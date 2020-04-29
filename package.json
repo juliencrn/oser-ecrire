@@ -1,0 +1,9 @@
+{
+  "name": "oser-ecrire",
+  "description": "The Oser-Ecrire Blog",
+  "private": true,
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "repository": "https://github.com/Junscuzzy/oser-ecrire",
+  "author": "Julien <juliencaron@protonmail.com>"
+}
