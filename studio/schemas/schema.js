@@ -7,11 +7,20 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 // document schemas
 import category from './documents/category'
 import post from './documents/post'
+import author from './documents/author'
+import topic from './documents/topic'
+import customer from './documents/customer'
+import service from './documents/service'
+import formation from './documents/formation'
+import project from './documents/project'
 import siteSettings from './documents/siteSettings'
 
 // Object types
 import bodyPortableText from './objects/bodyPortableText'
 import mainImage from './objects/mainImage'
+import quote from './objects/quote'
+import excerpt from './objects/excerpt'
+import testimonial from './objects/testimonial'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -22,11 +31,20 @@ export default createSchema({
   types: schemaTypes.concat([
     // document schemas
     siteSettings,
+    author,
     post,
     category,
+    topic,
+    customer,
+    service,
+    project,
+    formation,
 
     // Object types
     mainImage,
-    bodyPortableText
+    bodyPortableText,
+    quote,
+    excerpt,
+    testimonial
   ])
 })

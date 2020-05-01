@@ -6,13 +6,27 @@ export default {
       {
         name: 'title',
         type: 'string',
-        title: 'Titre'
+        title: 'Titre',
+        validation: Rule => Rule.error('Champ obligatoire').required(),
       },
       {
-        name: 'description',
+        name: 'slogan',
         type: 'text',
-        title: 'Description',
-        description: 'Courte description pour le SEO et les partages'
+        title: 'Slogan',
+        rows: 2,
+      },
+      {
+        name: 'logo',
+        type: 'mainImage',
+        title: 'Logo du site'
+      },
+      {
+        name: 'social',
+        type: 'object',
+        title: 'Social',
+        fields: [
+          {name: 'facebook', type: 'url', title: 'Facebook'}
+        ]
       }
     ]
   }

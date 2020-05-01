@@ -19,7 +19,7 @@ export default {
         type: 'string',
         title: 'Texte alternatif',
         description: 'Important pour le SEO et l\'accessiblité.',
-        validation: Rule => Rule.error('Vous devez mettre un texte alternatif').required(),
+        validation: Rule => Rule.error('Champ obligatoire').required(),
         options: {
           isHighlighted: true
         }

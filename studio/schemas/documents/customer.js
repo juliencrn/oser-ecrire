@@ -1,12 +1,12 @@
 export default {
-    name: 'category',
+    name: 'customer',
     type: 'document',
-    title: 'Catégories du blog',
+    title: 'Clients',
     fields: [
       {
         name: 'title',
         type: 'string',
-        title: 'Title',
+        title: 'Nom de l\'entreprise',
         validation: Rule => Rule.error('Champ obligatoire').required(),
       },
       {
@@ -21,9 +21,14 @@ export default {
         }
       },
       {
-        name: 'excerpt',
-        type: 'excerpt',
-        title: 'Extrait',
+        name: 'link',
+        type: 'url',
+        title: 'Lien vers l\'entreprise'
+      },
+      {
+        name: 'testimonial',
+        type: 'testimonial',
+        title: 'Avis'
       }
     ]
   }

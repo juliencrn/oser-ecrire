@@ -1,7 +1,7 @@
 export default {
-    name: 'category',
+    name: 'service',
     type: 'document',
-    title: 'Catégories du blog',
+    title: 'Prestations proposées',
     fields: [
       {
         name: 'title',
@@ -13,7 +13,7 @@ export default {
         name: 'slug',
         type: 'slug',
         title: 'Slug',
-        description: 'Ceci est l\'identifiant unique utilisé dans l\'url',
+        description: 'Ceci est l\'identifiant unique de l\'article utilisé dans l\'url',
         validation: Rule => Rule.error('Champ obligatoire').required(),
         options: {
           source: 'title',
@@ -21,9 +21,9 @@ export default {
         }
       },
       {
-        name: 'excerpt',
-        type: 'excerpt',
-        title: 'Extrait',
+        name: 'description',
+        type: 'text',
+        title: 'Description'
       }
     ]
   }

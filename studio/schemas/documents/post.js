@@ -5,19 +5,21 @@ import fr from 'date-fns/locale/fr'
 export default {
   name: 'post',
   type: 'document',
-  title: 'Articles',
+  title: 'L\'atelier d\'écriture (blog)',
   fields: [
     {
       name: 'title',
       type: 'string',
       title: 'Titre',
-      description: 'Les titres doivent être accrocheurs, descriptifs et pas trop longs'
+      description: 'Les titres doivent être accrocheurs, descriptifs et pas trop longs',
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'slug',
       type: 'slug',
       title: 'Slug',
       description: 'Ceci est l\'identifiant unique de l\'article utilisé dans l\'url',
+      validation: Rule => Rule.error('Champ obligatoire').required(),
       options: {
         source: 'title',
         maxLength: 96
@@ -30,11 +32,8 @@ export default {
     },
     {
       name: 'excerpt',
-      type: 'text',
-      rows: 4,
+      type: 'excerpt',
       title: 'Extrait',
-      description:
-        'Se retrouvera sur les pages de résumé, sur Google, lorsque les gens partagent votre message sur les réseaux sociaux'
     },
     {
       name: 'categories',

@@ -1,3 +1,5 @@
+import {FaExternalLinkAlt, FaLink} from 'react-icons/fa'
+
 export default {
     name: 'bodyPortableText',
     type: 'array',
@@ -6,10 +8,6 @@ export default {
       {
         type: 'block',
         title: 'Block',
-        // Styles let you set what your user can mark up blocks with. These
-        // corrensponds with HTML tags, but you can set any title or value
-        // you want and decide how you want to deal with it where you want to
-        // use your content.
         styles: [
           {title: 'Normal', value: 'normal'},
           {title: 'H2', value: 'h2'},
@@ -20,25 +18,42 @@ export default {
         lists: [
           {title: 'Liste à puces', value: 'bullet'},
           {title: 'Liste numérotée', value: 'number'}],
-        // Marks let you mark up inline text in the block editor.
         marks: {
-          // Decorators usually describe a single property – e.g. a typographic
-          // preference or highlighting by editors.
           decorators: [
             {title: 'Gras', value: 'strong'},
             {title: 'Italique', value: 'em'}
           ],
-          // Annotations can be any object structure – e.g. a link or a footnote.
           annotations: [
             {
               name: 'link',
               type: 'object',
-              title: 'URL',
+              title: 'Lien externe',
+              blockEditor: {
+                icon: FaExternalLinkAlt
+              },
               fields: [
                 {
                   title: 'URL',
                   name: 'href',
                   type: 'url'
+                }
+              ]
+            },
+            {
+              name: 'internalLink',
+              type: 'object',
+              title: 'Lien interne',
+              blockEditor: {
+                icon: FaLink
+              },
+              fields: [
+                {
+                  name: 'reference',
+                  type: 'reference',
+                  to: [
+                    { type: 'post' }
+                    // other types you may want to link to
+                  ]
                 }
               ]
             }
@@ -51,6 +66,9 @@ export default {
       {
         type: 'mainImage',
         options: {hotspot: true}
+      },
+      {
+        type: 'quote'
       }
     ]
   }

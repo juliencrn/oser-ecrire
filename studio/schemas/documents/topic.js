@@ -1,7 +1,7 @@
 export default {
-    name: 'category',
+    name: 'topic',
     type: 'document',
-    title: 'Catégories du blog',
+    title: 'Thèmes de prédilection',
     fields: [
       {
         name: 'title',
