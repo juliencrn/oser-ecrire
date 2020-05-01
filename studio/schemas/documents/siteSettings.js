@@ -1,7 +1,7 @@
 export default {
     name: 'siteSettings',
     type: 'document',
-    title: 'Réglages du site',
+    title: 'Réglages généraux',
     fields: [
       {
         name: 'title',

@@ -1,7 +1,7 @@
 {
   "root": true,
   "project": {
-    "name": "\"Oser Ecrire\""
+    "name": "Oser Ecrire"
   },
   "api": {
     "projectId": "5pa3cetx",
@@ -25,6 +25,10 @@
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema"
+    },
+    {
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "./deskStructure.js"
     }
   ]
 }
