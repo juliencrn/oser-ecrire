@@ -4,7 +4,7 @@ import {FaPencilAlt, FaHeart, FaRegLightbulb, FaNewspaper} from 'react-icons/fa'
 
 export default () =>
   S.list()
-    .title('Content')
+    .title('Contenu')
     .items([
         // Singleton
         S.listItem()
