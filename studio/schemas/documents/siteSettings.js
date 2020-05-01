@@ -22,11 +22,8 @@ export default {
       },
       {
         name: 'social',
-        type: 'object',
-        title: 'Social',
-        fields: [
-          {name: 'facebook', type: 'url', title: 'Facebook'}
-        ]
+        type: 'siteLinks',
+        title: 'Social'
       }
     ]
   }

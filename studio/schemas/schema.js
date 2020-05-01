@@ -21,6 +21,8 @@ import mainImage from './objects/mainImage'
 import quote from './objects/quote'
 import excerpt from './objects/excerpt'
 import testimonial from './objects/testimonial'
+import siteLinks from './objects/siteLinks'
+import authorLinks from './objects/authorLinks'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -45,6 +47,8 @@ export default createSchema({
     bodyPortableText,
     quote,
     excerpt,
+    siteLinks,
+    authorLinks,
     testimonial
   ])
 })
