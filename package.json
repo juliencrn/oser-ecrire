@@ -4,14 +4,13 @@
   "private": true,
   "version": "1.0.0",
   "license": "UNLICENSED",
-  "repository": "https://github.com/Junscuzzy/oser-ecrire",
   "author": "Julien <juliencaron@protonmail.com>",
   "scripts": {
     "build": "lerna run build --parallel",
     "dev": "lerna run dev --parallel",
     "format": "lerna run format",
-    "build-studio": "lerna bootstrap && cd studio && npm run build",
-    "build-web": "lerna bootstrap && (cd studio && SANITY_AUTH_TOKEN=$SANITY_DEPLOY_STUDIO_TOKEN npm run graphql-deploy) && (cd web && npm run build)",
+    "build-studio": "lerna bootstrap && cd studio && yarn build",
+    "build-web": "lerna bootstrap && (cd studio && GATSBY_SANITY_TOKEN=$GATSBY_SANITY_TOKEN npm run graphql-deploy) && (cd web && npm run build)",
     "graphql-deploy": "lerna run graphql-deploy",
     "lint": "lerna run lint",
     "postinstall": "lerna bootstrap",
@@ -20,5 +19,12 @@
   "dependencies": {
     "@sanity/cli": "^1.149.9",
     "lerna": "^3.20.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Junscuzzy/oser-ecrire"
+  },
+  "bugs": {
+    "url": "https://github.com/Junscuzzy/oser-ecrire/issues"
   }
 }
