@@ -1,0 +1,25 @@
+{
+    "editor.formatOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "search.exclude": {
+        "*/public/**": true,
+        "*/dist/**": true,
+        "*/.cache/**": true,
+        "*/node_modules/**": true
+      },
+    "eslint.workingDirectories": [
+		{
+			"directory": "studio",
+			"changeProcessCWD": true
+        },
+        {
+			"directory": "web",
+			"changeProcessCWD": true
+		}
+	]
+}
