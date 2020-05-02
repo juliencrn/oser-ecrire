@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase */
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Oser Ecrire`,
@@ -6,6 +10,22 @@ module.exports = {
   plugins: [
     `gatsby-plugin-typescript`,
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: 'gatsby-source-sanity',
+      options: {
+        projectId: '5pa3cetx',
+        dataset: 'production',
+
+        // a token with read permissions is required
+        // if you have a private dataset
+        token: process.env.GATSBY_SANITY_TOKEN,
+
+        // If the Sanity GraphQL API was deployed using `--tag <name>`,
+        // use `graphqlTag` to specify the tag name. Defaults to `default`.
+        graphqlTag: 'default',
+        watchMode: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
