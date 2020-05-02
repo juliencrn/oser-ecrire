@@ -7,7 +7,7 @@
   "author": "Julien <juliencaron@protonmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "npm run dev",
+    "start": "yarn dev",
     "dev": "sanity start",
     "build": "sanity build",
     "graphql-deploy": "sanity graphql deploy",

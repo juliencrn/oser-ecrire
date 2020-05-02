@@ -13,15 +13,16 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
-    "start": "npm run develop",
+    "dev": "yarn clean && gatsby develop",
+    "start": "yarn develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint": "run-p lint:**",
     "lint:prettier": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:typescript": "tsc",
-    "format": "npm run lint:prettier",
+    "convert-lock": "synp --source-file ./yarn.lock",
+    "format": "yarn lint:prettier",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
@@ -35,7 +36,8 @@
     "gatsby-source-sanity": "^5.0.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^6.0.0"
+    "react-helmet": "^6.0.0",
+    "synp": "^1.7.0"
   },
   "devDependencies": {
     "@types/node": "^13.11.1",
@@ -53,5 +55,8 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
     "typescript": "^3.8.3"
+  },
+  "engines": {
+    "node": ">= 10"
   }
 }

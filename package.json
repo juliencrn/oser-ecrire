@@ -28,7 +28,7 @@
     "url": "https://github.com/Junscuzzy/oser-ecrire/issues"
   },
   "engines": {
-    "npm": ">=5",
+    "npm": ">=6",
     "node": ">= 10"
   }
 }
