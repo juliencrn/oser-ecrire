@@ -12,7 +12,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "yarn clean && gatsby build",
     "dev": "yarn clean && gatsby develop",
     "start": "yarn develop",
     "serve": "gatsby serve",
@@ -21,7 +21,6 @@
     "lint:prettier": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:typescript": "tsc",
-    "convert-lock": "synp --source-file ./yarn.lock",
     "format": "yarn lint:prettier",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
