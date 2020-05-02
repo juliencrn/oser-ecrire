@@ -10,7 +10,7 @@
     "start": "npm run dev",
     "dev": "sanity start",
     "build": "sanity build",
-    "graphql-deploy": "sanity graphql deploy --playground",
+    "graphql-deploy": "sanity graphql deploy",
     "format": "prettier --write \"**/*.js\" \"!node_modules/**\" \"!dist/**\"",
     "lint": "eslint .",
     "test": "sanity check"
