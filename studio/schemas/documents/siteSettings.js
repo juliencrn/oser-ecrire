@@ -2,6 +2,7 @@ export default {
   name: 'siteSettings',
   type: 'document',
   title: 'Réglages généraux',
+  __experimental_actions: [/* 'create', */ 'update', /* 'delete', */ 'publish'],
   fields: [
     {
       name: 'title',

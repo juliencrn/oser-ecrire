@@ -63,11 +63,11 @@ export default () =>
                   S.documentTypeList('project').title('Références client'),
                 ),
               S.listItem()
-                .title('Thèmes de prédictions')
+                .title('Thèmes de prédilection')
                 .schemaType('topic')
                 .icon(FaHeart)
                 .child(
-                  S.documentTypeList('topic').title('Thèmes de prédictions'),
+                  S.documentTypeList('topic').title('Thèmes de prédilection'),
                 ),
               S.listItem()
                 .title('Clients')
