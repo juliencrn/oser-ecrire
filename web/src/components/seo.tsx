@@ -8,6 +8,7 @@
 import React, { FC } from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
+import useSiteSettings from '../hooks/useSiteSettings'
 
 interface MetaProperty {
   property: string
@@ -34,17 +35,7 @@ const SEO: FC<SEOProps> = ({
   meta = [],
   title,
 }) => {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `,
-  )
+  const siteSettings = useSiteSettings()
 
   const metaDescription = description /* || site.siteMetadata.description*/
 
@@ -54,7 +45,7 @@ const SEO: FC<SEOProps> = ({
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${siteSettings.title}`}
       meta={[
         {
           name: `description`,

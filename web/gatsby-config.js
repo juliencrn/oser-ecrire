@@ -25,6 +25,32 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-material-ui',
+      // If you want to use styled components you should change the injection order.
+      options: {
+        // stylesProvider: {
+        //   injectFirst: true,
+        // },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Source+Sans+Pro:ital`,
+            variants: [`200`, `300`, `400`, `600`, `700`],
+          },
+          {
+            family: `Vidaloka`,
+          },
+          {
+            family: `Domine`,
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         //trackingId: `ADD YOUR TRACKING ID HERE`,

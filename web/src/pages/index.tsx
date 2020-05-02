@@ -1,18 +1,37 @@
 import React, { FC } from 'react'
-import { Link } from 'gatsby'
 
-import Layout from '../components/layout'
+import Pagination from '@material-ui/lab/Pagination'
+
+import Layout from '../layout'
 import SEO from '../components/seo'
+import Hero from '../components/Hero'
+import PostList from '../components/PostList'
+import CategoryFilter from '../components/CategoryFilter'
+import { Box } from '@material-ui/core'
 
-const IndexPage: FC = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
+const IndexPage: FC = () => {
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <Hero
+        title="L'atelier d'écriture"
+        description="L'Atelier d'Écriture qui Libère Votre Créativité"
+      >
+        <CategoryFilter />
+      </Hero>
+      <PostList />
 
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+      <Box mt={4} mb={4} display="flex" justifyContent="center">
+        <Pagination
+          count={5}
+          page={2}
+          showFirstButton
+          showLastButton
+          // onChange={handleNavigate}
+        />
+      </Box>
+    </Layout>
+  )
+}
 
 export default IndexPage
