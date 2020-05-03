@@ -20,7 +20,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const Layout: FC = ({ children }) => {
+export interface LayoutProps {
+  isBlog?: boolean
+}
+
+const Layout: FC<LayoutProps> = ({ children, isBlog = false }) => {
   const classes = useStyles()
   const { title } = useSiteSettings()
 
@@ -28,7 +32,7 @@ const Layout: FC = ({ children }) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={classes.root}>
-        <Header siteTitle={title} />
+        <Header siteTitle={title} isBlog={isBlog} />
         <main>{children}</main>
         <Footer siteName={title} />
       </div>

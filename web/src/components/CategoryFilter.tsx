@@ -1,36 +1,74 @@
 import React, { FC } from 'react'
-// import { Link as GatsbyLink } from 'gatsby'
-import { Box, Button } from '@material-ui/core'
+import { Link as GatsbyLink } from 'gatsby'
+import { Link, Typography } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
+import { NodeArrayOf, Category } from '../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
-    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+    },
   },
   category: {
-    margin: theme.spacing(0, 0.5),
+    padding: theme.spacing(0, 1.5),
+    fontWeight: 600,
+    color: theme.palette.common.black,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    marginBottom: theme.spacing(1),
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: 0,
+    },
   },
 }))
 
-const CategoryFilter: FC = () => {
+export interface CategoryFilterProps {
+  categories: NodeArrayOf<Category>
+  basePath: string
+}
+
+const CategoryFilter: FC<CategoryFilterProps> = ({ categories, basePath }) => {
   const classes = useStyles()
-  const active = 0
+  const allCategory: Category = {
+    title: 'Tous',
+    slug: {
+      current: '',
+    },
+  }
+
   return (
-    <Box className={classes.root}>
-      {[0, 1, 2, 3].map((_, i) => (
-        <Button
-          className={classes.category}
-          color="default"
-          style={{
-            fontWeight: active === i ? 'bold' : 'normal',
-          }}
-          key={i}
-        >
-          {i === 0 ? 'Tous' : 'Category name'}
-        </Button>
-      ))}
-    </Box>
+    <Typography variant="body2" className={classes.root}>
+      {[{ node: allCategory }, ...categories].map(({ node }, i) => {
+        const { title, slug } = node
+
+        // Find active item
+        const isMainPage = basePath === '/atelier-ecriture'
+        const matchCategory =
+          basePath.includes(slug.current) && slug.current !== ''
+        const active =
+          (i !== 0 && matchCategory) ||
+          (i === 0 && !matchCategory && isMainPage)
+
+        return (
+          <Link
+            key={i}
+            className={classes.category}
+            component={GatsbyLink}
+            to={`/atelier-ecriture/${slug.current}`}
+            style={{
+              opacity: active ? 1 : 0.6,
+            }}
+          >
+            {title}
+          </Link>
+        )
+      })}
+    </Typography>
   )
 }
 

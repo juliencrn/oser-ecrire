@@ -1,35 +1,42 @@
 import React, { FC } from 'react'
-
-import Pagination from '@material-ui/lab/Pagination'
+import { Link as GatsbyLink } from 'gatsby'
+import { Grid, Button } from '@material-ui/core'
 
 import Layout from '../layout'
 import SEO from '../components/seo'
 import Hero from '../components/Hero'
-import PostList from '../components/PostList'
-import CategoryFilter from '../components/CategoryFilter'
-import { Box } from '@material-ui/core'
 
 const IndexPage: FC = () => {
   return (
     <Layout>
       <SEO title="Home" />
       <Hero
-        title="L'atelier d'écriture"
+        title="Oser Ecrire"
         description="L'Atelier d'Écriture qui Libère Votre Créativité"
       >
-        <CategoryFilter />
+        <Grid container spacing={2} justify="center">
+          <Grid item>
+            <Button
+              component={GatsbyLink}
+              to="/atelier-ecriture"
+              variant="contained"
+              color="primary"
+            >
+              L'atelier d'écriture
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              component={GatsbyLink}
+              to="/redaction-seo"
+              variant="contained"
+              color="secondary"
+            >
+              La rédaction SEO
+            </Button>
+          </Grid>
+        </Grid>
       </Hero>
-      <PostList />
-
-      <Box mt={4} mb={4} display="flex" justifyContent="center">
-        <Pagination
-          count={5}
-          page={2}
-          showFirstButton
-          showLastButton
-          // onChange={handleNavigate}
-        />
-      </Box>
     </Layout>
   )
 }

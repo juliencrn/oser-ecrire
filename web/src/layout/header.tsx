@@ -82,7 +82,7 @@ const Header: FC<HeaderProps> = ({ siteTitle, isBlog = false }) => {
                 className={classes.text}
               >
                 <Link
-                  to="/"
+                  to={isBlog ? `/atelier-ecriture` : `/redaction-seo`}
                   component={GatsbyLink}
                   color="inherit"
                   className={classes.link}

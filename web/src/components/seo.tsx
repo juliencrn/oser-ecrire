@@ -7,7 +7,7 @@
 
 import React, { FC } from 'react'
 import { Helmet } from 'react-helmet'
-import { useStaticQuery, graphql } from 'gatsby'
+// import { useStaticQuery, graphql } from 'gatsby'
 import useSiteSettings from '../hooks/useSiteSettings'
 
 interface MetaProperty {
@@ -27,6 +27,7 @@ export interface SEOProps {
   description?: string
   lang?: string
   meta?: Meta[]
+  path?: string
 }
 
 const SEO: FC<SEOProps> = ({
@@ -34,6 +35,7 @@ const SEO: FC<SEOProps> = ({
   lang = 'en',
   meta = [],
   title,
+  path = '/',
 }) => {
   const siteSettings = useSiteSettings()
 

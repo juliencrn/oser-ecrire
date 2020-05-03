@@ -1,50 +1,66 @@
 import React, { FC } from 'react'
-
+import { navigate } from 'gatsby'
+import BackgroundImage from 'gatsby-background-image'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, Theme } from '@material-ui/core/styles'
+import { CardActionArea } from '@material-ui/core'
+import { grey } from '@material-ui/core/colors'
 
-const useStyles = makeStyles(theme => ({
+import { Post } from '../interfaces'
+
+const useStyles = makeStyles((theme: Theme) => ({
   card: {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
   },
+  cardAction: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    paddingBottom: '56.25%',
+    height: 0,
+    width: '100%',
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
   },
   cardContent: {
-    flexGrow: 1,
+    flex: 1,
+    height: '100%',
   },
 }))
 
-export interface PostCardProps {
-  title?: string
-  content?: string
-}
+export type PostCardProps = Post
 
-const PostCard: FC<PostCardProps> = ({
-  title = `This is a the post Heading`,
-  content = `This is a media card. You can use this section to describe the
-    content. This is a media card. You can use this section to describe
-    the content.`,
-}) => {
+const PostCard: FC<PostCardProps> = ({ title, excerpt, mainImage, slug }) => {
   const classes = useStyles()
+
+  const handleNavigate = () => {
+    navigate(slug.current)
+  }
+
   return (
     <Card className={classes.card}>
-      <CardMedia
-        className={classes.cardMedia}
-        image="https://source.unsplash.com/random"
-        title="Image title"
-      />
-      <CardContent className={classes.cardContent}>
-        <Typography gutterBottom variant="h5" component="h2">
-          {title}
-        </Typography>
-        <Typography variant="body1">{content}</Typography>
-      </CardContent>
+      <CardActionArea className={classes.cardAction} onClick={handleNavigate}>
+        {mainImage && (
+          <BackgroundImage
+            className={classes.cardMedia}
+            fluid={mainImage.asset.sm}
+            backgroundColor={grey[200]}
+          />
+        )}
+        <CardContent className={classes.cardContent}>
+          <Typography gutterBottom variant="h5" component="h2">
+            {title}
+          </Typography>
+          <Typography variant="body1">{excerpt}</Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   )
 }
