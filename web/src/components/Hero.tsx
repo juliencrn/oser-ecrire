@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
-import { makeStyles } from '@material-ui/styles'
-import { Typography, Container, Theme, ContainerProps } from '@material-ui/core'
+import { makeStyles, Theme } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import Container, { ContainerProps } from '@material-ui/core/Container'
 
 const useStyles = makeStyles((theme: Theme) => ({
   heroContent: {
@@ -27,7 +28,7 @@ const Hero: FC<HeroProps> = ({
   const classes = useStyles()
   return (
     <div className={classes.heroContent}>
-      <Container maxWidth="sm" {...containerProps}>
+      <Container maxWidth="md" {...containerProps}>
         <Typography
           component="h1"
           variant="h2"

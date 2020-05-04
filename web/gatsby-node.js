@@ -9,60 +9,34 @@
 const path = require('path')
 
 const queries = require('./src/gatsby/queries')
+const { addImagesInPosts, normalizeCategories } = require('./src/gatsby/utils')
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  const results = await graphql(`
-    {
-      posts: allSanityPost(
-        limit: 1000
-        sort: { fields: _createdAt, order: DESC }
-      ) {
-        edges {
-          node {
-            ${queries.Post}
-          }
-        }
-      }
-      categories: allSanityCategory(limit: 1000) {
-        edges {
-          node {
-            id
-            title
-            slug {
-              current
-            }
-          }
-        }
-      }
-    }
-  `)
+  const results = await graphql(`{
+    posts: ${queries.posts}
+    categories: ${queries.categories}
+    images: ${queries.images}
+  }`)
 
   if (results.errors) {
     reporter.panicOnBuild(`Error while running GraphQL posts query.`)
     return
   }
 
-  const posts = results.data.posts.edges
+  // Foreach post, add body mainImages (used for gatsby-image)
+  const posts = addImagesInPosts(
+    results.data.posts.edges,
+    results.data.images.edges,
+  )
 
-  // Use only not empty categories
-  const categories = results.data.categories.edges
-    // 1. Get posts in category
-    .map(({ node }) => ({
-      node: {
-        ...node,
-        postsIn:
-          posts.filter(post => {
-            const matchesArr = post.node.categories.filter(
-              category => category.id === node.id,
-            )
-            return matchesArr.length > 0
-          }) || [],
-      },
-    }))
-    // 2. Remove category if has not posts
-    .filter(({ node }) => node.postsIn.length > 0)
+  // Remove empty categories
+  // Add "postsIn" posts array in each category
+  const categories = normalizeCategories(
+    results.data.categories.edges,
+    results.data.posts.edges,
+  )
 
   /**
    * Create posts

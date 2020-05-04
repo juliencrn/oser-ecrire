@@ -55,12 +55,11 @@ const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
       <Hero
         title="L'atelier d'écriture"
         description="L'Atelier d'Écriture qui Libère Votre Créativité"
-        containerProps={{ maxWidth: 'md' }}
       >
         <CategoryFilter categories={categories} basePath={basePath} />
       </Hero>
 
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Box py={6}>
           <Grid container spacing={4}>
             {posts.map(({ node }) => (

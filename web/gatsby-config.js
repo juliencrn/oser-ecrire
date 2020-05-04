@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/camelcase */
-const isProd = process.env.NODE_ENV === 'production'
+const isDev = process.env.NODE_ENV !== 'production'
 
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV || 'development'}`,
+  path: `.env.${isDev ? 'development' : 'production'}`,
 })
-
-const token = process.env.GATSBY_SANITY_TOKEN
 
 module.exports = {
   siteMetadata: {
@@ -19,9 +17,9 @@ module.exports = {
       options: {
         projectId: '5pa3cetx',
         dataset: 'production',
-        token,
+        token: process.env.GATSBY_SANITY_TOKEN,
         graphqlTag: 'default',
-        watchMode: !isProd,
+        watchMode: isDev,
       },
     },
     {

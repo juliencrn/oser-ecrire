@@ -1,8 +1,11 @@
 import React, { FC } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
-import { Link, Typography } from '@material-ui/core'
 import { makeStyles, Theme } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import Link from '@material-ui/core/Link'
+
 import { NodeArrayOf, Category } from '../interfaces'
+import { routes } from '../config'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -47,7 +50,7 @@ const CategoryFilter: FC<CategoryFilterProps> = ({ categories, basePath }) => {
         const { title, slug } = node
 
         // Find active item
-        const isMainPage = basePath === '/atelier-ecriture'
+        const isMainPage = basePath === routes.blog
         const matchCategory =
           basePath.includes(slug.current) && slug.current !== ''
         const active =
@@ -59,7 +62,7 @@ const CategoryFilter: FC<CategoryFilterProps> = ({ categories, basePath }) => {
             key={i}
             className={classes.category}
             component={GatsbyLink}
-            to={`/atelier-ecriture/${slug.current}`}
+            to={`${routes.blog}/${slug.current}`}
             style={{
               opacity: active ? 1 : 0.6,
             }}

@@ -15,6 +15,7 @@ export interface MainImage {
   caption?: string
   asset: {
     sm: FluidObject
+    md: FluidObject
   }
 }
 
@@ -30,6 +31,12 @@ export interface Post {
   excerpt: string
   categories?: Category[]
   mainImage?: MainImage
+  body: any[]
+  images: {
+    id: string
+    sm: FluidObject
+    md: FluidObject
+  }[]
 }
 
 export interface PageTemplate {

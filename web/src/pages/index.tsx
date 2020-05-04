@@ -1,10 +1,13 @@
 import React, { FC } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
-import { Grid, Button } from '@material-ui/core'
+
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 
 import Layout from '../layout'
 import SEO from '../components/seo'
 import Hero from '../components/Hero'
+import { routes } from '../config'
 
 const IndexPage: FC = () => {
   return (
@@ -18,7 +21,7 @@ const IndexPage: FC = () => {
           <Grid item>
             <Button
               component={GatsbyLink}
-              to="/atelier-ecriture"
+              to={routes.blog}
               variant="contained"
               color="primary"
             >
@@ -28,7 +31,7 @@ const IndexPage: FC = () => {
           <Grid item>
             <Button
               component={GatsbyLink}
-              to="/redaction-seo"
+              to={routes.redac}
               variant="contained"
               color="secondary"
             >

@@ -1,4 +1,4 @@
-const GatsbyFluid = `
+const gatsbyFluid = `
     srcWebp
     src
     srcSetWebp
@@ -8,7 +8,7 @@ const GatsbyFluid = `
     aspectRatio
 `
 
-const GatsbyFixed = `
+const gatsbyFixed = `
     srcWebp
     src
     srcSetWebp
@@ -19,19 +19,22 @@ const GatsbyFixed = `
     width
 `
 
-const MainImage = `
+const mainImage = `
   mainImage {
     alt
     caption
     asset {
       sm: fluid(maxWidth: 600) {
-        ${GatsbyFluid}
+        ${gatsbyFluid}
+      }
+      md: fluid(maxWidth: 960) {
+        ${gatsbyFluid}
       }
     }
   }
 `
 
-const Post = `
+const post = `
     id
     title
     slug {
@@ -45,9 +48,59 @@ const Post = `
         current
       }
     }
-    ${MainImage}
+    ${mainImage}
+    body: _rawBody
+`
+
+const posts = `
+  allSanityPost(
+    limit: 1000
+    sort: { fields: _createdAt, order: DESC }
+  ) {
+    edges {
+      node {
+        ${post}
+      }
+    }
+  }
+`
+
+const categories = `
+  allSanityCategory(limit: 1000) {
+    edges {
+      node {
+        id
+        title
+        slug {
+          current
+        }
+      }
+    }
+  }
+`
+
+const images = `
+  allSanityImageAsset(limit: 1000) {
+    edges {
+      node {
+        id
+        sm: fluid(maxWidth: 600) {
+          ${gatsbyFluid}
+        }
+        md: fluid(maxWidth: 960) {
+          ${gatsbyFluid}
+        }
+      }
+    }
+  }
 `
 
 module.exports = {
-  Post,
+  gatsbyFluid,
+  gatsbyFixed,
+  mainImage,
+  post,
+  posts,
+  categories,
+  images,
 }

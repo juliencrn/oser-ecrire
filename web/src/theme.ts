@@ -26,6 +26,15 @@ const baseTheme: ThemeOptions = {
       main: red.A400,
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 550,
+      md: 720,
+      lg: 960,
+      xl: 1280,
+    },
+  },
   typography: {
     fontFamily: sansS,
   },
