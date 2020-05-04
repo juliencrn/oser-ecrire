@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-typescript-starter",
+  "name": "oser-ecrire-web",
   "private": true,
   "description": "A simple starter using Typescript in front & back side with eslint & prettier",
   "version": "0.1.0",
@@ -12,16 +12,16 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "yarn clean && gatsby build",
-    "dev": "yarn clean && gatsby develop",
-    "start": "yarn develop",
+    "build": "npm run clean && gatsby build",
+    "dev": "npm run clean && gatsby develop",
+    "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint": "run-p lint:**",
     "lint:prettier": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:typescript": "tsc",
-    "format": "yarn lint:prettier",
+    "format": "npm run lint:prettier",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
