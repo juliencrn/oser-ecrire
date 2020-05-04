@@ -10,6 +10,7 @@ import Layout from '../layout'
 import SEO from '../components/seo'
 import { PageTemplate, Post } from '../interfaces'
 import Hero from '../components/Hero'
+import AuthorCard from '../components/AuthorCard'
 import BodyPortableText from '../components/BodyPortableText'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -65,6 +66,7 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
           </Box>
 
           {/* // TODO : Post footer */}
+          <AuthorCard />
         </Container>
       </div>
     </Layout>

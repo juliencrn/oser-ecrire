@@ -14,8 +14,7 @@ export interface MainImage {
   alt: string
   caption?: string
   asset: {
-    sm: FluidObject
-    md: FluidObject
+    [key: string]: FluidObject
   }
 }
 
