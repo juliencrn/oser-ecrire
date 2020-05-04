@@ -9,6 +9,7 @@
     "build": "lerna run build --parallel",
     "dev": "lerna run dev --parallel",
     "format": "lerna run format",
+    "refresh": "lerna run refresh --parallel",
     "build-studio": "lerna bootstrap && (cd studio && npm run build)",
     "build-web": "lerna bootstrap  && (cd web && npm run build)",
     "graphql-deploy": "lerna run graphql-deploy",
