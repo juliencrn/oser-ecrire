@@ -13,6 +13,7 @@ import Hero from '../components/Hero'
 import AuthorCard from '../components/AuthorCard'
 import BodyPortableText from '../components/BodyPortableText'
 import PostSocialBar from '../components/PostSocialBar'
+import Comments from '../components/Comments'
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {},
@@ -71,6 +72,10 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
           <Divider className={classes.divider} />
 
           <AuthorCard />
+
+          <Divider className={classes.divider} />
+
+          <Comments uid={path} title={title} />
         </Container>
       </div>
     </Layout>

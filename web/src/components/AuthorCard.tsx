@@ -67,7 +67,7 @@ const AuthorCard: FC = () => {
         <Button
           to="/contact"
           component={GatsbyLink}
-          variant="outlined"
+          variant="contained"
           color="primary"
           size="small"
         >
