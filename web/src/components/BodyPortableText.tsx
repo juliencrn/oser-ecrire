@@ -15,6 +15,10 @@ import Blockquote from './Blockquote'
 const { projectId, dataset } = config.sanity
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+  },
   title: {
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(2),
@@ -123,12 +127,14 @@ const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
   }
 
   return (
-    <BlockContent
-      blocks={blocks}
-      serializers={serializers}
-      projectId={projectId}
-      dataset={dataset}
-    />
+    <div className={classes.root}>
+      <BlockContent
+        blocks={blocks}
+        serializers={serializers}
+        projectId={projectId}
+        dataset={dataset}
+      />
+    </div>
   )
 }
 

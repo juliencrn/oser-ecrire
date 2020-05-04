@@ -12,10 +12,14 @@ import { PageTemplate, Post } from '../interfaces'
 import Hero from '../components/Hero'
 import AuthorCard from '../components/AuthorCard'
 import BodyPortableText from '../components/BodyPortableText'
+import PostSocialBar from '../components/PostSocialBar'
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {},
-
+  divider: {
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+  },
   body: {
     backgroundColor: theme.palette.background.paper,
     paddingBottom: theme.spacing(6),
@@ -33,19 +37,21 @@ export interface PostTemplateProps extends PageTemplate {
 const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
   const classes = useStyles()
 
-  const { title, excerpt, mainImage, body, images } = pageContext.current
+  const {
+    title,
+    excerpt,
+    mainImage,
+    body,
+    images,
+    categories,
+  } = pageContext.current
 
   return (
     <Layout isBlog>
       <SEO title={title} description={excerpt} path={path} />
 
-      <Hero title={pageContext.current.title} description={excerpt}>
-        {/* // TODO : Post header */}
-        <ul>
-          <li>Info sur l'auteur</li>
-          <li>Categories</li>
-          <li>Button de partage</li>
-        </ul>
+      <Hero title={title} description={excerpt}>
+        <PostSocialBar categories={categories} />
       </Hero>
       <div className={classes.body}>
         <Container maxWidth="lg">
@@ -57,15 +63,13 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
         </Container>
 
         <Container maxWidth="md">
-          <Box my={4}>
-            <Divider />
-          </Box>
-          <BodyPortableText blocks={body} images={images} />
-          <Box my={4}>
-            <Divider />
-          </Box>
+          <Divider className={classes.divider} />
 
-          {/* // TODO : Post footer */}
+          <BodyPortableText blocks={body} images={images} />
+          <PostSocialBar categories={categories} />
+
+          <Divider className={classes.divider} />
+
           <AuthorCard />
         </Container>
       </div>
