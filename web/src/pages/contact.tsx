@@ -1,10 +1,15 @@
 import React, { FC } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
-import { Grid, Button } from '@material-ui/core'
+
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import Box from '@material-ui/core/Box'
 
 import Layout from '../layout'
 import SEO from '../components/seo'
 import Hero from '../components/Hero'
+import ContactForm from '../components/ContactForm'
 
 const ContactPage: FC = () => (
   <Layout>
@@ -23,6 +28,12 @@ const ContactPage: FC = () => (
         </Grid>
       </Grid>
     </Hero>
+
+    <Box bgcolor="secondary.main" py={10} mb={0}>
+      <Container maxWidth="md">
+        <ContactForm />
+      </Container>
+    </Box>
   </Layout>
 )
 

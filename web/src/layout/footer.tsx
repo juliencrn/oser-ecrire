@@ -21,7 +21,11 @@ const Footer: FC<FooterProps> = ({ siteName }) => {
     <footer className={classes.footer}>
       <Container maxWidth="md">
         <Typography variant="body1" color="textSecondary">
-          © {new Date().getFullYear()} {siteName}
+          © {new Date().getFullYear()} {siteName} - Site réalisé par
+          {` `}
+          <Link color="inherit" href="https://juliencaron.eu/" target="_blank">
+            Julien CARON
+          </Link>
         </Typography>
       </Container>
     </footer>

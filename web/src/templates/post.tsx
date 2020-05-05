@@ -15,6 +15,7 @@ import BodyPortableText from '../components/BodyPortableText'
 import PostSocialBar from '../components/PostSocialBar'
 import Comments from '../components/Comments'
 import PostNavigation from '../components/PostNavigation'
+import NewsletterForm from '../components/NewsletterForm'
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {},
@@ -81,6 +82,12 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
           <Comments uid={path} title={title} />
         </Container>
       </div>
+
+      <Box bgcolor="secondary.main" py={10} mb={0}>
+        <Container maxWidth="md">
+          <NewsletterForm />
+        </Container>
+      </Box>
     </Layout>
   )
 }
