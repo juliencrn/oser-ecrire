@@ -14,6 +14,7 @@ import AuthorCard from '../components/AuthorCard'
 import BodyPortableText from '../components/BodyPortableText'
 import PostSocialBar from '../components/PostSocialBar'
 import Comments from '../components/Comments'
+import PostNavigation from '../components/PostNavigation'
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {},
@@ -50,6 +51,8 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
   return (
     <Layout isBlog>
       <SEO title={title} description={excerpt} path={path} />
+      <PostNavigation direction="left" post={pageContext.prev} />
+      <PostNavigation direction="right" post={pageContext.next} />
 
       <Hero title={title} description={excerpt}>
         <PostSocialBar categories={categories} />

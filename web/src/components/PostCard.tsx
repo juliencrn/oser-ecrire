@@ -1,12 +1,13 @@
 import React, { FC } from 'react'
 import { navigate } from 'gatsby'
 import BackgroundImage from 'gatsby-background-image'
+import { makeStyles, Theme } from '@material-ui/core/styles'
+import { grey } from '@material-ui/core/colors'
+
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles, Theme } from '@material-ui/core/styles'
-import { CardActionArea } from '@material-ui/core'
-import { grey } from '@material-ui/core/colors'
+import CardActionArea from '@material-ui/core/CardActionArea'
 
 import { Post } from '../interfaces'
 
