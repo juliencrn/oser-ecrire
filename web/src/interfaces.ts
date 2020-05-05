@@ -10,6 +10,13 @@ export interface Slug {
   current: string
 }
 
+export type AlertType = 'success' | 'error' | 'warning' | 'info'
+export interface AlertProps {
+  type: AlertType
+  message: string
+  isValid: boolean
+}
+
 export interface MainImage {
   alt: string
   caption?: string

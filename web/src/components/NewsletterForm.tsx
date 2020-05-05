@@ -1,42 +1,20 @@
 import * as React from 'react'
 import { Formik, Field } from 'formik'
+
 import { TextField } from 'formik-material-ui'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-
 import Grid from '@material-ui/core/Grid'
 
 import Yup from '../libs/Yup'
 import FormLayout from './FormLayout'
+import { registerContact } from '../libs/sendInBlueApi'
+import { AlertProps } from '../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
   field: {
     width: `100%`,
   },
 }))
-
-// const responses = {
-//   duplicated: {
-//     code: 'duplicate_parameter',
-//     message: 'Contact already exist',
-//   },
-//   success: {
-//     id: 10,
-//   },
-// }
-
-// const headers = {
-//   'Content-Type': 'application/json',
-//   'api-key': process.env.GATSBY_SENDINBLUE_API_KEY,
-// }
-
-// const body = {
-//   email: 'thomas.bianchi@emaaail.com',
-//   listIds: [3], // Contact - Newsletter Form ID,
-//   attributes: {
-//     NOM: 'Caron',
-//     PRENOM: 'Julien',
-//   },
-// }
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required(),
@@ -46,33 +24,37 @@ const validationSchema = Yup.object().shape({
   }),
 })
 
-interface Values {
-  email: string
+const initialValues = {
+  email: '',
   attributes: {
-    NOM: string
-    PRENOM: string
-  }
-}
-
-const initialValues: Values = {
-  email: 'test@test.fr',
-  attributes: {
-    NOM: 'Caron',
-    PRENOM: 'Julien',
+    NOM: '',
+    PRENOM: '',
   },
 }
 
 function NewsletterForm() {
   const classes = useStyles()
+  const [alert, setAlert] = React.useState<AlertProps | undefined>(undefined)
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          setSubmitting(false)
-          console.log(JSON.stringify(values, null, 2))
-        }, 500)
+      onSubmit={async (values, { resetForm }) => {
+        // Clear previous alert
+        if (alert) {
+          setAlert(undefined)
+        }
+
+        // Try to register/update contact in sendInBlue API
+        const { email, attributes } = values
+        const newAlert = await registerContact({ email, attributes })
+
+        setAlert(newAlert)
+        if (newAlert.isValid) {
+          resetForm()
+        }
+
+        return newAlert.isValid
       }}
     >
       {({ submitForm, isSubmitting }) => (
@@ -82,6 +64,7 @@ function NewsletterForm() {
 boite de réception."
           isSubmitting={isSubmitting}
           submitForm={submitForm}
+          alert={alert}
         >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>

@@ -7,6 +7,9 @@ import Box from '@material-ui/core/Box'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+import Alert from '@material-ui/lab/Alert'
+
+import { AlertProps } from '../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {},
@@ -27,6 +30,7 @@ export interface FormLayoutProps {
   subtitle?: string
   isSubmitting: boolean
   submitForm: () => void
+  alert?: AlertProps
 }
 
 const FormLayout: FC<FormLayoutProps> = ({
@@ -35,6 +39,7 @@ const FormLayout: FC<FormLayoutProps> = ({
   children,
   isSubmitting,
   submitForm,
+  alert,
 }) => {
   const classes = useStyles()
   return (
@@ -57,10 +62,18 @@ const FormLayout: FC<FormLayoutProps> = ({
           </Typography>
         )}
         <br />
+        {alert && <Alert severity={alert.type}>{alert.message}</Alert>}
+        <br />
 
         {children}
 
-        <Box display="flex" justifyContent="flex-end" mt={3}>
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          alignItems="center"
+          flexWrap="wrap"
+          mt={3}
+        >
           <Button
             variant="contained"
             color="secondary"
