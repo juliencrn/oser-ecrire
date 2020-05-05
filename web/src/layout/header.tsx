@@ -1,21 +1,18 @@
 import { Link as GatsbyLink } from 'gatsby'
 import React, { FC } from 'react'
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 import Headroom from 'react-headroom'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
+
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
-import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import Box from '@material-ui/core/Box'
 import Hidden from '@material-ui/core/Hidden'
-import IconButton from '@material-ui/core/IconButton'
-
-import MenuIcon from '@material-ui/icons/Menu'
 
 import { routes } from '../config'
+import Menu from './menu'
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -44,17 +41,8 @@ export interface HeaderProps {
   isBlog?: boolean
 }
 
-const links = [
-  { label: 'À propos', to: '/a-propos' },
-  { label: "L'atelier d'écriture", to: routes.blog },
-  { label: 'Rédaction SEO', to: routes.redac },
-  { label: 'Contact', to: '/contact' },
-]
-
 const Header: FC<HeaderProps> = ({ siteTitle, isBlog = false }) => {
   const classes = useStyles()
-  const theme = useTheme()
-  const isLarge = useMediaQuery(theme.breakpoints.up('md'))
 
   return (
     <Headroom>
@@ -94,19 +82,7 @@ const Header: FC<HeaderProps> = ({ siteTitle, isBlog = false }) => {
             </Hidden>
           </div>
 
-          {isLarge ? (
-            <>
-              {links.map(({ label, to }) => (
-                <Button key={to} component={GatsbyLink} to={to} color="inherit">
-                  {label}
-                </Button>
-              ))}
-            </>
-          ) : (
-            <IconButton>
-              <MenuIcon />
-            </IconButton>
-          )}
+          <Menu />
         </Toolbar>
       </AppBar>
     </Headroom>
