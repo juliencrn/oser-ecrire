@@ -35,9 +35,9 @@ export interface MenuProps {
 }
 
 const links: MenuItem[] = [
-  { label: 'À propos', to: '/a-propos' },
   { label: "L'atelier d'écriture", to: routes.blog },
   { label: 'Rédaction SEO', to: routes.redac },
+  { label: 'À propos', to: '/a-propos' },
   { label: 'Contact', to: '/contact' },
 ]
 

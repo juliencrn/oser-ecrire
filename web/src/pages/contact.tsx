@@ -13,8 +13,8 @@ import ContactForm from '../components/ContactForm'
 
 const ContactPage: FC = () => (
   <Layout>
-    <SEO title="Contact" />
-    <Hero title="Contact">
+    <SEO title="Contact" description="Vous avez un projet ? Dites-moi tout !" />
+    <Hero title="Contact" description="Vous avez un projet ? Dites-moi tout !">
       <Grid container spacing={2} justify="center">
         <Grid item>
           <Button
