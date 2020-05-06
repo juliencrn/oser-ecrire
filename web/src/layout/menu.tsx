@@ -14,6 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import CloseIcon from '@material-ui/icons/Close'
 
 import { routes } from '../config'
+import { MenuItem } from '../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawerHeader: {
@@ -23,11 +24,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
   },
 }))
-
-export interface MenuItem {
-  label: string
-  to: string
-}
 
 export interface MenuProps {
   links: MenuItem[]

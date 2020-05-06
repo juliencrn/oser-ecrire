@@ -10,6 +10,12 @@ export interface Slug {
   current: string
 }
 
+// Used in menu & footer for menu links map()
+export interface MenuItem {
+  label: string
+  to: string
+}
+
 export type AlertType = 'success' | 'error' | 'warning' | 'info'
 export interface AlertProps {
   type: AlertType
