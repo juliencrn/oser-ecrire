@@ -16,12 +16,14 @@ import { routes } from '../config'
 import NewsletterForm from '../components/NewsletterForm'
 import Blockquote from '../components/Blockquote'
 
-const FakeSection: FC<{ title: string }> = ({ title, children }) => (
+const FakeSection: FC<{ title?: string }> = ({ title, children }) => (
   <Container maxWidth="lg">
-    <Box my={8}>
-      <Typography variant="h3" align="center">
-        {title}
-      </Typography>
+    <Box my={24}>
+      {title && (
+        <Typography variant="h3" align="center">
+          {title}
+        </Typography>
+      )}
       <Box my={4}>{children}</Box>
     </Box>
   </Container>
@@ -34,7 +36,7 @@ const IndexPage: FC = () => {
       <Hero
         title="Créatrice de Contenus"
         description="Hello ! Je suis Nathalie et mon truc, c'est l'écriture.
-        J'écris pour mo, avec vous et pour mes clients.
+        J'écris pour moi, avec vous et pour mes clients.
         Bienvenue dans l'univers d'Oser Ecrire."
       ></Hero>
 
@@ -92,14 +94,14 @@ const IndexPage: FC = () => {
         </Grid>
       </FakeSection>
 
-      <Container maxWidth="lg">
-        <Box my={8}>
+      <FakeSection>
+        <Container maxWidth="lg">
           <Blockquote author="Michèle Mailhot">
             L'écriture, toute écriture, reste une audace et un courage. Et
             représente un énorme travail.
           </Blockquote>
-        </Box>
-      </Container>
+        </Container>
+      </FakeSection>
 
       <Box bgcolor="secondary.main" py={10} mb={0}>
         <Container maxWidth="md">

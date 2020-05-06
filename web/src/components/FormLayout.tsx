@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 
 import { AlertProps } from '../interfaces'
+import Fade from './Fade'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {},
@@ -43,51 +44,53 @@ const FormLayout: FC<FormLayoutProps> = ({
 }) => {
   const classes = useStyles()
   return (
-    <Paper className={classes.paper}>
-      <Form className={classes.form}>
-        {title && (
-          <Typography variant="h5" align="center" gutterBottom>
-            {title}
-          </Typography>
-        )}
+    <Fade>
+      <Paper className={classes.paper}>
+        <Form className={classes.form}>
+          {title && (
+            <Typography variant="h5" align="center" gutterBottom>
+              {title}
+            </Typography>
+          )}
 
-        {subtitle && (
-          <Typography
-            variant="body1"
-            color="textSecondary"
-            align="center"
-            gutterBottom
+          {subtitle && (
+            <Typography
+              variant="body1"
+              color="textSecondary"
+              align="center"
+              gutterBottom
+            >
+              {subtitle}
+            </Typography>
+          )}
+          <br />
+          {alert && <Alert severity={alert.type}>{alert.message}</Alert>}
+          <br />
+
+          {children}
+
+          <Box
+            display="flex"
+            justifyContent="flex-end"
+            alignItems="center"
+            flexWrap="wrap"
+            mt={3}
           >
-            {subtitle}
-          </Typography>
-        )}
-        <br />
-        {alert && <Alert severity={alert.type}>{alert.message}</Alert>}
-        <br />
+            <Button
+              variant="contained"
+              color="secondary"
+              disabled={isSubmitting}
+              onClick={submitForm}
+              className={classes.submit}
+            >
+              Envoyer
+            </Button>
+          </Box>
+        </Form>
 
-        {children}
-
-        <Box
-          display="flex"
-          justifyContent="flex-end"
-          alignItems="center"
-          flexWrap="wrap"
-          mt={3}
-        >
-          <Button
-            variant="contained"
-            color="secondary"
-            disabled={isSubmitting}
-            onClick={submitForm}
-            className={classes.submit}
-          >
-            Envoyer
-          </Button>
-        </Box>
-      </Form>
-
-      {isSubmitting && <LinearProgress />}
-    </Paper>
+        {isSubmitting && <LinearProgress />}
+      </Paper>
+    </Fade>
   )
 }
 
