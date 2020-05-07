@@ -24,6 +24,9 @@ const mainImage = `
     alt
     caption
     asset {
+      extension
+      size
+      url
       sm: fluid(maxWidth: 600) {
         ${gatsbyFluid}
       }
@@ -36,6 +39,8 @@ const mainImage = `
 
 const post = `
     id
+    _createdAt
+    _updatedAt
     title
     slug {
       current

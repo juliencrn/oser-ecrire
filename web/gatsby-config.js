@@ -1,17 +1,36 @@
 /* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/no-var-requires */
+const queries = require('./src/gatsby/queries')
+const utils = require('./src/gatsby/utils')
+
 const isDev = process.env.NODE_ENV !== 'production'
 
 require('dotenv').config({
   path: `.env.${isDev ? 'development' : 'production'}`,
 })
 
+const siteMetadata = {
+  title: `Oser Ecrire`,
+  description: `Écrire et Partager`,
+  siteUrl: `https://oser-ecrire.fr/`,
+  author: `Nathalie CARON`,
+  image: `${__dirname}/src/images/oser-ecrire-baniere.png`,
+}
+
 module.exports = {
-  siteMetadata: {
-    title: `Oser Ecrire`,
-  },
+  siteMetadata,
   plugins: [
     `gatsby-plugin-typescript`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-material-ui`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
     {
       resolve: 'gatsby-source-sanity',
       options: {
@@ -23,15 +42,6 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-material-ui',
-      // If you want to use styled components you should change the injection order.
-      options: {
-        // stylesProvider: {
-        //   injectFirst: true,
-        // },
-      },
-    },
-    {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
         fonts: [
@@ -39,11 +49,30 @@ module.exports = {
             family: `Source+Sans+Pro:ital`,
             variants: [`200`, `300`, `400`, `600`, `700`],
           },
+          { family: `Vidaloka` },
+          { family: `Domine` },
+        ],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: siteMetadata.siteUrl,
+        sitemap: `${siteMetadata.siteUrl}/sitemap.xml`,
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        feeds: [
           {
-            family: `Vidaloka`,
-          },
-          {
-            family: `Domine`,
+            query: `{posts: ${queries.posts}}`,
+            output: '/rss.xml',
+            title: `RSS Feed - ${siteMetadata.title}`,
+            description: `${siteMetadata.siteUrl}`,
+            serialize: ({ query }) =>
+              utils.feedSerializer(query.posts.edges, siteMetadata),
           },
         ],
       },
@@ -51,7 +80,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
+        trackingId: process.env.GATSBY_GOOGLE_ANALYTICS_TRACKING_ID || '',
       },
     },
     {
@@ -60,10 +89,10 @@ module.exports = {
         name: `gatsby-starter-default`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#ffffff`,
+        theme_color: `#000000`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/oser-ecrire-logo.png`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

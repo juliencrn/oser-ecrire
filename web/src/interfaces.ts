@@ -27,8 +27,10 @@ export interface MainImage {
   alt: string
   caption?: string
   asset: {
-    [key: string]: FluidObject
-  }
+    extension: string
+    size: number
+    url: string
+  } & { [key: string]: FluidObject }
 }
 
 export interface Category {
@@ -38,6 +40,8 @@ export interface Category {
 
 export interface Post {
   id: string
+  _createdAt: string
+  _updatedAt: string
   title: string
   slug: Slug
   excerpt: string
