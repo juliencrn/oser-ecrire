@@ -1,14 +1,9 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
-import React, { FC } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
-// import { useStaticQuery, graphql } from 'gatsby'
+
 import useSiteSettings from '../hooks/useSiteSettings'
+import useAuthorData from '../hooks/useAuthorData'
+import useSiteMetadata from '../hooks/useSiteMetadata'
 
 interface MetaProperty {
   property: string
@@ -23,31 +18,35 @@ interface MetaName {
 type Meta = MetaName | MetaProperty
 
 export interface SEOProps {
+  path: string
   title: string
   description?: string
   lang?: string
   meta?: Meta[]
-  path?: string
+  imageUrl?: string
+  isPost?: boolean
 }
 
-const SEO: FC<SEOProps> = ({
-  description = '',
-  lang = 'en',
-  meta = [],
-  title,
-  path = '/',
-}) => {
-  const siteSettings = useSiteSettings()
+export default function SEO(props: SEOProps) {
+  const { path, title, description, lang, meta, imageUrl, isPost } = props
+  const siteSettings = useSiteSettings() // From CMS
+  const authorData = useAuthorData() // From CMS
+  const siteMetadata = useSiteMetadata() // From gatsby-config.js
 
-  const metaDescription = description /* || site.siteMetadata.description*/
+  // Format data using different sources
+  const siteName = siteSettings.title || siteMetadata.title
+  const metaDescription =
+    description || siteSettings.slogan || siteMetadata.description
+  const url = `${siteMetadata.siteUrl}${path}`
+  const image = imageUrl || siteMetadata.image
+  const author = authorData.name || siteMetadata.author
 
   return (
     <Helmet
-      htmlAttributes={{
-        lang,
-      }}
+      htmlAttributes={{ lang }}
       title={title}
-      titleTemplate={`%s | ${siteSettings.title}`}
+      titleTemplate={`%s | ${siteName}`}
+      link={[{ rel: 'canonical', key: url, href: url }]}
       meta={[
         {
           name: `description`,
@@ -58,21 +57,33 @@ const SEO: FC<SEOProps> = ({
           content: title,
         },
         {
+          property: `og:site_name`,
+          content: siteName,
+        },
+        {
           property: `og:description`,
           content: metaDescription,
         },
         {
           property: `og:type`,
-          content: `website`,
+          content: isPost ? `article` : `website`,
+        },
+        {
+          property: `og:url`,
+          content: url,
+        },
+        {
+          property: `og:image`,
+          content: image,
         },
         {
           name: `twitter:card`,
           content: `summary`,
         },
-        // {
-        //   name: `twitter:creator`,
-        //   content: site.siteMetadata.author.name,
-        // },
+        {
+          name: `twitter:creator`,
+          content: author,
+        },
         {
           name: `twitter:title`,
           content: title,
@@ -81,9 +92,15 @@ const SEO: FC<SEOProps> = ({
           name: `twitter:description`,
           content: metaDescription,
         },
-      ].concat(meta)}
+      ].concat(meta || [])}
     />
   )
 }
 
-export default SEO
+SEO.defaultProps = {
+  description: '',
+  lang: 'fr',
+  meta: [],
+  imageUrl: '',
+  isPost: false,
+}

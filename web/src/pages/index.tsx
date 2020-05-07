@@ -29,16 +29,16 @@ const FakeSection: FC<{ title?: string }> = ({ title, children }) => (
   </Container>
 )
 
+const description = `Hello ! 
+Je suis Nathalie et mon truc, c'est l'écriture.
+J'écris pour moi, avec vous et pour mes clients.
+Bienvenue dans l'univers d'Oser Ecrire.`
+
 const IndexPage: FC = () => {
   return (
     <Layout>
-      <SEO title="Home" />
-      <Hero
-        title="Créatrice de Contenus"
-        description="Hello ! Je suis Nathalie et mon truc, c'est l'écriture.
-        J'écris pour moi, avec vous et pour mes clients.
-        Bienvenue dans l'univers d'Oser Ecrire."
-      ></Hero>
+      <SEO title="Accueil" path="/" description={description} />
+      <Hero title="Créatrice de Contenus" description={description}></Hero>
 
       <FakeSection title="Oser Ecrire : Pour qui ? Pour quoi ?">
         <Grid container spacing={2} justify="center">

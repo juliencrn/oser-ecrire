@@ -14,7 +14,7 @@ export interface AuthorData {
   }
 }
 
-export default (): AuthorData => {
+export default function useAuthorData(): AuthorData {
   const data = useStaticQuery(graphql`
     {
       sanityAuthor {

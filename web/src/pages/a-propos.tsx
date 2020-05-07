@@ -5,10 +5,11 @@ import { Grid, Button } from '@material-ui/core'
 import Layout from '../layout'
 import SEO from '../components/seo'
 import Hero from '../components/Hero'
+import { PageTemplate } from '../interfaces'
 
-const AboutPage: FC = () => (
+const AboutPage: FC<PageTemplate> = ({ path }) => (
   <Layout>
-    <SEO title="À propos" />
+    <SEO title="À propos" path={path} />
     <Hero title="À propos">
       <Grid container spacing={2} justify="center">
         <Grid item>

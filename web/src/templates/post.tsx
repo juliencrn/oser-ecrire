@@ -51,7 +51,7 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
 
   return (
     <Layout isBlog>
-      <SEO title={title} description={excerpt} path={path} />
+      <SEO title={title} description={excerpt} path={path} isPost />
       <PostNavigation direction="left" post={pageContext.prev} />
       <PostNavigation direction="right" post={pageContext.next} />
 

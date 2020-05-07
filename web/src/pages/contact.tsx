@@ -10,10 +10,15 @@ import Layout from '../layout'
 import SEO from '../components/seo'
 import Hero from '../components/Hero'
 import ContactForm from '../components/ContactForm'
+import { PageTemplate } from '../interfaces'
 
-const ContactPage: FC = () => (
+const ContactPage: FC<PageTemplate> = ({ path }) => (
   <Layout>
-    <SEO title="Contact" description="Vous avez un projet ? Dites-moi tout !" />
+    <SEO
+      title="Contact"
+      path={path}
+      description="Vous avez un projet ? Dites-moi tout !"
+    />
     <Hero title="Contact" description="Vous avez un projet ? Dites-moi tout !">
       <Grid container spacing={2} justify="center">
         <Grid item>
