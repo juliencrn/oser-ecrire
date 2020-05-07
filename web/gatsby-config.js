@@ -12,7 +12,7 @@ require('dotenv').config({
 const siteMetadata = {
   title: `Oser Ecrire`,
   description: `Écrire et Partager`,
-  siteUrl: `https://oser-ecrire.fr|`,
+  siteUrl: `https://oser-ecrire.fr`,
   author: `Nathalie CARON`,
   image: `${__dirname}/src/images/Baniere-oser-ecrire.png`,
 }
@@ -39,6 +39,17 @@ module.exports = {
         token: process.env.GATSBY_SANITY_TOKEN,
         graphqlTag: 'default',
         watchMode: isDev,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,
+        indexName: process.env.GATSBY_ALGOLIA_SEARCH_KEY, // for all queries
+        queries: utils.algoliaQueries,
+        // enablePartialUpdates: true, // default: false
+        chunkSize: 10000, // default: 1000
       },
     },
     {

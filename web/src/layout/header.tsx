@@ -13,6 +13,7 @@ import Hidden from '@material-ui/core/Hidden'
 
 import { routes } from '../config'
 import Menu from './menu'
+import Search from '../components/search'
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
@@ -49,7 +50,11 @@ const Header: FC<HeaderProps> = ({ siteTitle, isBlog = false }) => {
       <AppBar component="header" position="static" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <div className={classes.titles}>
-            <Typography variant="h5" className={classes.text}>
+            <Typography
+              variant="h5"
+              className={classes.text}
+              style={{ marginTop: 'auto', marginBottom: 'auto' }}
+            >
               <Link
                 to="/"
                 component={GatsbyLink}
@@ -76,7 +81,7 @@ const Header: FC<HeaderProps> = ({ siteTitle, isBlog = false }) => {
                   color="inherit"
                   className={classes.link}
                 >
-                  {isBlog ? `L'atelier d'écriture` : `Rédaction SEO`}
+                  {isBlog ? <Search /> : `Rédaction SEO`}
                 </Link>
               </Typography>
             </Hidden>

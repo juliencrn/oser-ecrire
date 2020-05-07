@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const queries = require('./queries')
+
 // Extension: string => ImageType: string
 const getMediaType = extention => {
   switch (extention) {
@@ -41,6 +44,20 @@ const feedSerializer = (posts, siteMetadata) => {
     return formattedPost
   })
 }
+
+const algoliaQueries = [
+  {
+    query: `{posts: ${queries.posts}}`,
+    transformer: ({ data }) =>
+      data.posts.edges.map(({ node: { title, excerpt, slug } }) => ({
+        id: slug.current,
+        path: slug.current,
+        title,
+        excerpt,
+      })),
+    indexName: `Posts`,
+  },
+]
 
 const getImagesFunc = images => id => {
   const results = images.filter(({ node }) => node.id === id)
@@ -86,4 +103,5 @@ module.exports = {
   normalizeCategories,
   // getMediaType,
   feedSerializer,
+  algoliaQueries,
 }
