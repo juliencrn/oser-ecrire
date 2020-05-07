@@ -14,7 +14,7 @@ const siteMetadata = {
   description: `Écrire et Partager`,
   siteUrl: `https://oser-ecrire.fr/`,
   author: `Nathalie CARON`,
-  image: `${__dirname}/src/images/oser-ecrire-baniere.png`,
+  image: `${__dirname}/src/images/Baniere-oser-ecrire.png`,
 }
 
 module.exports = {
@@ -92,7 +92,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#000000`,
         display: `minimal-ui`,
-        icon: `src/images/oser-ecrire-logo.png`, // This path is relative to the root of the site.
+        icon: `src/images/Logo-oser-ecrire.png`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
