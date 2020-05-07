@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'flex-start',
     '& em': {
       background: fade(theme.palette.primary.light, 0.3),
+      fontStyle: 'normal',
     },
   },
   title: {
