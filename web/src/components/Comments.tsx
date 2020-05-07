@@ -39,7 +39,7 @@ const Comments: FC<CommentsProps> = ({ uid, title }) => {
           style={{ width: `100%` }}
           onClick={toggleVisibility}
         >
-          Voir les commentaires
+          Laissez un commentaire
         </Button>
       )}
     </Box>
