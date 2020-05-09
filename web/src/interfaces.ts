@@ -55,6 +55,19 @@ export interface Post {
   }[]
 }
 
+export interface Comment {
+  _id: string
+  _type: 'comment'
+  _createdAt: string
+  _updatedAt: string
+  post: {
+    _ref: string
+  }
+  email: string
+  username: string
+  message: string
+}
+
 export interface PageTemplate {
   location: Location
   pageContext: any

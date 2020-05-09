@@ -55,7 +55,7 @@ const Blockquote: FC<{ author?: string }> = ({ author, children }) => {
           align="right"
           component="p"
           className={classes.author}
-        >{`- ${author}`}</Typography>
+        >{`— ${author}`}</Typography>
       )}
     </Box>
   )

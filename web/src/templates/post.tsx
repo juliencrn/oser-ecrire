@@ -20,8 +20,8 @@ import NewsletterForm from '../components/NewsletterForm'
 const useStyles = makeStyles((theme: Theme) => ({
   title: {},
   divider: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(8),
   },
   body: {
     backgroundColor: theme.palette.background.paper,
@@ -42,6 +42,7 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
 
   const {
     title,
+    slug,
     excerpt,
     mainImage,
     body,
@@ -79,7 +80,7 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
 
           <Divider className={classes.divider} />
 
-          <Comments uid={path} title={title} />
+          <Comments postSlug={slug.current} />
         </Container>
       </div>
 

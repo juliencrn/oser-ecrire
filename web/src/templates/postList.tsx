@@ -2,20 +2,18 @@ import React, { FC } from 'react'
 import { navigate } from 'gatsby'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { useTransition, animated } from 'react-spring'
-import loadable from '@loadable/component'
 
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
+import Pagination from '@material-ui/lab/Pagination'
 
 import Layout from '../layout'
 import SEO from '../components/seo'
 import { PageTemplate, Post, Category, NodeArrayOf } from '../interfaces'
 import Hero from '../components/Hero'
 import CategoryFilter from '../components/CategoryFilter'
-
-const AsyncPostCard = loadable(() => import('../components/PostCard'))
-const AsyncPagination = loadable(() => import('@material-ui/lab/Pagination'))
+import PostCard from '../components/PostCard'
 
 const useStyles = makeStyles((theme: Theme) => ({
   heroButtons: {
@@ -82,13 +80,13 @@ const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
                 sm={6}
                 md={4}
               >
-                <AsyncPostCard {...item.node} />
+                <PostCard {...item.node} />
               </Grid>
             ))}
           </Grid>
 
           <div className={classes.pagination}>
-            <AsyncPagination
+            <Pagination
               count={numPages}
               page={currentPage}
               showFirstButton
