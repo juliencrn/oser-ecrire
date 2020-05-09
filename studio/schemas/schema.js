@@ -24,6 +24,7 @@ import excerpt from './objects/excerpt'
 import testimonial from './objects/testimonial'
 import siteLinks from './objects/siteLinks'
 import authorLinks from './objects/authorLinks'
+import comment from './documents/comment'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -42,6 +43,7 @@ export default createSchema({
     service,
     project,
     formation,
+    comment,
 
     // Object types
     mainImage,

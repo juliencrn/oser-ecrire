@@ -5,6 +5,7 @@ import {
   MdWork,
   MdLocalOffer,
   MdSchool,
+  MdComment,
 } from 'react-icons/md'
 import {
   FaPencilAlt,
@@ -24,11 +25,13 @@ export default () =>
         .child(
           S.editor().schemaType('siteSettings').documentId('siteSettings'),
         ),
+
       // Singleton
       S.listItem()
         .title("À propos de l'auteur")
         .icon(MdPerson)
         .child(S.editor().schemaType('author').documentId('author')),
+
       S.listItem()
         .title("L'atelier d'écriture")
         .icon(FaPencilAlt)
@@ -41,13 +44,21 @@ export default () =>
                 .icon(FaNewspaper)
                 .schemaType('post')
                 .child(S.documentTypeList('post').title('Articles')),
+
               S.listItem()
                 .title('Categories')
                 .icon(MdLocalOffer)
                 .schemaType('category')
                 .child(S.documentTypeList('category').title('Categories')),
+
+              S.listItem()
+                .title('Commentaires')
+                .icon(MdComment)
+                .schemaType('comment')
+                .child(S.documentTypeList('comment').title('Commentaires')),
             ]),
         ),
+
       S.listItem()
         .title('Rédaction SEO')
         .icon(MdWork)
@@ -62,6 +73,7 @@ export default () =>
                 .child(
                   S.documentTypeList('project').title('Références client'),
                 ),
+
               S.listItem()
                 .title('Thèmes de prédilection')
                 .schemaType('topic')
@@ -69,16 +81,19 @@ export default () =>
                 .child(
                   S.documentTypeList('topic').title('Thèmes de prédilection'),
                 ),
+
               S.listItem()
                 .title('Clients')
                 .icon(MdPerson)
                 .schemaType('customer')
                 .child(S.documentTypeList('customer').title('Clients')),
+
               S.listItem()
                 .title('Prestations proposées')
                 .icon(FaRegLightbulb)
                 .schemaType('service')
                 .child(S.documentTypeList('service').title('Prestations')),
+
               S.listItem()
                 .title('Formations suivies')
                 .icon(MdSchool)

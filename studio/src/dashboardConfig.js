@@ -88,6 +88,7 @@ export default {
           'formation',
           'project',
           'topic',
+          'comment',
         ],
       },
     },
