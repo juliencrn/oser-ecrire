@@ -80,7 +80,7 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
 
           <Divider className={classes.divider} />
 
-          <Comments postSlug={slug.current} />
+          <Comments postSlug={slug.current} postTitle={title} />
         </Container>
       </div>
 

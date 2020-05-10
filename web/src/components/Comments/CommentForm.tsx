@@ -8,6 +8,8 @@ import Grid from '@material-ui/core/Grid'
 
 import Yup from '../../libs/Yup'
 import { createComment } from './commentsAPI'
+import sendMail, { Mail } from '../../libs/sendMailApi'
+import useSiteSettings from '../../hooks/useSiteSettings'
 
 const useStyles = makeStyles((theme: Theme) => ({
   field: {
@@ -37,11 +39,13 @@ const initialValues = {
 
 export interface CommentsFormProps {
   postSlug: string
+  postTitle: string
   onSubmit: () => void
 }
 
-function CommentsForm({ postSlug, onSubmit }: CommentsFormProps) {
+function CommentsForm({ postSlug, postTitle, onSubmit }: CommentsFormProps) {
   const classes = useStyles()
+  const siteSettings = useSiteSettings()
 
   return (
     <Formik
@@ -62,6 +66,22 @@ function CommentsForm({ postSlug, onSubmit }: CommentsFormProps) {
         if (res) {
           resetForm()
           onSubmit() // Refresh comments list
+
+          const mail: Mail = {
+            to: siteSettings.email,
+            subject: `Nouveau commentaire sur Oser-Ecrire.fr`,
+            html: `
+            <p>Nouveau commentaire sur oser-ecrire.fr > "${postTitle}" !</p>
+            <p>De la part de :</p>
+            <ul>
+              <li>Nom : ${username} </li>
+              <li>Email : ${email} </li>
+            </ul>
+            <p>Message :</p>
+            <p>${message}</p>
+            `,
+          }
+          await sendMail(mail)
         }
 
         return !!res

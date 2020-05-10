@@ -10,9 +10,10 @@ import Comment from './Comment'
 
 interface CommentsProps {
   postSlug: string
+  postTitle: string
 }
 
-const Comments: FC<CommentsProps> = ({ postSlug }) => {
+const Comments: FC<CommentsProps> = ({ postSlug, postTitle }) => {
   const [comments, setComments] = useState<IComment[]>([])
 
   const fetchComments = async () => {
@@ -33,7 +34,11 @@ const Comments: FC<CommentsProps> = ({ postSlug }) => {
     <Box mt={6} mb={3}>
       <Typography variant="h4">Laisser un commentaire</Typography>
 
-      <CommentsForm postSlug={postSlug} onSubmit={handleCommentSubmit} />
+      <CommentsForm
+        postSlug={postSlug}
+        postTitle={postTitle}
+        onSubmit={handleCommentSubmit}
+      />
 
       {comments.length > 0 &&
         comments.map(comment => <Comment key={comment._id} {...comment} />)}
