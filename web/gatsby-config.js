@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable @typescript-eslint/no-var-requires */
+const proxy = require('http-proxy-middleware')
+
 const queries = require('./src/gatsby/queries')
 const utils = require('./src/gatsby/utils')
 
@@ -110,4 +112,18 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
+
+  // for avoiding CORS while developing Netlify Functions locally
+  // read more: https://www.gatsbyjs.org/docs/api-proxy/#advanced-proxying
+  developMiddleware: app => {
+    app.use(
+      '/.netlify/functions/',
+      proxy({
+        target: 'http://localhost:9000',
+        pathRewrite: {
+          '/.netlify/functions/': '',
+        },
+      }),
+    )
+  },
 }
