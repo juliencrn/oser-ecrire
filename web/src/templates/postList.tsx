@@ -10,7 +10,7 @@ import Pagination from '@material-ui/lab/Pagination'
 
 import Layout from '../layout'
 import SEO from '../components/seo'
-import { PageTemplate, Post, Category, NodeArrayOf } from '../interfaces'
+import { PageTemplate, Post, NodeArrayOf, BlogSettings } from '../interfaces'
 import Hero from '../components/Hero'
 import CategoryFilter from '../components/CategoryFilter'
 import PostCard from '../components/PostCard'
@@ -29,17 +29,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface PostListTemplateProps extends PageTemplate {
   pageContext: {
-    categories: NodeArrayOf<Category>
     numPages: number
     basePath: string
     currentPage: number
     posts: NodeArrayOf<Post>
+    blogSettings: BlogSettings
   }
 }
 
 const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
   const classes = useStyles()
-  const { numPages, currentPage, posts, categories, basePath } = pageContext
+  const { numPages, currentPage, posts, basePath, blogSettings } = pageContext
+  const { title, excerpt, slogan, categories } = blogSettings
 
   const transitions = useTransition(posts, item => item.node.slug.current, {
     trail: 650 / posts.length,
@@ -54,16 +55,9 @@ const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
 
   return (
     <Layout isBlog>
-      <SEO
-        title="L'atelier d'écriture"
-        description="L'Atelier d'Écriture qui Libère Votre Créativité"
-        path={path}
-      />
+      <SEO title={title} description={excerpt} path={path} />
 
-      <Hero
-        title="L'atelier d'écriture"
-        description="L'Atelier d'Écriture qui Libère Votre Créativité"
-      >
+      <Hero title={title} description={slogan}>
         <CategoryFilter categories={categories} basePath={basePath} />
       </Hero>
 

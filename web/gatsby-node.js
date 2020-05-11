@@ -16,8 +16,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const results = await graphql(`{
     posts: ${queries.posts}
-    categories: ${queries.categories}
     images: ${queries.images}
+    blogSettings: ${queries.blogSettings}
   }`)
 
   if (results.errors) {
@@ -34,9 +34,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // Remove empty categories
   // Add "postsIn" posts array in each category
   const categories = normalizeCategories(
-    results.data.categories.edges,
+    results.data.blogSettings.categories,
     results.data.posts.edges,
   )
+
+  // Merge blogSettings with serialized categories instead existing
+  const blogSettings = {
+    ...results.data.blogSettings,
+    categories,
+  }
 
   /**
    * Create posts
@@ -57,7 +63,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
    * Create posts list (with pagination)
    */
   const postsPerPage = 6
-  const blogPath = `/atelier-ecriture`
+  const blogPath = `/${blogSettings.slug.current}`
   const numPages = Math.ceil(posts.length / postsPerPage)
 
   Array.from({ length: numPages }).forEach((_, i) => {
@@ -65,10 +71,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: i === 0 ? blogPath : `${blogPath}/${i + 1}`,
       component: path.resolve(`./src/templates/postList.tsx`),
       context: {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        categories: categories.map(({ node: { postsIn, ...rest } }) => ({
-          node: rest,
-        })),
+        blogSettings,
         numPages,
         basePath: blogPath,
         currentPage: i + 1,
@@ -80,24 +83,21 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   /**
    * Create categories archive of posts list (with pagination)
    */
-  categories.forEach(({ node }) => {
+  categories.forEach(({ slug, postsIn }) => {
     // Pagination
-    const numArchivePages = Math.ceil(node.postsIn.length / postsPerPage)
+    const numArchivePages = Math.ceil(postsIn.length / postsPerPage)
 
     Array.from({ length: numArchivePages }).forEach((_, i) => {
-      const basePath = `${blogPath}/${node.slug.current}`
+      const basePath = `${blogPath}/${slug.current}`
       createPage({
         path: i === 0 ? basePath : `${basePath}/${i + 1}`,
         component: path.resolve(`./src/templates/postList.tsx`),
         context: {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          categories: categories.map(({ node: { postsIn, ...rest } }) => ({
-            node: rest,
-          })),
+          blogSettings,
           basePath,
           numPages: numArchivePages,
           currentPage: i + 1,
-          posts: node.postsIn.slice(
+          posts: postsIn.slice(
             i * postsPerPage,
             i * postsPerPage + postsPerPage,
           ),

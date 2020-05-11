@@ -4,7 +4,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 
-import { NodeArrayOf, Category } from '../interfaces'
+import { Category } from '../interfaces'
 import { routes } from '../config'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 export interface CategoryFilterProps {
-  categories: NodeArrayOf<Category>
+  categories: Category[]
   basePath: string
 }
 
@@ -46,9 +46,7 @@ const CategoryFilter: FC<CategoryFilterProps> = ({ categories, basePath }) => {
 
   return (
     <Typography variant="body2" className={classes.root}>
-      {[{ node: allCategory }, ...categories].map(({ node }, i) => {
-        const { title, slug } = node
-
+      {[allCategory, ...categories].map(({ title, slug }, i) => {
         // Find active item
         const isMainPage = basePath === routes.blog
         const matchCategory =

@@ -70,16 +70,34 @@ const posts = `
   }
 `
 
-const categories = `
-  allSanityCategory(limit: 1000) {
-    edges {
-      node {
-        id
-        title
-        slug {
-          current
-        }
+// const categories = `
+//   allSanityCategory(limit: 1000) {
+//     edges {
+//       node {
+//         id
+//         title
+//         slug {
+//           current
+//         }
+//       }
+//     }
+//   }
+// `
+
+const blogSettings = `
+  sanityBlogSettings {
+    title
+    slogan
+    slug {
+      current
+    }
+    excerpt
+    categories {
+      id
+      slug {
+        current
       }
+      title
     }
   }
 `
@@ -106,6 +124,7 @@ module.exports = {
   mainImage,
   post,
   posts,
-  categories,
+  // categories,
+  blogSettings,
   images,
 }

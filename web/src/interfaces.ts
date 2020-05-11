@@ -68,6 +68,14 @@ export interface Comment {
   message: string
 }
 
+export interface BlogSettings {
+  title: string
+  slug: Slug
+  slogan: string
+  excerpt: string
+  categories: Category[]
+}
+
 export interface PageTemplate {
   location: Location
   pageContext: any

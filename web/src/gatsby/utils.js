@@ -83,20 +83,18 @@ const addImagesInPosts = (posts, images) => {
 const normalizeCategories = (categories, posts) =>
   categories
     // 1. Get posts in category
-    .map(({ node }) => ({
-      node: {
-        ...node,
-        postsIn:
-          posts.filter(post => {
-            const matchesArr = post.node.categories.filter(
-              category => category.id === node.id,
-            )
-            return matchesArr.length > 0
-          }) || [],
-      },
+    .map(node => ({
+      ...node,
+      postsIn:
+        posts.filter(post => {
+          const matchesArr = post.node.categories.filter(
+            category => category.id === node.id,
+          )
+          return matchesArr.length > 0
+        }) || [],
     }))
     // 2. Remove category if has not posts
-    .filter(({ node }) => node.postsIn.length > 0)
+    .filter(({ postsIn }) => postsIn.length > 0)
 
 module.exports = {
   addImagesInPosts,
