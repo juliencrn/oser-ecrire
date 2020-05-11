@@ -39,6 +39,15 @@ export default () =>
           S.list()
             .title("L'atelier d'écriture")
             .items([
+              // Singleton
+              S.listItem()
+                .title('Réglages du blog')
+                .icon(MdSettings)
+                .child(
+                  S.editor()
+                    .schemaType('blogSettings')
+                    .documentId('blogSettings'),
+                ),
               S.listItem()
                 .title('Articles')
                 .icon(FaNewspaper)

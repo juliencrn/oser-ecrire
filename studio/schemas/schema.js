@@ -25,6 +25,7 @@ import testimonial from './objects/testimonial'
 import siteLinks from './objects/siteLinks'
 import authorLinks from './objects/authorLinks'
 import comment from './documents/comment'
+import blogSettings from './documents/blogSettings'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -44,6 +45,7 @@ export default createSchema({
     project,
     formation,
     comment,
+    blogSettings,
 
     // Object types
     mainImage,
