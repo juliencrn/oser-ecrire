@@ -31,8 +31,9 @@ export default {
     },
     {
       name: 'description',
-      type: 'textPortableText',
+      type: 'text',
       title: 'Description',
+      rows: 3,
     },
     {
       name: 'testimonial',

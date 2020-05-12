@@ -1,10 +1,12 @@
 import { FaExternalLinkAlt, FaLink } from 'react-icons/fa'
+import { MdTextFields } from 'react-icons/md'
 
 // Same of bodyPortableText without image
 export default {
-  name: 'textPortableText',
+  name: 'simplePortableText',
   type: 'array',
   title: "Contenu de l'article",
+  icon: MdTextFields,
   of: [
     {
       type: 'block',

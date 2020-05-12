@@ -35,70 +35,8 @@ export default {
       title: 'Extrait',
     },
     {
-      name: 'body',
-      type: 'textPortableText',
-      title: 'Présentation principale',
-    },
-    {
-      name: 'services',
-      type: 'array',
-      title: 'Mes services',
-      description: `Sélectionner les services proposés. L'ordre compte.`,
-      of: [
-        {
-          type: 'reference',
-          to: {
-            type: 'service',
-          },
-        },
-      ],
-    },
-    {
-      name: 'projects',
-      type: 'array',
-      title: 'Mes références',
-      description: `Sélectionner les références clients à mettre en avant sur le portfolio. L'ordre compte.`,
-      of: [
-        {
-          type: 'reference',
-          to: {
-            type: 'project',
-          },
-        },
-      ],
-    },
-    {
-      name: 'customers',
-      type: 'array',
-      title: 'Mes avis',
-      description: `Sélectionner les clients qui vous ont donné un avis. L'ordre compte.`,
-      of: [
-        {
-          type: 'reference',
-          to: {
-            type: 'customer',
-          },
-        },
-      ],
-    },
-    {
-      name: 'formations',
-      type: 'array',
-      title: 'Mes formations',
-      description: `Sélectionner les formations suivies dans le cadre de la rédaction SEO. L'ordre compte.`,
-      of: [
-        {
-          type: 'reference',
-          to: {
-            type: 'formation',
-          },
-        },
-      ],
-    },
-    {
-      name: 'whyMe',
-      type: 'textPortableText',
-      title: 'Pourquoi moi ?',
+      name: 'modules',
+      type: 'modules',
     },
   ],
 }

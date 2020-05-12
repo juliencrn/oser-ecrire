@@ -54,11 +54,6 @@ export default {
       type: 'url',
       title: 'Lien vers la référence',
     },
-    {
-      name: 'mainImage',
-      type: 'mainImage',
-      title: 'Image',
-    },
   ],
   preview: {
     select: {
