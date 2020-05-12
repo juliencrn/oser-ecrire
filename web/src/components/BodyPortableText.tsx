@@ -15,10 +15,7 @@ import Blockquote from './Blockquote'
 const { projectId, dataset } = config.sanity
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-  },
+  root: {},
   title: {
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(2),
@@ -44,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface BodyPortableTextProps {
   blocks: any[]
-  images: any[]
+  images?: any[]
 }
 
 const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
@@ -84,10 +81,12 @@ const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
         }
       },
       mainImage: (props: any) => {
+        if (!images) return null
         const image = images.filter(
           ({ node }) => node.id === props.node.asset._ref,
         )[0]
-        return image ? (
+        if (!image) return null
+        return (
           <Box className={classes.imageWrap}>
             <Image alt={props.node.alt} fluid={image.node.md} />
             {props.node.caption && (
@@ -101,7 +100,7 @@ const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
               </Typography>
             )}
           </Box>
-        ) : null
+        )
       },
       quote: (props: any) => (
         <Blockquote author={props.node?.author}>{props.node.text}</Blockquote>

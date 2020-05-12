@@ -18,6 +18,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     posts: ${queries.posts}
     images: ${queries.images}
     blogSettings: ${queries.blogSettings}
+    redactionSettings: ${queries.redactionSettings}
   }`)
 
   if (results.errors) {
@@ -104,5 +105,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         },
       })
     })
+  })
+
+  /**
+   * Create "Redaction SEO" template page
+   */
+  const { redactionSettings } = results.data
+  createPage({
+    path: redactionSettings.slug.current,
+    component: path.resolve(`./src/templates/redaction.tsx`),
+    context: redactionSettings,
   })
 }

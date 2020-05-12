@@ -68,6 +68,64 @@ export interface Comment {
   message: string
 }
 
+export interface Testimonial {
+  name: string
+  text: string
+  avatar?: {
+    asset: {
+      avatar: FluidObject
+    }
+  }
+}
+
+export interface Customer {
+  id: string
+  link?: string
+  slug: Slug
+  title: string
+  testimonial?: Testimonial
+}
+
+export interface Formation {
+  id: string
+  link?: string
+  slug: Slug
+  title: string
+  body: any
+  testimonial?: Testimonial
+}
+
+export interface Project {
+  id: string
+  link?: string
+  slug: Slug
+  title: string
+  service: Service
+  customer?: Customer
+  mainImage?: MainImage
+}
+
+export interface Service {
+  id: string
+  slug: Slug
+  title: string
+  description?: string
+}
+
+export interface RedactionSettings {
+  id: string
+  title: string
+  slogan: string
+  excerpt?: string
+  whyMe?: any
+  body?: any
+
+  customers?: Customer[]
+  formations?: Formation[]
+  projects?: Project[]
+  services?: Service[]
+}
+
 export interface BlogSettings {
   title: string
   slug: Slug

@@ -71,7 +71,10 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
         <Container maxWidth="md">
           <Divider className={classes.divider} />
 
-          <BodyPortableText blocks={body} images={images} />
+          <Box mb={4}>
+            <BodyPortableText blocks={body} images={images} />
+          </Box>
+
           <PostSocialBar categories={categories} />
 
           <Divider className={classes.divider} />
