@@ -33,9 +33,18 @@ export default {
       },
     },
     {
+      name: 'topic',
+      type: 'reference',
+      title: 'Thème de prédilection',
+      to: {
+        type: 'topic',
+      },
+    },
+    {
       name: 'service',
       type: 'reference',
       title: 'Prestation',
+      validation: (Rule) => Rule.error('Champ obligatoire').required(),
       to: {
         type: 'service',
       },
@@ -49,11 +58,6 @@ export default {
       name: 'mainImage',
       type: 'mainImage',
       title: 'Image',
-    },
-    {
-      name: 'excerpt',
-      type: 'excerpt',
-      title: 'Extrait',
     },
   ],
   preview: {

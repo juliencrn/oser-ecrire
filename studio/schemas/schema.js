@@ -26,6 +26,8 @@ import siteLinks from './objects/siteLinks'
 import authorLinks from './objects/authorLinks'
 import comment from './documents/comment'
 import blogSettings from './documents/blogSettings'
+import redactionSettings from './documents/redactionSettings'
+import textPortableText from './objects/textPortableText'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -46,10 +48,12 @@ export default createSchema({
     formation,
     comment,
     blogSettings,
+    redactionSettings,
 
     // Object types
     mainImage,
     bodyPortableText,
+    textPortableText,
     quote,
     excerpt,
     siteLinks,

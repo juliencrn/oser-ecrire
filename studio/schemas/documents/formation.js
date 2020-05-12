@@ -31,7 +31,7 @@ export default {
     },
     {
       name: 'description',
-      type: 'bodyPortableText',
+      type: 'textPortableText',
       title: 'Description',
     },
     {
