@@ -5,10 +5,10 @@ import { TextField } from 'formik-material-ui'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 
-import Yup from '../libs/Yup'
+import Yup from '../../libs/Yup'
 import FormLayout from './FormLayout'
-import { registerContact } from '../libs/sendInBlueApi'
-import { AlertProps } from '../interfaces'
+import { registerContact } from '../../libs/sendInBlueApi'
+import { AlertProps } from '../../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
   field: {

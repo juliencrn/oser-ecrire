@@ -5,9 +5,9 @@ import Box from '@material-ui/core/Box'
 import Chip from '@material-ui/core/Chip'
 import FolderOpenIcon from '@material-ui/icons/FolderOpen'
 
-import { Category } from '../interfaces'
-import SharingButtons from './SharingButtons'
-import { routes } from '../config'
+import { Category } from '../../interfaces'
+import SharingButtons from '../SharingButtons'
+import { routes } from '../../config'
 
 const PostSocialBar: FC<{ categories?: Category[] }> = ({ categories }) => {
   const handleCategoryClick = (slug: string) => {

@@ -13,7 +13,7 @@ import Hidden from '@material-ui/core/Hidden'
 
 import { routes } from '../config'
 import Menu from './menu'
-import Search from '../components/search'
+import Search from '../components/blog/search'
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {

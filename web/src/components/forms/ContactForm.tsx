@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import { TextField } from 'formik-material-ui'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 
-import Yup from '../libs/Yup'
+import Yup from '../../libs/Yup'
 import FormLayout from './FormLayout'
 
 const useStyles = makeStyles((theme: Theme) => ({

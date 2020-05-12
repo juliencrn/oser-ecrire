@@ -6,14 +6,14 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 
 import Layout from '../layout'
-import SEO from '../components/seo'
+import SEO from '../layout/seo'
 import { PageTemplate, RedactionSettings } from '../interfaces'
 import Hero from '../components/Hero'
 import BodyPortableText from '../components/BodyPortableText'
 import Section from '../components/Section'
-import TestimonialCard from '../components/TestimonialCard'
-import ProjectCard from '../components/ProjectCard'
-import ServiceCard from '../components/ServiceCard'
+import TestimonialCard from '../components/redaction/TestimonialCard'
+import ProjectCard from '../components/redaction/ProjectCard'
+import ServiceCard from '../components/redaction/ServiceCard'
 
 export interface RedactionTemplateProps extends PageTemplate {
   pageContext: RedactionSettings

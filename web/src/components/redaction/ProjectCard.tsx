@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import Chip from '@material-ui/core/Chip'
 import FolderOpenIcon from '@material-ui/icons/FolderOpen'
 
-import { Project } from '../interfaces'
+import { Project } from '../../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

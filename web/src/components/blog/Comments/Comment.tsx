@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton'
 
 import DeleteIcon from '@material-ui/icons/Delete'
 
-import { Comment as IComment } from '../../interfaces'
+import { Comment as IComment } from '../../../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},

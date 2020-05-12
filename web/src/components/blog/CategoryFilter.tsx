@@ -4,8 +4,8 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 
-import { Category } from '../interfaces'
-import { routes } from '../config'
+import { Category } from '../../interfaces'
+import { routes } from '../../config'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

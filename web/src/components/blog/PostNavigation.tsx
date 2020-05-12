@@ -9,7 +9,7 @@ import Hidden from '@material-ui/core/Hidden'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 
-import { Post } from '../interfaces'
+import { Post } from '../../interfaces'
 import PostCard from './PostCard'
 import { navigate } from 'gatsby'
 

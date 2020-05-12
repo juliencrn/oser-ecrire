@@ -6,10 +6,10 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 
-import Yup from '../../libs/Yup'
+import Yup from '../../../libs/Yup'
 import { createComment } from './commentsAPI'
-import sendMail, { Mail } from '../../libs/sendMailApi'
-import useSiteSettings from '../../hooks/useSiteSettings'
+import sendMail, { Mail } from '../../../libs/sendMailApi'
+import useSiteSettings from '../../../hooks/useSiteSettings'
 
 const useStyles = makeStyles((theme: Theme) => ({
   field: {

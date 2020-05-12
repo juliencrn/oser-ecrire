@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
-import { Service } from '../interfaces'
+import { Service } from '../../interfaces'
 
 const ServiceCard: FC<Service> = ({ title, description }) => {
   return (

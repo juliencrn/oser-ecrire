@@ -10,10 +10,10 @@ import CardContent from '@material-ui/core/CardContent'
 import Box from '@material-ui/core/Box'
 
 import Layout from '../layout'
-import SEO from '../components/seo'
+import SEO from '../layout/seo'
 import Hero from '../components/Hero'
 import { routes } from '../config'
-import NewsletterForm from '../components/NewsletterForm'
+import NewsletterForm from '../components/forms/NewsletterForm'
 import Blockquote from '../components/Blockquote'
 
 const FakeSection: FC<{ title?: string }> = ({ title, children }) => (

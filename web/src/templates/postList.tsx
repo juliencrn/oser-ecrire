@@ -9,11 +9,11 @@ import Box from '@material-ui/core/Box'
 import Pagination from '@material-ui/lab/Pagination'
 
 import Layout from '../layout'
-import SEO from '../components/seo'
+import SEO from '../layout/seo'
 import { PageTemplate, Post, NodeArrayOf, BlogSettings } from '../interfaces'
 import Hero from '../components/Hero'
-import CategoryFilter from '../components/CategoryFilter'
-import PostCard from '../components/PostCard'
+import CategoryFilter from '../components/blog/CategoryFilter'
+import PostCard from '../components/blog/PostCard'
 
 const useStyles = makeStyles((theme: Theme) => ({
   heroButtons: {

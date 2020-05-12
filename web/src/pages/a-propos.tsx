@@ -3,7 +3,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import { Grid, Button } from '@material-ui/core'
 
 import Layout from '../layout'
-import SEO from '../components/seo'
+import SEO from '../layout/seo'
 import Hero from '../components/Hero'
 import { PageTemplate } from '../interfaces'
 

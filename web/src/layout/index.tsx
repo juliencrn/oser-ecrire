@@ -6,7 +6,7 @@ import Header from './header'
 import Footer from './footer'
 import theme from '../theme'
 import useSiteSettings from '../hooks/useSiteSettings'
-import BackToTop from '../components/BackToTop'
+import BackToTop from './BackToTop'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

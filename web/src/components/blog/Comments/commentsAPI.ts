@@ -1,7 +1,7 @@
 import sanityClient from '@sanity/client'
 
-import { sanity } from '../../config'
-import { Comment } from '../../interfaces'
+import { sanity } from '../../../config'
+import { Comment } from '../../../interfaces'
 
 const client = sanityClient({
   projectId: sanity.projectId,

@@ -7,9 +7,9 @@ import Button from '@material-ui/core/Button'
 import Box from '@material-ui/core/Box'
 
 import Layout from '../layout'
-import SEO from '../components/seo'
+import SEO from '../layout/seo'
 import Hero from '../components/Hero'
-import ContactForm from '../components/ContactForm'
+import ContactForm from '../components/forms/ContactForm'
 import { PageTemplate } from '../interfaces'
 
 const ContactPage: FC<PageTemplate> = ({ path }) => (

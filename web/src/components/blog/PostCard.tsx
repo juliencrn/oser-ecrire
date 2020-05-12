@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import CardActionArea from '@material-ui/core/CardActionArea'
 
-import { Post } from '../interfaces'
+import { Post } from '../../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 
 import { getCommentsByPostSlug } from './commentsAPI'
-import { Comment as IComment } from '../../interfaces'
+import { Comment as IComment } from '../../../interfaces'
 import CommentsForm from './CommentForm'
 import Comment from './Comment'
 

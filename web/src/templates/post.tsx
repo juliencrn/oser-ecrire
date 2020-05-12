@@ -7,15 +7,15 @@ import Container from '@material-ui/core/Container'
 import Divider from '@material-ui/core/Divider'
 
 import Layout from '../layout'
-import SEO from '../components/seo'
+import SEO from '../layout/seo'
 import { PageTemplate, Post } from '../interfaces'
 import Hero from '../components/Hero'
 import AuthorCard from '../components/AuthorCard'
 import BodyPortableText from '../components/BodyPortableText'
-import PostSocialBar from '../components/PostSocialBar'
-import Comments from '../components/Comments'
-import PostNavigation from '../components/PostNavigation'
-import NewsletterForm from '../components/NewsletterForm'
+import PostSocialBar from '../components/blog/PostSocialBar'
+import Comments from '../components/blog/Comments'
+import PostNavigation from '../components/blog/PostNavigation'
+import NewsletterForm from '../components/forms/NewsletterForm'
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {},

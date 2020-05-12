@@ -9,8 +9,8 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 
-import { AlertProps } from '../interfaces'
-import Fade from './Fade'
+import { AlertProps } from '../../interfaces'
+import Fade from '../Fade'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {},
