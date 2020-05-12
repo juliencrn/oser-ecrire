@@ -6,50 +6,29 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
-import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
-import Chip from '@material-ui/core/Chip'
-import FolderOpenIcon from '@material-ui/icons/FolderOpen'
 
 import { Project } from '../../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    position: 'relative',
-  },
-  chip: {
-    position: 'absolute',
-    top: theme.spacing(1),
-    left: theme.spacing(1),
-    backgroundColor: theme.palette.background.default,
+  root: {},
+  title: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
   },
 }))
 
-const ProjectCard: FC<Project> = ({
-  title,
-  link,
-  mainImage,
-  customer,
-  service,
-}) => {
+const ProjectCard: FC<Project> = ({ title, link, customer, service }) => {
   const classes = useStyles()
   return (
     <Card className={classes.root} component={Paper}>
-      <CardMedia
-        style={{ height: 140 }}
-        image={mainImage?.asset.sm.src || ''}
-        title={mainImage?.alt || ''}
-      />
       <CardContent>
-        <Chip
-          className={classes.chip}
-          // clickable
-          // onClick={() => handleCategoryClick(categories[0].slug.current)}
-          label={service.title}
-          icon={<FolderOpenIcon />}
-          variant="outlined"
-        />
-        <Typography gutterBottom variant="h5" component="h2">
+        {service && (
+          <Typography variant="body2" color="textSecondary">
+            {service.title}
+          </Typography>
+        )}
+        <Typography className={classes.title} variant="h5">
           {title}
         </Typography>
         {customer && <Typography>{`Pour ${customer.title}`}</Typography>}
@@ -57,7 +36,12 @@ const ProjectCard: FC<Project> = ({
 
       {link && (
         <CardActions>
-          <Button target="_blank" href={link} size="small">
+          <Button
+            style={{ marginLeft: 'auto' }}
+            target="_blank"
+            href={link}
+            size="small"
+          >
             Lire sur le site
           </Button>
         </CardActions>

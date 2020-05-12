@@ -8,6 +8,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 
+// Deep node console.log util
+// require('util').inspect.defaultOptions.depth = null
+
+const { getRedactionSettings } = require('./src/gatsby/croqQueries')
 const queries = require('./src/gatsby/queries')
 const { addImagesInPosts, normalizeCategories } = require('./src/gatsby/utils')
 
@@ -18,7 +22,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     posts: ${queries.posts}
     images: ${queries.images}
     blogSettings: ${queries.blogSettings}
-    redactionSettings: ${queries.redactionSettings}
   }`)
 
   if (results.errors) {
@@ -110,7 +113,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   /**
    * Create "Redaction SEO" template page
    */
-  const { redactionSettings } = results.data
+  const redactionSettings = await getRedactionSettings()
   createPage({
     path: redactionSettings.slug.current,
     component: path.resolve(`./src/templates/redaction.tsx`),

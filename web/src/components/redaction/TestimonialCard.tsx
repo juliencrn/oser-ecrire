@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
-import Image from 'gatsby-image'
+import React, { FC, useState } from 'react'
 
+import Link from '@material-ui/core/Link'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
@@ -8,26 +8,45 @@ import Avatar from '@material-ui/core/Avatar'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
-import { Testimonial } from '../../interfaces'
+import { Testimonial, Formation, Customer } from '../../interfaces'
 
 export interface TestimonialCardProps {
   title: string
   testimonial?: Testimonial
 }
 
-const TestimonialCard: FC<TestimonialCardProps> = ({ title, testimonial }) => {
-  if (!(testimonial?.name && testimonial?.name)) {
+const TestimonialCard: FC<Formation | Customer> = ({
+  title,
+  link,
+  testimonial,
+}) => {
+  const TEXT_LENGTH = 150
+  const [expended, setExpended] = useState(false)
+
+  // Return if hasn't testimonial
+  if (!(testimonial?.name && testimonial?.text)) {
     return null
   }
+
+  // Crop text length
+  const text = expended
+    ? testimonial.text
+    : testimonial.text.slice(0, TEXT_LENGTH)
+  const cropped = text.length === TEXT_LENGTH
+
+  const handleExpend = () => {
+    setExpended(true)
+  }
+
   return (
     <Card component={Paper}>
       <CardHeader
         avatar={
           <Avatar>
             {testimonial?.avatar ? (
-              <Image
+              <img
                 style={{ width: `100%` }}
-                fluid={testimonial.avatar.asset.avatar}
+                src={testimonial.avatar.asset?.url}
                 alt={testimonial.name}
               />
             ) : (
@@ -36,10 +55,31 @@ const TestimonialCard: FC<TestimonialCardProps> = ({ title, testimonial }) => {
           </Avatar>
         }
         title={testimonial.name}
-        subheader={title}
+        subheader={
+          <Typography variant="body2" color="textSecondary">
+            <Link
+              href={link}
+              target="_blank"
+              style={{ cursor: 'pointer' }}
+              color="inherit"
+            >
+              {title}
+            </Link>
+          </Typography>
+        }
       />
       <CardContent>
-        <Typography>{testimonial.text}</Typography>
+        <Typography>
+          {text}
+          {!expended && cropped && (
+            <>
+              {`... `}
+              <Link onClick={handleExpend} style={{ cursor: 'pointer' }}>
+                Voir plus
+              </Link>
+            </>
+          )}
+        </Typography>
       </CardContent>
     </Card>
   )

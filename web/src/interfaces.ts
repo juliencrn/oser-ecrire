@@ -33,6 +33,32 @@ export interface MainImage {
   } & { [key: string]: FluidObject }
 }
 
+export type ModuleType =
+  | 'servicesModule'
+  | 'projectsModule'
+  | 'simplePortableTextModule'
+  | 'ctaModule'
+  | 'customersModule'
+  | 'formationsModule'
+
+export type PageName = 'contact' | 'about' | 'portfolio' | 'blog' | 'home'
+
+export interface Module {
+  // Common
+  _key: string
+  _type: ModuleType
+  title: string
+  introduction?: string
+
+  // Specific
+  body?: any
+  services?: Service[]
+  projects?: Project[]
+  customers?: Customer[]
+  formations?: Formation[]
+  internalLink?: PageName[]
+}
+
 export interface Category {
   title: string
   slug: Slug
@@ -73,7 +99,8 @@ export interface Testimonial {
   text: string
   avatar?: {
     asset: {
-      avatar: FluidObject
+      avatar?: FluidObject // From GraphQL
+      url?: string // From @sanity/client
     }
   }
 }
@@ -91,8 +118,14 @@ export interface Formation {
   link?: string
   slug: Slug
   title: string
-  body: any
+  description: any
   testimonial?: Testimonial
+}
+
+export interface Topic {
+  slug: Slug
+  title: string
+  excerpt?: string
 }
 
 export interface Project {
@@ -102,7 +135,7 @@ export interface Project {
   title: string
   service: Service
   customer?: Customer
-  mainImage?: MainImage
+  topic?: Topic
 }
 
 export interface Service {
@@ -117,13 +150,8 @@ export interface RedactionSettings {
   title: string
   slogan: string
   excerpt?: string
-  whyMe?: any
-  body?: any
 
-  customers?: Customer[]
-  formations?: Formation[]
-  projects?: Project[]
-  services?: Service[]
+  modules: Module[]
 }
 
 export interface BlogSettings {

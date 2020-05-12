@@ -3,7 +3,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
-import Container from '@material-ui/core/Container'
+import Container, { ContainerProps } from '@material-ui/core/Container'
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -18,10 +18,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 export interface SectionProps {
   title?: string
   description?: string
+  childContainerProps?: ContainerProps
 }
 
-const Section: FC<SectionProps> = ({ title, description, children }) => {
+const Section: FC<SectionProps> = ({
+  title,
+  description,
+  childContainerProps = {},
+  children,
+}) => {
   const classes = useStyles()
+
+  const containerProps: ContainerProps = {
+    // Default width
+    maxWidth: 'lg',
+    ...childContainerProps,
+  }
 
   return (
     <Box className={classes.section}>
@@ -35,7 +47,7 @@ const Section: FC<SectionProps> = ({ title, description, children }) => {
           <Typography variant="subtitle2">{description}</Typography>
         )}
       </Container>
-      <Container maxWidth="lg">
+      <Container {...containerProps}>
         <Box my={4}>{children}</Box>
       </Container>
     </Box>

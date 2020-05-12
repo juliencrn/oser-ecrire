@@ -118,107 +118,87 @@ const images = `
   }
 `
 
-const customer = `
-  id
-  link
-  slug {
-    current
-  }
-  title
-  testimonial {
-    name
-    text
-    avatar {
-      asset {
-        avatar: fluid(maxWidth: 250) {
-          ${gatsbyFluid}
-        }
-      }
-    }
-  }
-`
+// const customer = `
+//   id
+//   link
+//   slug {
+//     current
+//   }
+//   title
+//   testimonial {
+//     name
+//     text
+//     avatar {
+//       asset {
+//         avatar: fluid(maxWidth: 250) {
+//           ${gatsbyFluid}
+//         }
+//       }
+//     }
+//   }
+// `
 
-const customers = `
-  customers {
-    ${customer}
-  }
-`
+// const customers = `
+//   customers {
+//     ${customer}
+//   }
+// `
 
-const service = `
-    id
-    title
-    slug {
-      current
-    }
-    description
-`
+// const service = `
+//     id
+//     title
+//     slug {
+//       current
+//     }
+//     description
+// `
 
-const services = `
-  services {
-    ${service}
-  }
-`
+// const services = `
+//   services {
+//     ${service}
+//   }
+// `
 
-const formations = `
-  formations {
-    _rawDescription
-    id
-    title
-    link
-    slug {
-      current
-    }
-    testimonial {
-      name
-      text
-      avatar {
-        asset {
-          avatar: fluid(maxWidth: 250) {
-            ${gatsbyFluid}
-          }
-        }
-      }
-    }
-  }
-`
+// const formations = `
+//   formations {
+//     _rawDescription
+//     id
+//     title
+//     link
+//     slug {
+//       current
+//     }
+//     testimonial {
+//       name
+//       text
+//       avatar {
+//         asset {
+//           avatar: fluid(maxWidth: 250) {
+//             ${gatsbyFluid}
+//           }
+//         }
+//       }
+//     }
+//   }
+// `
 
-const projects = `
-  projects {
-    id
-    link
-    title
-    slug {
-      current
-    }
-    service {
-      ${service}
-    }
-    customer {
-      ${customer}
-    }
-    ${mainImage}
-  }
-`
-
-const redactionSettings = `
-  sanityRedactionSettings {
-    id
-    _rawWhyMe
-    excerpt
-    slogan
-    title
-    slug {
-      current
-    }
-    whyMe: _rawWhyMe
-    body: _rawBody
-
-    ${customers}
-    ${formations}
-    ${projects}
-    ${services}
-  }
-`
+// const projects = `
+//   projects {
+//     id
+//     link
+//     title
+//     slug {
+//       current
+//     }
+//     service {
+//       ${service}
+//     }
+//     customer {
+//       ${customer}
+//     }
+//     ${mainImage}
+//   }
+// `
 
 module.exports = {
   gatsbyFluid,
@@ -226,8 +206,6 @@ module.exports = {
   mainImage,
   post,
   posts,
-  // categories,
-  redactionSettings,
   blogSettings,
   images,
 }
