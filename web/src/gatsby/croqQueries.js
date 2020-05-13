@@ -8,9 +8,9 @@
 const sanityClient = require('@sanity/client')
 
 const client = sanityClient({
-  projectId: process.env.GATSBY_SANITY_TOKEN,
+  projectId: process.env.GATSBY_SANITY_PROJECTID,
   dataset: process.env.GATSBY_SANITY_DATASET,
-  token: process.env.GATSBY_SANITY_PROJECTID,
+  token: process.env.GATSBY_SANITY_TOKEN,
   useCdn: true, // `false` if you want to ensure fresh data
 })
 

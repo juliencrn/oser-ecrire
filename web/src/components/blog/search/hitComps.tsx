@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link as GatsbyLink } from 'gatsby'
+import { navigate } from 'gatsby'
 import { Highlight, connectHits } from 'react-instantsearch-dom'
 import { Theme, makeStyles, fade } from '@material-ui/core/styles'
 
@@ -72,8 +72,7 @@ export const ConnectedHits = connectHits(({ hits }) => {
         <ListItem
           button
           key={hit.objectID}
-          component={GatsbyLink}
-          to={hit.path}
+          onClick={() => navigate(hit.path)}
           className={classes.hit}
         >
           <Typography className={classes.title} variant="h6" component="span">

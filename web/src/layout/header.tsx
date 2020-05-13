@@ -75,14 +75,18 @@ const Header: FC<HeaderProps> = ({ siteTitle, isBlog = false }) => {
                 color="textSecondary"
                 className={classes.text}
               >
-                <Link
-                  to={isBlog ? routes.blog : routes.redac}
-                  component={GatsbyLink}
-                  color="inherit"
-                  className={classes.link}
-                >
-                  {isBlog ? <Search /> : `Rédaction SEO`}
-                </Link>
+                {isBlog ? (
+                  <Search />
+                ) : (
+                  <Link
+                    to={routes.redac}
+                    component={GatsbyLink}
+                    color="inherit"
+                    className={classes.link}
+                  >
+                    Rédaction SEO
+                  </Link>
+                )}
               </Typography>
             </Hidden>
           </div>

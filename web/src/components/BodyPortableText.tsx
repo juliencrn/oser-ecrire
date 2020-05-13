@@ -10,6 +10,7 @@ import Link from '@material-ui/core/Link'
 import Box from '@material-ui/core/Box'
 
 import Blockquote from './Blockquote'
+import useSiteMetadata from '../hooks/useSiteMetadata'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -43,6 +44,7 @@ export interface BodyPortableTextProps {
 
 const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
   const classes = useStyles()
+  const { siteUrl } = useSiteMetadata()
 
   const serializers = {
     types: {
@@ -109,13 +111,28 @@ const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
       </Typography>
     ),
     marks: {
-      link: (props: any) => (
-        <Link href={props.mark.href} target="_blank">
-          {props.children}
-        </Link>
-      ),
+      link: (props: any) => {
+        // Hack: replace old site link by internalLink if url matches
+        const link = new URL(props.mark.href)
+        const isMatch = link?.origin === siteUrl
+        const isCategory = link?.pathname.includes('category')
+        const isAdmin = link?.pathname.includes('wp-admin')
+
+        if (isMatch && !(isCategory || isAdmin)) {
+          return (
+            <Link component={GatsbyLink} to={link.pathname}>
+              {props.children}
+            </Link>
+          )
+        }
+        return (
+          <Link href={props.mark.href} target="_blank">
+            {props.children}
+          </Link>
+        )
+      },
       internalLink: (props: any) => (
-        <Link to={`/${props.mark.reference._ref}`} component={GatsbyLink}>
+        <Link component={GatsbyLink} to={`/${props.mark.reference._ref}`}>
           {props.children}
         </Link>
       ),

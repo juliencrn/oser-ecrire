@@ -14,7 +14,7 @@ require('dotenv').config({
 const siteMetadata = {
   title: `Oser Ecrire`,
   description: `Écrire et Partager`,
-  siteUrl: `https://oser-ecrire.fr`,
+  siteUrl: `https://www.oser-ecrire.fr`,
   author: `Nathalie CARON`,
   image: `${__dirname}/src/images/Baniere-oser-ecrire.png`,
 }
@@ -36,9 +36,9 @@ module.exports = {
     {
       resolve: 'gatsby-source-sanity',
       options: {
-        projectId: process.env.GATSBY_SANITY_TOKEN,
+        projectId: process.env.GATSBY_SANITY_PROJECTID,
         dataset: process.env.GATSBY_SANITY_DATASET,
-        token: process.env.GATSBY_SANITY_PROJECTID,
+        token: process.env.GATSBY_SANITY_TOKEN,
         graphqlTag: 'default',
         watchMode: isDev,
       },

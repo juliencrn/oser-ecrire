@@ -55,9 +55,9 @@ const footers: FooterCol[] = [
   {
     title: `L'Écriture web`,
     links: [
-      { label: 'Mes Prestations', to: `/${routes.redac}#services` },
-      { label: 'Mon Portfolio', to: `/${routes.redac}#services` },
-      { label: 'Mes références', to: `/${routes.redac}#services` },
+      { label: 'Mes Prestations', to: `${routes.redac}/#services` },
+      { label: 'Mon Portfolio', to: `${routes.redac}/#services` },
+      { label: 'Mes références', to: `${routes.redac}/#services` },
       { label: 'Me demander un devis', to: `/contact` },
     ],
   },
