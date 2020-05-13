@@ -9,10 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 import Box from '@material-ui/core/Box'
 
-import config from '../config'
 import Blockquote from './Blockquote'
-
-const { projectId, dataset } = config.sanity
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -130,8 +127,8 @@ const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
       <BlockContent
         blocks={blocks}
         serializers={serializers}
-        projectId={projectId}
-        dataset={dataset}
+        projectId={process.env.GATSBY_SANITY_PROJECTID}
+        dataset={process.env.GATSBY_SANITY_DATASET}
       />
     </div>
   )

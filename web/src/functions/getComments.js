@@ -8,8 +8,8 @@ require('dotenv').config({
 })
 
 const client = sanityClient({
-  projectId: '5pa3cetx',
-  dataset: 'production',
+  projectId: process.env.GATSBY_SANITY_PROJECTID,
+  dataset: process.env.GATSBY_SANITY_DATASET,
   token: process.env.GATSBY_SANITY_TOKEN,
   useCdn: false, // `false` if you want to ensure fresh data
 })

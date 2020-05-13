@@ -36,9 +36,9 @@ module.exports = {
     {
       resolve: 'gatsby-source-sanity',
       options: {
-        projectId: '5pa3cetx',
-        dataset: 'production',
-        token: process.env.GATSBY_SANITY_TOKEN,
+        projectId: process.env.GATSBY_SANITY_TOKEN,
+        dataset: process.env.GATSBY_SANITY_DATASET,
+        token: process.env.GATSBY_SANITY_PROJECTID,
         graphqlTag: 'default',
         watchMode: isDev,
       },
