@@ -45,7 +45,7 @@ const SwitchModuleContent: FC<Module> = ({ _type, ...module }) => {
 
     case 'projectsModule':
       return module.projects ? (
-        <Grid container justify="center" spacing={2}>
+        <Grid container justify="center" alignItems="stretch" spacing={2}>
           {module.projects.map(project => (
             <Grid key={uuid()} item xs={12} sm={6} md={4}>
               <ProjectCard {...project} />

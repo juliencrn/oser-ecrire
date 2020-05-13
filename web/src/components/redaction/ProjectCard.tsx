@@ -11,7 +11,14 @@ import Typography from '@material-ui/core/Typography'
 import { Project } from '../../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {},
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100%',
+  },
+  content: {
+    flex: 1,
+  },
   title: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
@@ -22,7 +29,7 @@ const ProjectCard: FC<Project> = ({ title, link, customer, service }) => {
   const classes = useStyles()
   return (
     <Card className={classes.root} component={Paper}>
-      <CardContent>
+      <CardContent className={classes.content}>
         {service && (
           <Typography variant="body2" color="textSecondary">
             {service.title}
