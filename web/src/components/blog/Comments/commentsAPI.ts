@@ -1,23 +1,14 @@
-import sanityClient from '@sanity/client'
+import Axios from 'axios'
 
-import { sanity } from '../../../config'
 import { Comment } from '../../../interfaces'
-
-const client = sanityClient({
-  projectId: sanity.projectId,
-  dataset: sanity.dataset,
-  token: process.env.GATSBY_SANITY_TOKEN,
-  useCdn: false, // `false` if you want to ensure fresh data
-})
 
 export const getCommentsByPostSlug = async (
   slug: string,
 ): Promise<Comment[]> => {
-  const query = `*[_type == "comment" && post._ref == $slug]`
-  const params = { slug }
   try {
-    const comments = await client.fetch(query, params)
-    return comments
+    const url = `/.netlify/functions/getComments?postSlug=${slug}`
+    const res = await Axios.get(url)
+    return (res.data as Comment[]) || []
   } catch (error) {
     console.log({ error })
   }
@@ -30,13 +21,14 @@ export type CreateCommentFields = Omit<
 >
 
 export const createComment = async (comment: CreateCommentFields) => {
-  return client
-    .create({ ...comment, _type: 'comment' })
-    .then(res => res)
-    .catch(error => {
-      console.log(error)
-      return false
-    })
+  try {
+    const url = `/.netlify/functions/postComment`
+    const res = await Axios.post(url, { ...comment, _type: 'comment' })
+    return res.status < 400
+  } catch (error) {
+    console.log({ error })
+  }
+  return false
 }
 
 // interface UpdateCommentFields extends CreateCommentFields {
