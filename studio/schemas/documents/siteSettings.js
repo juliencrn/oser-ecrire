@@ -33,5 +33,11 @@ export default {
       type: 'siteLinks',
       title: 'Social',
     },
+    {
+      name: 'mainMenu',
+      type: 'array',
+      title: 'Menu principal',
+      of: [{ type: 'internalLink' }],
+    },
   ],
 }

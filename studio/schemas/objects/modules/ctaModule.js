@@ -13,14 +13,9 @@ export default {
       validation: (Rule) => Rule.error('Champ obligatoire').required(),
     },
     {
-      name: 'introduction',
-      type: 'text',
-      title: `Texte d'introduction`,
-    },
-    {
-      name: 'internalLink',
-      type: 'selectPage',
-      title: 'Lien vers page',
+      name: 'link',
+      type: 'internalLink',
+      validation: (Rule) => Rule.error('Champ obligatoire').required(),
     },
   ],
 }

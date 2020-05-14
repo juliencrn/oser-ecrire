@@ -26,16 +26,16 @@ import siteLinks from './objects/siteLinks'
 import authorLinks from './objects/authorLinks'
 import comment from './documents/comment'
 import blogSettings from './documents/blogSettings'
-import redactionSettings from './documents/redactionSettings'
 import projectsModule from './objects/modules/projectsModule'
 import servicesModule from './objects/modules/servicesModule'
 import customersModule from './objects/modules/customersModule'
-import selectPage from './objects/selectPage'
 import ctaModule from './objects/modules/ctaModule'
 import simplePortableText from './objects/simplePortableText'
 import simplePortableTextModule from './objects/modules/simplePortableTextModule'
 import modules from './objects/modules/modules'
 import formationsModule from './objects/modules/formationsModule'
+import page from './documents/page'
+import internalLink from './objects/internalLink'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -46,6 +46,7 @@ export default createSchema({
   types: schemaTypes.concat([
     // document schemas
     siteSettings,
+    page,
     author,
     post,
     category,
@@ -56,7 +57,6 @@ export default createSchema({
     formation,
     comment,
     blogSettings,
-    redactionSettings,
 
     // Object types
     mainImage,
@@ -67,7 +67,7 @@ export default createSchema({
     siteLinks,
     authorLinks,
     testimonial,
-    selectPage,
+    internalLink,
 
     // Modules builder
     modules,

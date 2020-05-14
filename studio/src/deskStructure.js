@@ -26,6 +26,12 @@ export default () =>
           S.editor().schemaType('siteSettings').documentId('siteSettings'),
         ),
 
+      S.listItem()
+        .title('Pages')
+        .icon(FaNewspaper)
+        .schemaType('page')
+        .child(S.documentTypeList('page').title('Pages')),
+
       // Singleton
       S.listItem()
         .title("À propos de l'auteur")
@@ -75,16 +81,6 @@ export default () =>
           S.list()
             .title('Rédaction SEO')
             .items([
-              // Singleton
-              S.listItem()
-                .title('Réglages rédaction SEO')
-                .icon(MdSettings)
-                .child(
-                  S.editor()
-                    .schemaType('redactionSettings')
-                    .documentId('redactionSettings'),
-                ),
-
               S.listItem()
                 .title('Références client')
                 .schemaType('project')

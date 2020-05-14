@@ -56,6 +56,7 @@ export default {
                 type: 'reference',
                 to: [
                   { type: 'post' },
+                  { type: 'page' },
                   // other types you may want to link to
                 ],
               },
