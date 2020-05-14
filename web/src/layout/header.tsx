@@ -11,7 +11,6 @@ import Divider from '@material-ui/core/Divider'
 import Box from '@material-ui/core/Box'
 import Hidden from '@material-ui/core/Hidden'
 
-import { routes } from '../config'
 import Menu from './menu'
 import Search from '../components/blog/search'
 
@@ -75,18 +74,7 @@ const Header: FC<HeaderProps> = ({ siteTitle, isBlog = false }) => {
                 color="textSecondary"
                 className={classes.text}
               >
-                {isBlog ? (
-                  <Search />
-                ) : (
-                  <Link
-                    to={routes.redac}
-                    component={GatsbyLink}
-                    color="inherit"
-                    className={classes.link}
-                  >
-                    Rédaction SEO
-                  </Link>
-                )}
+                {isBlog ? <Search /> : `Rédaction SEO`}
               </Typography>
             </Hidden>
           </div>

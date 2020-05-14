@@ -15,8 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     minHeight: '100vh',
   },
   main: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
+    flex: 1,
   },
 }))
 
@@ -33,7 +32,7 @@ const Layout: FC<LayoutProps> = ({ children, isBlog = false }) => {
       <CssBaseline />
       <div className={classes.root}>
         <Header siteTitle={title} isBlog={isBlog} />
-        <main>{children}</main>
+        <main className={classes.main}>{children}</main>
         <Footer siteName={title} />
       </div>
       <BackToTop />

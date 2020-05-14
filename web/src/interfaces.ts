@@ -41,7 +41,17 @@ export type ModuleType =
   | 'customersModule'
   | 'formationsModule'
 
-export type PageName = 'contact' | 'about' | 'portfolio' | 'blog' | 'home'
+export interface InternalLink {
+  label?: string
+  reference: {
+    _type: 'page' | 'post'
+    id: string
+    title: string
+    slug: Slug
+  }
+}
+
+export type LinkModule = InternalLink
 
 export interface Module {
   // Common
@@ -56,7 +66,19 @@ export interface Module {
   projects?: Project[]
   customers?: Customer[]
   formations?: Formation[]
-  internalLink?: PageName[]
+  link?: LinkModule
+}
+
+export interface Page {
+  id: string
+  slug: Slug
+  title: string
+  subtitle?: string
+  excerpt?: string
+  image?: {
+    asset: { url: string }
+  }
+  modules?: Module[]
 }
 
 export interface Category {
@@ -143,23 +165,6 @@ export interface Service {
   slug: Slug
   title: string
   description?: string
-}
-
-export interface RedactionSettings {
-  id: string
-  title: string
-  slogan: string
-  excerpt?: string
-
-  modules: Module[]
-}
-
-export interface BlogSettings {
-  title: string
-  slug: Slug
-  slogan: string
-  excerpt: string
-  categories: Category[]
 }
 
 export interface PageTemplate {

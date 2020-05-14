@@ -10,7 +10,7 @@ import Pagination from '@material-ui/lab/Pagination'
 
 import Layout from '../layout'
 import SEO from '../layout/seo'
-import { PageTemplate, Post, NodeArrayOf, BlogSettings } from '../interfaces'
+import { PageTemplate, Post, NodeArrayOf, Category, Page } from '../interfaces'
 import Hero from '../components/Hero'
 import CategoryFilter from '../components/blog/CategoryFilter'
 import PostCard from '../components/blog/PostCard'
@@ -33,15 +33,15 @@ export interface PostListTemplateProps extends PageTemplate {
     basePath: string
     currentPage: number
     posts: NodeArrayOf<Post>
-    blogSettings: BlogSettings
+    categories: Category[]
+    page: Page
   }
 }
 
 const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
   const classes = useStyles()
-  const { numPages, currentPage, posts, basePath, blogSettings } = pageContext
-  const { title, excerpt, slogan, categories } = blogSettings
-
+  const { numPages, currentPage, posts, basePath, categories } = pageContext
+  const { title, excerpt, subtitle } = pageContext.page
   const transitions = useTransition(posts, item => item.node.slug.current, {
     trail: 650 / posts.length,
     from: { transform: 'translate3d(0,-24px,0)', opacity: 0 },
@@ -57,7 +57,7 @@ const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
     <Layout isBlog>
       <SEO title={title} description={excerpt} path={path} />
 
-      <Hero title={title} description={slogan}>
+      <Hero title={title} subtitle={subtitle}>
         <CategoryFilter categories={categories} basePath={basePath} />
       </Hero>
 

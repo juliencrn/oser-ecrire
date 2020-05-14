@@ -86,12 +86,6 @@ const posts = `
 
 const blogSettings = `
   sanityBlogSettings {
-    title
-    slogan
-    slug {
-      current
-    }
-    excerpt
     categories {
       id
       slug {

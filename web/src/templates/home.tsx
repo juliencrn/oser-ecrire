@@ -15,6 +15,7 @@ import Hero from '../components/Hero'
 import { routes } from '../config'
 import NewsletterForm from '../components/forms/NewsletterForm'
 import Blockquote from '../components/Blockquote'
+import { PageTemplate, Page } from '../interfaces'
 
 const FakeSection: FC<{ title?: string }> = ({ title, children }) => (
   <Container maxWidth="lg">
@@ -29,16 +30,17 @@ const FakeSection: FC<{ title?: string }> = ({ title, children }) => (
   </Container>
 )
 
-const description = `Hello ! 
-Je suis Nathalie et mon truc, c'est l'écriture.
-J'écris pour moi, avec vous et pour mes clients.
-Bienvenue dans l'univers d'Oser Ecrire.`
+export interface HomeTemplateProps extends PageTemplate {
+  pageContext: { page: Page }
+}
 
-const IndexPage: FC = () => {
+function IndexPage({ pageContext, path }: HomeTemplateProps) {
+  const { title, subtitle, excerpt } = pageContext.page
+  console.log({ pageContext })
   return (
     <Layout>
-      <SEO title="Accueil" path="/" description={description} />
-      <Hero title="Créatrice de Contenus" description={description}></Hero>
+      <SEO title={title} path={path} description={excerpt} />
+      <Hero title={title} subtitle={subtitle}></Hero>
 
       <FakeSection title="Oser Ecrire : Pour qui ? Pour quoi ?">
         <Grid container spacing={2} justify="center">

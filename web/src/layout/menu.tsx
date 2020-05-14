@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
-import { useTheme } from '@material-ui/core/styles'
+import uuid from 'uuid/v1'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
 
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
@@ -13,8 +13,8 @@ import Container from '@material-ui/core/Container'
 import MenuIcon from '@material-ui/icons/Menu'
 import CloseIcon from '@material-ui/icons/Close'
 
-import { routes } from '../config'
-import { MenuItem } from '../interfaces'
+import { MenuItem, InternalLink } from '../interfaces'
+import useSiteSettings from '../hooks/useSiteSettings'
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawerHeader: {
@@ -25,23 +25,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
+function serializeLink({ label, reference }: InternalLink): MenuItem {
+  return {
+    label: label || reference.title,
+    to: `/${reference.slug.current}`,
+  }
+}
+
 export interface MenuProps {
   links: MenuItem[]
   isLarge: boolean
 }
 
-const links: MenuItem[] = [
-  { label: "L'atelier d'écriture", to: routes.blog },
-  { label: 'Rédaction SEO', to: routes.redac },
-  { label: 'À propos', to: '/a-propos' },
-  { label: 'Contact', to: '/contact' },
-]
-
 const MenuLinks: FC<MenuProps> = ({ links, isLarge }) => (
   <>
     {links.map(({ label, to }) => (
       <Button
-        key={to}
+        key={uuid()}
         component={GatsbyLink}
         to={to}
         size={isLarge ? `medium` : `large`}
@@ -58,6 +58,8 @@ const Menu: FC = () => {
   const classes = useStyles()
   const isLarge = useMediaQuery(theme.breakpoints.up('lg'))
   const [isOpen, setOpen] = React.useState(false)
+  const { mainMenu } = useSiteSettings()
+  const links = mainMenu.map(link => serializeLink(link))
 
   const handleOpenMenu = () => {
     setOpen(true)

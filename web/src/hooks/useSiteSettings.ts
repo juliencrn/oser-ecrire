@@ -1,5 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby'
 
+import { InternalLink } from '../interfaces'
+
 export interface SiteSettings {
   title: string
   slogan: string
@@ -7,7 +9,34 @@ export interface SiteSettings {
   social: {
     facebook: string
   }
+  mainMenu: InternalLink[]
 }
+
+export const mainMenu = graphql`
+  fragment MainMenu on SanitySiteSettings {
+    mainMenu {
+      label
+      reference {
+        ... on SanityPage {
+          id
+          _type
+          title
+          slug {
+            current
+          }
+        }
+        ... on SanityPost {
+          id
+          _type
+          title
+          slug {
+            current
+          }
+        }
+      }
+    }
+  }
+`
 
 export default (): SiteSettings => {
   const data = useStaticQuery(graphql`
@@ -19,6 +48,7 @@ export default (): SiteSettings => {
         social {
           facebook
         }
+        ...MainMenu
       }
     }
   `)

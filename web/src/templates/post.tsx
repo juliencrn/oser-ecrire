@@ -56,7 +56,7 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
       <PostNavigation direction="left" post={pageContext.prev} />
       <PostNavigation direction="right" post={pageContext.next} />
 
-      <Hero title={title} description={excerpt}>
+      <Hero title={title} subtitle={excerpt}>
         <PostSocialBar categories={categories} />
       </Hero>
       <div className={classes.body}>

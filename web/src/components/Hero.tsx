@@ -15,13 +15,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface HeroProps {
   title: string
-  description?: string
+  subtitle?: string
   containerProps?: ContainerProps
 }
 
 const Hero: FC<HeroProps> = ({
   title,
-  description = '',
+  subtitle = '',
   containerProps,
   children,
 }) => {
@@ -46,7 +46,7 @@ const Hero: FC<HeroProps> = ({
           paragraph
           component="h3"
         >
-          {description}
+          {subtitle}
         </Typography>
         <div className={classes.heroButtons}>{children}</div>
       </Container>
