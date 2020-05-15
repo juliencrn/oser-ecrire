@@ -1,7 +1,16 @@
+import { FaNewspaper } from 'react-icons/fa'
+
+const templateList = [
+  { title: 'Accueil', value: 'home' },
+  { title: 'Contact', value: 'contact' },
+  { title: 'Blog', value: 'blog' },
+]
+
 export default {
   name: 'page',
   type: 'document',
   title: 'Page',
+  icon: FaNewspaper,
   fields: [
     {
       name: 'title',
@@ -23,19 +32,7 @@ export default {
         maxLength: 96,
       },
     },
-    {
-      name: 'template',
-      type: 'string',
-      title: 'Modèle de page',
-      description: 'Appliquer un modèle de page. Laisser vide si page normale.',
-      options: {
-        list: [
-          { title: 'Accueil', value: 'home' },
-          { title: 'Contact', value: 'contact' },
-          { title: 'Blog', value: 'blog' },
-        ],
-      },
-    },
+
     {
       name: 'subtitle',
       type: 'string',
@@ -54,8 +51,42 @@ export default {
       title: 'Extrait',
     },
     {
-      name: 'modules',
-      type: 'modules',
+      name: 'template',
+      type: 'string',
+      title: 'Modèle de page',
+      description: 'Appliquer un modèle de page. Laisser vide si page normale.',
+      options: {
+        list: templateList,
+      },
+    },
+    {
+      name: 'blog',
+      type: 'blog',
+      title: 'Réglage du blog',
+    },
+    {
+      name: 'pageBuilder',
+      type: 'pageBuilder',
+      title: 'Constructeur de page',
     },
   ],
+  preview: {
+    select: {
+      template: 'template',
+      title: 'title',
+    },
+    prepare({ title, template }) {
+      let templateName = 'Normal'
+      if (template) {
+        const item = templateList.filter(({ value }) => value === template)[0]
+        if (item) {
+          templateName = item.title
+        }
+      }
+      return {
+        title,
+        subtitle: `Modèle : ${templateName}`,
+      }
+    },
+  },
 }

@@ -25,7 +25,6 @@ import testimonial from './objects/testimonial'
 import siteLinks from './objects/siteLinks'
 import authorLinks from './objects/authorLinks'
 import comment from './documents/comment'
-import blogSettings from './documents/blogSettings'
 import projectsModule from './objects/modules/projectsModule'
 import servicesModule from './objects/modules/servicesModule'
 import customersModule from './objects/modules/customersModule'
@@ -36,6 +35,8 @@ import modules from './objects/modules/modules'
 import formationsModule from './objects/modules/formationsModule'
 import page from './documents/page'
 import internalLink from './objects/internalLink'
+import pageBlog from './objects/conditionals/pageBlog'
+import pageBuilder from './objects/conditionals/pageBuilder'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -56,7 +57,6 @@ export default createSchema({
     project,
     formation,
     comment,
-    blogSettings,
 
     // Object types
     mainImage,
@@ -68,6 +68,8 @@ export default createSchema({
     authorLinks,
     testimonial,
     internalLink,
+    pageBlog,
+    pageBuilder,
 
     // Modules builder
     modules,
