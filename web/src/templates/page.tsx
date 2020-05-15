@@ -16,7 +16,7 @@ export interface PageTemplateProps extends IPageTemplate {
 const PageTemplate: FC<PageTemplateProps> = ({ pageContext, path }) => {
   const classes = useStyles()
 
-  const { title, subtitle, excerpt, modules } = pageContext.page
+  const { title, subtitle, excerpt, pageBuilder } = pageContext.page
 
   console.log({ pageContext })
 
@@ -26,7 +26,7 @@ const PageTemplate: FC<PageTemplateProps> = ({ pageContext, path }) => {
 
       <Hero title={title} subtitle={subtitle}></Hero>
 
-      <SwitchModules modules={modules} />
+      <SwitchModules modules={pageBuilder?.modules} />
     </Layout>
   )
 }

@@ -78,7 +78,9 @@ export interface Page {
   image?: {
     asset: { url: string }
   }
-  modules?: Module[]
+
+  pageBuilder?: { modules?: Module[] }
+  // blog?: { categories?: Category[] }
 }
 
 export interface Category {

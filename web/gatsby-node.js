@@ -26,7 +26,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const results = await graphql(`{
     posts: ${queries.posts}
     images: ${queries.images}
-    blogSettings: ${queries.blogSettings}
   }`)
 
   if (results.errors) {
@@ -40,15 +39,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   /**
    * Normalize data
    */
-  const normalize = ({ posts, images, blogSettings }) => ({
-    // Foreach post, add body mainImages (used for gatsby-image)
-    posts: addImagesInPosts(posts.edges, images.edges),
-
-    // Remove empty categories & add "postsIn" posts array in each category
-    categories: normalizeCategories(blogSettings.categories, posts.edges),
-  })
-
-  const { posts, categories } = normalize(results.data)
+  const posts = addImagesInPosts(
+    results.data.posts.edges,
+    results.data.images.edges,
+  )
 
   /**
    * Create posts
@@ -77,8 +71,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     /**
      * Create posts list (with pagination)
      */
+    const { blog, ...page } = blogTemplate
+    const categories = normalizeCategories(blog.categories, posts)
     const postsPerPage = 6
-    const blogPath = `/${blogTemplate.slug.current}`
+    const blogPath = `/${page.slug.current}`
     const numPages = Math.ceil(posts.length / postsPerPage)
 
     Array.from({ length: numPages }).forEach((_, i) => {
@@ -91,7 +87,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           basePath: blogPath,
           currentPage: i + 1,
           posts: posts.slice(i * postsPerPage, i * postsPerPage + postsPerPage),
-          page: blogTemplate,
+          page,
         },
       })
     })
@@ -117,7 +113,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               i * postsPerPage,
               i * postsPerPage + postsPerPage,
             ),
-            page: blogTemplate,
+            page,
           },
         })
       })

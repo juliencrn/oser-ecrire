@@ -99,7 +99,9 @@ async function getPages() {
     excerpt,
     template,
     image {asset->{url}},
-    ${modules}
+
+    pageBuilder { ${modules} },
+    blog { categories[]-> { title, slug } }
   }`
 
   return await client.fetch(query)

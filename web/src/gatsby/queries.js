@@ -84,18 +84,6 @@ const posts = `
 //   }
 // `
 
-const blogSettings = `
-  sanityBlogSettings {
-    categories {
-      id
-      slug {
-        current
-      }
-      title
-    }
-  }
-`
-
 const images = `
   allSanityImageAsset(limit: 1000) {
     edges {
@@ -200,6 +188,5 @@ module.exports = {
   mainImage,
   post,
   posts,
-  blogSettings,
   images,
 }
