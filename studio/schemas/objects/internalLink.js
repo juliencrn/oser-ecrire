@@ -17,6 +17,7 @@ export default {
       to: [
         { type: 'post' },
         { type: 'page' },
+        { type: 'category' },
         // other types you may want to link to
       ],
     },

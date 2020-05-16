@@ -27,6 +27,7 @@ export default {
       name: 'logo',
       type: 'mainImage',
       title: 'Logo du site',
+      validation: (Rule) => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'social',
@@ -38,6 +39,20 @@ export default {
       type: 'array',
       title: 'Menu principal',
       of: [{ type: 'internalLink' }],
+    },
+    {
+      name: 'footerMenus',
+      type: 'array',
+      title: 'Colonnes du pied de page.',
+      validation: (Rule) =>
+        Rule.required().min(3).max(3).error('Il doit y avoir 3 colonnes'),
+      of: [
+        {
+          name: 'footerColumn',
+          title: 'colonne',
+          type: 'footerColumn',
+        },
+      ],
     },
   ],
 }
