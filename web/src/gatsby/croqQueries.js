@@ -62,6 +62,21 @@ const moduleTypes = {
   bodyModule: `
     body,
   `,
+  featuresModule: `
+    features[] {
+      _key,
+      title, 
+      content,
+      link {
+        label,
+        reference-> {
+          _type,
+          title, 
+          slug { current }
+        }
+      }
+    },
+  `,
 }
 
 const {
@@ -71,6 +86,7 @@ const {
   customersModule,
   servicesModule,
   bodyModule,
+  featuresModule,
 } = moduleTypes
 
 const modules = `
@@ -85,6 +101,7 @@ const modules = `
     ${customersModule}
     ${formationsModule}
     ${bodyModule}
+    ${featuresModule}
     ${ctaModule}
   }
 `

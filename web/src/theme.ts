@@ -19,7 +19,8 @@ const baseTheme: ThemeOptions = {
   palette: {
     primary: {
       main: cyan[700],
-      light: fade(cyan.A700, 0.3),
+      // light: fade(cyan.A700, 0.3),
+      light: `#ccf0f6`,
     },
     secondary: {
       main: amber.A700,

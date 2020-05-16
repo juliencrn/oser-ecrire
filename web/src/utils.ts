@@ -10,7 +10,7 @@ export const linkSerializer: LinkSerializer = blogPrefix => props => {
     slug: { current: slug },
   } = reference
 
-  const to = _type === 'category' ? `/${blogPrefix}/${slug}` : `/${slug}`
+  const to = _type === 'category' ? `${blogPrefix}/${slug}` : `/${slug}`
 
   return {
     label: label || title,

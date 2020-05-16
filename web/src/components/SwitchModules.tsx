@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import uuid from 'uuid/v1'
 import loadable from '@loadable/component'
+import VisibilitySensor from 'react-visibility-sensor'
 
 import { Module } from '../interfaces'
 import Section from './Section'
@@ -13,6 +14,7 @@ const ProjectsModule = loadable(() => import('./modules/projects'))
 const CustomersModule = loadable(() => import('./modules/customers'))
 const FormationsModule = loadable(() => import('./modules/formations'))
 const ServicesModule = loadable(() => import('./modules/services'))
+const FeaturesModule = loadable(() => import('./modules/features'))
 
 const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
   if (!modules || modules.length <= 0) {
@@ -21,43 +23,84 @@ const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
 
   return (
     <>
-      {modules.map(module => {
-        // New way
-        switch (module._type) {
-          case 'ctaModule':
-            return <CtaModule key={uuid()} {...module} />
+      {modules.map((module, index) => (
+        <VisibilitySensor partialVisibility key={uuid()}>
+          {({ isVisible }) => {
+            // console.log(
+            //   `Le module ${module._type.replace('Module', '')} n°${
+            //     index + 1
+            //   } est ${isVisible ? `visible` : `invisible`}`,
+            // )
 
-          case 'projectsModule':
-            return <ProjectsModule key={uuid()} {...module} />
+            const props: Module = {
+              ...module,
+              isVisible,
+            }
 
-          case 'customersModule':
-            return <CustomersModule key={uuid()} {...module} />
+            // New way
+            switch (module._type) {
+              case 'ctaModule':
+                return (
+                  <div>
+                    <CtaModule {...props} />
+                  </div>
+                )
 
-          case 'formationsModule':
-            return <FormationsModule key={uuid()} {...module} />
+              case 'projectsModule':
+                return (
+                  <div>
+                    <ProjectsModule {...props} />
+                  </div>
+                )
 
-          case 'servicesModule':
-            return <ServicesModule key={uuid()} {...module} />
+              case 'customersModule':
+                return (
+                  <div>
+                    <CustomersModule {...props} />
+                  </div>
+                )
 
-          case 'simplePortableTextModule':
-            return (
-              <Section
-                key={uuid()}
-                title={module.title}
-                description={module?.introduction}
-                childContainerProps={{
-                  maxWidth: 'md',
-                }}
-              >
-                <BodyPortableText blocks={module.body} />
-              </Section>
-            )
+              case 'formationsModule':
+                return (
+                  <div>
+                    <FormationsModule {...props} />
+                  </div>
+                )
 
-          default:
-            console.warn(`This module hasn't module template`, { module })
-            return null
-        }
-      })}
+              case 'servicesModule':
+                return (
+                  <div>
+                    <ServicesModule {...props} />
+                  </div>
+                )
+
+              case 'featuresModule':
+                return (
+                  <div>
+                    <FeaturesModule {...props} />
+                  </div>
+                )
+
+              case 'simplePortableTextModule':
+                return (
+                  <Section
+                    title={module.title}
+                    description={module?.introduction}
+                    childContainerProps={{
+                      maxWidth: 'md',
+                    }}
+                  >
+                    <BodyPortableText blocks={module.body} />
+                  </Section>
+                )
+
+              default:
+                console.warn(`This module hasn't module template`, { module })
+                return null
+            }
+          }}
+        </VisibilitySensor>
+      ))}
     </>
   )
 }
