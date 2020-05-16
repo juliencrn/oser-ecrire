@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     height: 'auto',
     position: 'absolute',
-    top: 'calc(100% + 0.5em)',
+    top: 'calc(100% + 0.8em)',
     zIndex: 100,
     left: 0,
     [theme.breakpoints.up('sm')]: {

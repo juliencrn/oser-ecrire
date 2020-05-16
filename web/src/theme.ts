@@ -18,8 +18,11 @@ const heading = {
 const baseTheme: ThemeOptions = {
   palette: {
     primary: {
+      /**
+       * fade(dark || cyan.A700, 0.3) == #ccf0f6
+       */
+      dark: cyan.A700,
       main: cyan[700],
-      // light: fade(cyan.A700, 0.3),
       light: `#ccf0f6`,
     },
     secondary: {

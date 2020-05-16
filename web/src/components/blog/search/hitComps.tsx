@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     '& em': {
-      background: fade(theme.palette.primary.light, 0.3),
+      background: fade(theme.palette.primary.dark, 0.3),
       fontStyle: 'normal',
     },
   },

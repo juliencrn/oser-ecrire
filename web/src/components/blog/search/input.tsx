@@ -9,9 +9,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     background: 'transparent',
-    '&:hover': {
-      background: theme.palette.common.white,
-    },
     [theme.breakpoints.up('sm')]: {
       width: 'auto',
     },

@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       textDecoration: 'none',
     },
   },
+  divider: {
+    backgroundColor: theme.palette.background.default,
+  },
 }))
 
 export interface HeaderProps {
@@ -64,7 +67,7 @@ const Header: FC<HeaderProps> = ({ siteTitle, isBlog = false }) => {
             </Typography>
             <Hidden xsDown>
               <Box px={2}>
-                <Divider orientation="vertical" />
+                <Divider orientation="vertical" className={classes.divider} />
               </Box>
             </Hidden>
             <Hidden xsDown>

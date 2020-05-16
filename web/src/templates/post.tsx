@@ -15,7 +15,6 @@ import BodyPortableText from '../components/BodyPortableText'
 import PostSocialBar from '../components/blog/PostSocialBar'
 import Comments from '../components/blog/Comments'
 import PostNavigation from '../components/blog/PostNavigation'
-import NewsletterForm from '../components/forms/NewsletterForm'
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {},
@@ -24,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(8),
   },
   body: {
-    // backgroundColor: theme.palette.background.paper,
     paddingBottom: theme.spacing(6),
   },
 }))
@@ -86,12 +84,6 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
           <Comments postSlug={slug.current} postTitle={title} />
         </Container>
       </div>
-
-      <Box bgcolor="secondary.main" py={10} mb={0}>
-        <Container maxWidth="md">
-          <NewsletterForm />
-        </Container>
-      </Box>
     </Layout>
   )
 }

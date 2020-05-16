@@ -78,6 +78,7 @@ const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
               page={currentPage}
               showFirstButton
               showLastButton
+              color="primary"
               onChange={handleNavigate}
             />
           </div>
