@@ -11,5 +11,6 @@ export default {
     { type: 'formationsModule' },
     { type: 'ctaModule' },
     { type: 'featuresModule' },
+    { type: 'quote' },
   ],
 }
