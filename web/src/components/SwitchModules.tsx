@@ -3,8 +3,13 @@ import uuid from 'uuid/v1'
 import loadable from '@loadable/component'
 import VisibilitySensor from 'react-visibility-sensor'
 
+import Container from '@material-ui/core/Container'
+import Box from '@material-ui/core/Box'
+import Fade from '@material-ui/core/Fade'
+
 import { Module } from '../interfaces'
 import Section from './Section'
+import Quote from './Quote'
 
 const BodyPortableText = loadable(() => import('./BodyPortableText'))
 
@@ -23,7 +28,7 @@ const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
 
   return (
     <>
-      {modules.map((module, index) => (
+      {modules.map(item => (
         <VisibilitySensor partialVisibility key={uuid()}>
           {({ isVisible }) => {
             // console.log(
@@ -33,12 +38,12 @@ const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
             // )
 
             const props: Module = {
-              ...module,
+              ...item,
               isVisible,
             }
 
             // New way
-            switch (module._type) {
+            switch (props._type) {
               case 'ctaModule':
                 return (
                   <div>
@@ -74,6 +79,23 @@ const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
                   </div>
                 )
 
+              case 'quote':
+                if (!props?.text) {
+                  console.warn(`Error with Quote module, missing "text"`)
+                  return null
+                }
+                return (
+                  <Container maxWidth="lg">
+                    <Box py={8} my={8}>
+                      <Fade timeout={1000} in={props?.isVisible}>
+                        <div>
+                          <Quote author={props?.author}>{props.text}</Quote>
+                        </div>
+                      </Fade>
+                    </Box>
+                  </Container>
+                )
+
               case 'featuresModule':
                 return (
                   <div>
@@ -84,13 +106,13 @@ const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
               case 'simplePortableTextModule':
                 return (
                   <Section
-                    title={module.title}
-                    description={module?.introduction}
+                    title={props?.title}
+                    description={props?.introduction}
                     childContainerProps={{
                       maxWidth: 'md',
                     }}
                   >
-                    <BodyPortableText blocks={module.body} />
+                    <BodyPortableText blocks={props.body} />
                   </Section>
                 )
 

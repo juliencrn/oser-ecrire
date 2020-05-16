@@ -8,6 +8,7 @@ export type ModuleType =
   | 'customersModule'
   | 'formationsModule'
   | 'featuresModule'
+  | 'quote'
 
 export type LinkModule = InternalLink
 
@@ -15,7 +16,7 @@ export interface Module {
   // Common
   _key: string
   _type: ModuleType
-  title: string
+  title?: string
   introduction?: string
 
   // Settings
@@ -29,6 +30,8 @@ export interface Module {
   formations?: Formation[]
   features?: Feature[]
   link?: LinkModule
+  text?: string // quote
+  author?: string // quote
 }
 
 export interface Feature {

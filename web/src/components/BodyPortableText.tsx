@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 import Box from '@material-ui/core/Box'
 
-import Blockquote from './Blockquote'
+import Quote from './Quote'
 import useSiteMetadata from '../hooks/useSiteMetadata'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -70,7 +70,7 @@ const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
               </Typography>
             )
           case 'blockquote':
-            return <Blockquote>{props.children}</Blockquote>
+            return <Quote inPortableText>{props.children}</Quote>
           default:
             return (
               <Typography className={classes.blogText} variant="body1">
@@ -102,7 +102,9 @@ const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
         )
       },
       quote: (props: any) => (
-        <Blockquote author={props.node?.author}>{props.node.text}</Blockquote>
+        <Quote inPortableText author={props.node?.author}>
+          {props.node.text}
+        </Quote>
       ),
     },
     listItem: (props: any) => (

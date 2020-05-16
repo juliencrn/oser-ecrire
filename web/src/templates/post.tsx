@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(8),
   },
   body: {
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
     paddingBottom: theme.spacing(6),
   },
 }))

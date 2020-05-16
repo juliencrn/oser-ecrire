@@ -77,6 +77,10 @@ const moduleTypes = {
       }
     },
   `,
+  quoteModule: `
+    author,
+    text,
+  `,
 }
 
 const {
@@ -87,6 +91,7 @@ const {
   servicesModule,
   bodyModule,
   featuresModule,
+  quoteModule,
 } = moduleTypes
 
 const modules = `
@@ -103,6 +108,7 @@ const modules = `
     ${bodyModule}
     ${featuresModule}
     ${ctaModule}
+    ${quoteModule}
   }
 `
 
