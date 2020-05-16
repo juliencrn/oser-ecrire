@@ -38,6 +38,8 @@ import internalLink from './objects/internalLink'
 import pageBlog from './objects/conditionals/pageBlog'
 import pageBuilder from './objects/conditionals/pageBuilder'
 import footerColumn from './objects/footerColumn'
+import feature from './objects/feature'
+import featuresModule from './objects/modules/featuresModule'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -72,6 +74,7 @@ export default createSchema({
     pageBlog,
     pageBuilder,
     footerColumn,
+    feature,
 
     // Modules builder
     modules,
@@ -81,5 +84,6 @@ export default createSchema({
     customersModule,
     formationsModule,
     ctaModule,
+    featuresModule,
   ]),
 })

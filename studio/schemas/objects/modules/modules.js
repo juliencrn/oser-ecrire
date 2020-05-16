@@ -10,5 +10,6 @@ export default {
     { type: 'customersModule' },
     { type: 'formationsModule' },
     { type: 'ctaModule' },
+    { type: 'featuresModule' },
   ],
 }
