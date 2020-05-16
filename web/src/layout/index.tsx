@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
-import { makeStyles, ThemeProvider } from '@material-ui/styles'
-import { Theme, CssBaseline } from '@material-ui/core'
+import { makeStyles, ThemeProvider, Theme } from '@material-ui/core/styles'
+
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 import Header from './header'
 import Footer from './footer'
@@ -33,7 +34,7 @@ const Layout: FC<LayoutProps> = ({ children, isBlog = false }) => {
       <div className={classes.root}>
         <Header siteTitle={title} isBlog={isBlog} />
         <main className={classes.main}>{children}</main>
-        <Footer siteName={title} />
+        <Footer />
       </div>
       <BackToTop />
     </ThemeProvider>

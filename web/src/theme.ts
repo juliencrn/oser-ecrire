@@ -1,8 +1,9 @@
-import { red, indigo, amber } from '@material-ui/core/colors'
+import { red, cyan, amber } from '@material-ui/core/colors'
 import {
   createMuiTheme,
   responsiveFontSizes,
   ThemeOptions,
+  fade,
 } from '@material-ui/core/styles'
 import deepmerge from 'deepmerge'
 
@@ -17,7 +18,8 @@ const heading = {
 const baseTheme: ThemeOptions = {
   palette: {
     primary: {
-      main: indigo.A200,
+      main: cyan[700],
+      light: fade(cyan.A700, 0.3),
     },
     secondary: {
       main: amber.A700,

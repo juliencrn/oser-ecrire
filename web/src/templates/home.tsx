@@ -105,11 +105,11 @@ function IndexPage({ pageContext, path }: HomeTemplateProps) {
         </Container>
       </FakeSection>
 
-      <Box bgcolor="secondary.main" py={10} mb={0}>
+      {/* <Box bgcolor="secondary.main" py={10} mb={0}>
         <Container maxWidth="md">
           <NewsletterForm />
         </Container>
-      </Box>
+      </Box> */}
     </Layout>
   )
 }

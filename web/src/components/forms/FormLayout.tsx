@@ -78,7 +78,7 @@ const FormLayout: FC<FormLayoutProps> = ({
           >
             <Button
               variant="contained"
-              color="secondary"
+              color="primary"
               disabled={isSubmitting}
               onClick={submitForm}
               className={classes.submit}

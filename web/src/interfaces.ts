@@ -44,7 +44,7 @@ export type ModuleType =
 export interface InternalLink {
   label?: string
   reference: {
-    _type: 'page' | 'post'
+    _type: 'page' | 'post' | 'category'
     id: string
     title: string
     slug: Slug

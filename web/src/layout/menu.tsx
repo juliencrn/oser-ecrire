@@ -13,7 +13,7 @@ import Container from '@material-ui/core/Container'
 import MenuIcon from '@material-ui/icons/Menu'
 import CloseIcon from '@material-ui/icons/Close'
 
-import { MenuItem, InternalLink } from '../interfaces'
+import { MenuItem } from '../interfaces'
 import useSiteSettings from '../hooks/useSiteSettings'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -24,13 +24,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
   },
 }))
-
-function serializeLink({ label, reference }: InternalLink): MenuItem {
-  return {
-    label: label || reference.title,
-    to: `/${reference.slug.current}`,
-  }
-}
 
 export interface MenuProps {
   links: MenuItem[]
@@ -59,7 +52,6 @@ const Menu: FC = () => {
   const isLarge = useMediaQuery(theme.breakpoints.up('lg'))
   const [isOpen, setOpen] = React.useState(false)
   const { mainMenu } = useSiteSettings()
-  const links = mainMenu.map(link => serializeLink(link))
 
   const handleOpenMenu = () => {
     setOpen(true)
@@ -71,7 +63,7 @@ const Menu: FC = () => {
   return (
     <>
       {isLarge ? (
-        <MenuLinks links={links} isLarge={isLarge} />
+        <MenuLinks links={mainMenu} isLarge={isLarge} />
       ) : (
         <>
           <IconButton onClick={handleOpenMenu}>
@@ -84,7 +76,7 @@ const Menu: FC = () => {
               </IconButton>
             </Container>
             <Box pb={1} px={2} display="flex" flexDirection="column">
-              <MenuLinks links={links} isLarge={isLarge} />
+              <MenuLinks links={mainMenu} isLarge={isLarge} />
             </Box>
           </Drawer>
         </>
