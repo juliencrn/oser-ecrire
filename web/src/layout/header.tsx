@@ -16,8 +16,7 @@ import Search from '../components/blog/search'
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
-    backgroundColor: theme.palette.background.default,
-    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.primary.main,
     boxShadow: theme.shadows[1],
   },
   toolbar: {},
@@ -71,7 +70,7 @@ const Header: FC<HeaderProps> = ({ siteTitle, isBlog = false }) => {
             <Hidden xsDown>
               <Typography
                 variant="subtitle2"
-                color="textSecondary"
+                color="inherit"
                 className={classes.text}
               >
                 {isBlog ? <Search /> : `Rédaction SEO`}
