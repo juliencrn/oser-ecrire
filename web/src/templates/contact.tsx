@@ -37,7 +37,7 @@ function ContactPage({ pageContext, path }: ContactTemplateProps) {
         </Grid>
       </Hero>
 
-      <Box bgcolor="secondary.main" py={10} mb={0}>
+      <Box bgcolor="primary.light" py={10} mb={0}>
         <Container maxWidth="md">
           <ContactForm />
         </Container>

@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 import { navigate } from 'gatsby'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import { useTransition, animated } from 'react-spring'
 
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import Pagination from '@material-ui/lab/Pagination'
+import Grow from '@material-ui/core/Grow'
 
 import Layout from '../layout'
 import SEO from '../layout/seo'
@@ -42,12 +42,6 @@ const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
   const classes = useStyles()
   const { numPages, currentPage, posts, basePath, categories } = pageContext
   const { title, excerpt, subtitle } = pageContext.page
-  const transitions = useTransition(posts, item => item.node.slug.current, {
-    trail: 650 / posts.length,
-    from: { transform: 'translate3d(0,-24px,0)', opacity: 0 },
-    enter: { transform: 'translate3d(0,0px,0)', opacity: 1 },
-    leave: { transform: 'translate3d(0,-24px,0)', opacity: 0 },
-  })
 
   const handleNavigate = (event: React.ChangeEvent<unknown>, value: number) => {
     navigate(value >= 2 ? `${basePath}/${value}` : basePath)
@@ -64,18 +58,17 @@ const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
       <Container maxWidth="lg">
         <Box py={6}>
           <Grid container spacing={4}>
-            {transitions.map(({ item, props, key }) => (
-              <Grid
-                component={animated.div}
-                key={key}
-                style={props}
-                item
-                xs={12}
-                sm={6}
-                md={4}
+            {posts.map(({ node }, i) => (
+              <Grow
+                in
+                key={i}
+                timeout={(i + 1) * 1000}
+                style={{ transformOrigin: '0 -40px 0' }}
               >
-                <PostCard {...item.node} />
-              </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <PostCard {...node} />
+                </Grid>
+              </Grow>
             ))}
           </Grid>
 

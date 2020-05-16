@@ -116,8 +116,8 @@ function FeaturesModule({ title, features, isVisible }: Module) {
               <Grow
                 key={index}
                 in={!!isVisible}
-                style={{ transformOrigin: '0 0 0' }}
-                {...(isVisible ? { timeout: index * 1000 } : {})}
+                style={{ transformOrigin: '0 -40px 0' }}
+                {...(isVisible ? { timeout: (index + 1) * 1000 } : {})}
               >
                 <Grid item xs={12} sm={6} md={array.length > 2 ? 4 : 6}>
                   <Feature {...item} />

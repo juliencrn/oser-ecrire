@@ -12,7 +12,6 @@ export interface HomeTemplateProps extends PageTemplate {
 
 function IndexPage({ pageContext, path }: HomeTemplateProps) {
   const { title, subtitle, excerpt, pageBuilder } = pageContext.page
-  console.log({ pageContext })
   return (
     <Layout>
       <SEO title={title} path={path} description={excerpt} />

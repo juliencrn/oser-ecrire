@@ -8,9 +8,9 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
+import Fade from '@material-ui/core/Fade'
 
 import { AlertProps } from '../../interfaces'
-import Fade from '../Fade'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {},
@@ -44,7 +44,7 @@ const FormLayout: FC<FormLayoutProps> = ({
 }) => {
   const classes = useStyles()
   return (
-    <Fade>
+    <Fade in>
       <Paper className={classes.paper}>
         <Form className={classes.form}>
           {title && (
@@ -64,7 +64,11 @@ const FormLayout: FC<FormLayoutProps> = ({
             </Typography>
           )}
           <br />
-          {alert && <Alert severity={alert.type}>{alert.message}</Alert>}
+          {alert && (
+            <Fade in={!!alert}>
+              <Alert severity={alert.type}>{alert.message}</Alert>
+            </Fade>
+          )}
           <br />
 
           {children}
