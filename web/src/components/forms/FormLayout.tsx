@@ -17,8 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
-    borderRadius: theme.spacing(2),
-    boxShadow: theme.shadows[12],
+    boxShadow: theme.shadows[3],
   },
   form: {
     padding: theme.spacing(6, 3, 3),
