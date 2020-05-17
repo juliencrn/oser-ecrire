@@ -16,6 +16,13 @@ export interface MenuItem {
   to: string
 }
 
+// Used with pageBuilder.module from mainImage refs
+export interface PageImage {
+  _id: string
+  sm: FluidObject
+  md: FluidObject
+}
+
 export type AlertType = 'success' | 'error' | 'warning' | 'info'
 export interface AlertProps {
   type: AlertType

@@ -7,9 +7,10 @@ import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 import Fade from '@material-ui/core/Fade'
 
-import { Module } from '../interfaces'
+import { Module, PageImage } from '../interfaces'
 import Section from './Section'
 import Quote from './Quote'
+import Hero1Module from './modules/hero1'
 
 const BodyPortableText = loadable(() => import('./BodyPortableText'))
 
@@ -21,7 +22,11 @@ const FormationsModule = loadable(() => import('./modules/formations'))
 const ServicesModule = loadable(() => import('./modules/services'))
 const FeaturesModule = loadable(() => import('./modules/features'))
 
-const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
+export interface SwitchModulesProps {
+  modules?: Module[]
+  images?: PageImage[]
+}
+const SwitchModules: FC<SwitchModulesProps> = ({ modules, images = [] }) => {
   if (!modules || modules.length <= 0) {
     return null
   }
@@ -114,6 +119,27 @@ const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
                   >
                     <BodyPortableText blocks={props.body} />
                   </Section>
+                )
+
+              case 'hero1Module':
+                return (
+                  <div>
+                    <Hero1Module
+                      {...props}
+                      image={
+                        props?.mainImage
+                          ? {
+                              ...props.mainImage,
+                              asset:
+                                images.filter(
+                                  ({ _id }) =>
+                                    _id === props.mainImage?.asset._ref,
+                                )[0] || undefined,
+                            }
+                          : undefined
+                      }
+                    />
+                  </div>
                 )
 
               default:

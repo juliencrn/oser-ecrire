@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(4),
   },
   wave: {
-    bottom: 0,
+    bottom: theme.spacing(1),
     left: 0,
     zIndex: -1,
     transform: `translateY(100%)`,

@@ -9,6 +9,7 @@ export type ModuleType =
   | 'formationsModule'
   | 'featuresModule'
   | 'quote'
+  | 'hero1Module'
 
 export type LinkModule = InternalLink
 
@@ -32,6 +33,12 @@ export interface Module {
   link?: LinkModule
   text?: string // quote
   author?: string // quote
+
+  // Used in Hero1
+  mainImage?: {
+    alt: string
+    asset: { _ref: string }
+  }
 }
 
 export interface Feature {

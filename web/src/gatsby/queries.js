@@ -88,7 +88,7 @@ const images = `
   allSanityImageAsset(limit: 1000) {
     edges {
       node {
-        id
+        _id
         sm: fluid(maxWidth: 600) {
           ${gatsbyFluid}
         }

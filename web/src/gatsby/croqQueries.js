@@ -81,6 +81,12 @@ const moduleTypes = {
     author,
     text,
   `,
+  hero1Module: `
+    mainImage {
+      alt,
+      asset { _ref },
+    },
+  `,
 }
 
 const {
@@ -92,6 +98,7 @@ const {
   bodyModule,
   featuresModule,
   quoteModule,
+  hero1Module,
 } = moduleTypes
 
 const modules = `
@@ -109,6 +116,7 @@ const modules = `
     ${featuresModule}
     ${ctaModule}
     ${quoteModule}
+    ${hero1Module} // use mainImage _ref
   }
 `
 
