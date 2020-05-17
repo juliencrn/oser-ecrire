@@ -3,7 +3,6 @@ import {
   createMuiTheme,
   responsiveFontSizes,
   ThemeOptions,
-  fade,
 } from '@material-ui/core/styles'
 import deepmerge from 'deepmerge'
 

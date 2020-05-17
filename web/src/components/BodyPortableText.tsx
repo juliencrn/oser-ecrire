@@ -11,6 +11,7 @@ import Box from '@material-ui/core/Box'
 
 import Quote from './Quote'
 import useSiteMetadata from '../hooks/useSiteMetadata'
+import useSanityImages from '../hooks/useSanityImages'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -27,8 +28,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   // Image with: 960px
   // Actual body container: 720px - px(2-3)
   imageWrap: {
-    margin: theme.spacing(4, 0),
-    [theme.breakpoints.up('md')]: {
+    maxWidth: 960,
+    margin: theme.spacing(6, 0),
+    [theme.breakpoints.up('lg')]: {
       margin: theme.spacing(6, -10),
     },
   },
@@ -37,14 +39,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-export interface BodyPortableTextProps {
-  blocks: any[]
-  images?: any[]
-}
-
-const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
+const BodyPortableText: FC<{ blocks: any[] }> = ({ blocks }) => {
   const classes = useStyles()
   const { siteUrl } = useSiteMetadata()
+  const [getImageById] = useSanityImages()
 
   const serializers = {
     types: {
@@ -80,14 +78,20 @@ const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
         }
       },
       mainImage: (props: any) => {
-        if (!images) return null
-        const image = images.filter(
-          ({ node }) => node.id === props.node.asset._ref,
-        )[0]
-        if (!image) return null
+        const mainImage = props?.node
+        const image = getImageById(mainImage?.asset?._ref)
+
+        if (!image || !mainImage) {
+          return null
+        }
+
         return (
           <Box className={classes.imageWrap}>
-            <Image alt={props.node.alt} fluid={image.node.md} />
+            <Image
+              style={{ maxWidth: `100%` }}
+              alt={mainImage?.alt}
+              fluid={image.md}
+            />
             {props.node.caption && (
               <Typography
                 className={classes.imageCaption}
@@ -95,7 +99,7 @@ const BodyPortableText: FC<BodyPortableTextProps> = ({ blocks, images }) => {
                 color="textSecondary"
                 align="center"
               >
-                {props.node.caption}
+                {mainImage?.caption}
               </Typography>
             )}
           </Box>

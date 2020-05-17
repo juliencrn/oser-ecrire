@@ -1,4 +1,5 @@
 import { InternalLink, Service, Project, Customer, Formation } from '.'
+import { MainImage } from './utils'
 
 export type ModuleType =
   | 'servicesModule'
@@ -35,10 +36,7 @@ export interface Module {
   author?: string // quote
 
   // Used in Hero1
-  mainImage?: {
-    alt: string
-    asset: { _ref: string }
-  }
+  mainImage?: MainImage
 }
 
 export interface Feature {

@@ -8,7 +8,8 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 
-import { Module, PageImage } from '../../interfaces'
+import { Module } from '../../interfaces'
+import useSanityImages from '../../hooks/useSanityImages'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -36,16 +37,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-export interface Hero1ModuleProps extends Module {
-  image?: {
-    alt: string
-    asset?: PageImage
-  }
-}
-
-function Hero1Module({ title, introduction, image }: Hero1ModuleProps) {
+function Hero1Module({ title, introduction, mainImage }: Module) {
   const classes = useStyles()
   const { breakpoints } = useTheme()
+  const [getImageById] = useSanityImages()
+  const image = getImageById(mainImage?.asset.id)
   const isLarge = useMediaQuery(breakpoints.up('sm'))
 
   return (
@@ -71,8 +67,8 @@ function Hero1Module({ title, introduction, image }: Hero1ModuleProps) {
             ))}
         </Grid>
         <Grid item sm={7} className={classes.image}>
-          {image?.asset && isLarge && (
-            <Image fluid={image.asset.sm} alt={image.alt} />
+          {image && mainImage?.asset && isLarge && (
+            <Image fluid={image.sm} alt={mainImage.alt} />
           )}
         </Grid>
       </Grid>

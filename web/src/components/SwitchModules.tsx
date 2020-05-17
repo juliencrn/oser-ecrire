@@ -7,7 +7,7 @@ import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 import Fade from '@material-ui/core/Fade'
 
-import { Module, PageImage } from '../interfaces'
+import { Module } from '../interfaces'
 import Section from './Section'
 import Quote from './Quote'
 import Hero1Module from './modules/hero1'
@@ -22,11 +22,7 @@ const FormationsModule = loadable(() => import('./modules/formations'))
 const ServicesModule = loadable(() => import('./modules/services'))
 const FeaturesModule = loadable(() => import('./modules/features'))
 
-export interface SwitchModulesProps {
-  modules?: Module[]
-  images?: PageImage[]
-}
-const SwitchModules: FC<SwitchModulesProps> = ({ modules, images = [] }) => {
+const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
   if (!modules || modules.length <= 0) {
     return null
   }
@@ -124,21 +120,7 @@ const SwitchModules: FC<SwitchModulesProps> = ({ modules, images = [] }) => {
               case 'hero1Module':
                 return (
                   <div>
-                    <Hero1Module
-                      {...props}
-                      image={
-                        props?.mainImage
-                          ? {
-                              ...props.mainImage,
-                              asset:
-                                images.filter(
-                                  ({ _id }) =>
-                                    _id === props.mainImage?.asset._ref,
-                                )[0] || undefined,
-                            }
-                          : undefined
-                      }
-                    />
+                    <Hero1Module {...props} />
                   </div>
                 )
 

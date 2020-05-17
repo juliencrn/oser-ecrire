@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography'
 
 import useAuthorData from '../hooks/useAuthorData'
 import { Hidden } from '@material-ui/core'
+import useSanityImages from '../hooks/useSanityImages'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -40,15 +41,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 const AuthorCard: FC = () => {
   const classes = useStyles()
   const { name, excerpt, mainImage } = useAuthorData()
+  const [getImageById] = useSanityImages()
+  const image = getImageById(mainImage?.asset.id)
 
   return (
     <Box className={classes.root}>
       <Link to="/a-propos" component={GatsbyLink}>
         <Avatar
           className={classes.avatar}
-          src={mainImage.asset.sm.src}
-          srcSet={mainImage.asset.sm.srcSet}
-        />
+          src={image?.xxs.src}
+          srcSet={image?.xxs.srcSet}
+        ></Avatar>
       </Link>
       <Box className={classes.content}>
         <Typography variant="body2" color="textSecondary">

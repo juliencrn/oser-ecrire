@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 
 import { Module } from '../../interfaces'
 import Section from '../Section'
-import ProjectCard from '../redaction/ProjectCard'
+import ProjectCard from './ProjectCard'
 
 function ProjectsModule({ title, introduction, projects }: Module) {
   if (!projects) {

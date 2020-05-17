@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import CardActionArea from '@material-ui/core/CardActionArea'
 
 import { Post } from '../../interfaces'
+import useSanityImages from '../../hooks/useSanityImages'
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -40,6 +41,8 @@ export type PostCardProps = Post
 
 const PostCard: FC<PostCardProps> = ({ title, excerpt, mainImage, slug }) => {
   const classes = useStyles()
+  const [getImageById] = useSanityImages()
+  const image = getImageById(mainImage?.asset.id)
 
   const handleNavigate = () => {
     navigate(slug.current)
@@ -48,10 +51,11 @@ const PostCard: FC<PostCardProps> = ({ title, excerpt, mainImage, slug }) => {
   return (
     <Card className={classes.card}>
       <CardActionArea className={classes.cardAction} onClick={handleNavigate}>
-        {mainImage && (
+        {mainImage && image && (
           <BackgroundImage
             className={classes.cardMedia}
-            fluid={mainImage.asset.sm}
+            fluid={image.sm}
+            alt={mainImage?.alt}
             backgroundColor={grey[200]}
           />
         )}

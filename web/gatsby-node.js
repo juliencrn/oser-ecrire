@@ -13,11 +13,7 @@ const path = require('path')
 
 const { getPages } = require('./src/gatsby/croqQueries')
 const queries = require('./src/gatsby/queries')
-const {
-  addImagesInPosts,
-  normalizeCategories,
-  extractsMainImageRefs,
-} = require('./src/gatsby/utils')
+const { normalizeCategories } = require('./src/gatsby/utils')
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
@@ -25,11 +21,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   /**
    * Fetch data
    */
-
-  // from GraphQL
   const results = await graphql(`{
     posts: ${queries.posts}
-    images: ${queries.images}
   }`)
 
   if (results.errors) {
@@ -37,17 +30,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return
   }
 
-  // from Sanity.client()
   const pages = await getPages()
-
-  /**
-   * Normalize data
-   */
-  const posts = addImagesInPosts(
-    results.data.posts.edges,
-    results.data.images.edges,
-  )
-  const images = results.data.images.edges.map(({ node }) => node)
+  const posts = results.data.posts.edges
 
   /**
    * Create posts
@@ -128,13 +112,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // Home
   const homeTemplate = pages.filter(isTemplate('home'))[0]
   if (homeTemplate) {
-    const refs = extractsMainImageRefs(homeTemplate.pageBuilder)
     createPage({
       path: '/',
       component: path.resolve(`./src/templates/home.tsx`),
       context: {
         page: homeTemplate,
-        images: images.filter(({ _id }) => refs.includes(_id)),
       },
     })
   }
@@ -153,14 +135,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const otherPages = pages.filter(({ template }) => !template)
   if (otherPages) {
     otherPages.forEach(page => {
-      const refs = extractsMainImageRefs(page.pageBuilder)
       createPage({
         path: page.slug.current,
         component: path.resolve(`./src/templates/page.tsx`),
-        context: {
-          page,
-          images: images.filter(({ _id }) => refs.includes(_id)),
-        },
+        context: { page },
       })
     })
   }

@@ -1,11 +1,15 @@
-import { FluidObject } from 'gatsby-image'
-
-import { Slug, Testimonial, MainImage } from './utils'
+import { Slug, MainImage, Image } from './utils'
 import { Module } from './modules'
 
 export interface Category {
   title: string
   slug: Slug
+}
+
+export interface Testimonial {
+  name: string
+  text: string
+  avatar?: Image
 }
 
 export interface Post {
@@ -18,11 +22,6 @@ export interface Post {
   categories?: Category[]
   mainImage?: MainImage
   body: any[]
-  images: {
-    id: string
-    sm: FluidObject
-    md: FluidObject
-  }[]
 }
 
 export interface Comment {
@@ -44,9 +43,7 @@ export interface Page {
   title: string
   subtitle?: string
   excerpt?: string
-  image?: {
-    asset: { url: string }
-  }
+  image?: Image
 
   pageBuilder?: { modules?: Module[] }
   // blog?: { categories?: Category[] }

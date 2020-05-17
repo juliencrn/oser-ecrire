@@ -40,7 +40,10 @@ const moduleTypes = {
       testimonial {
         name, 
         text, 
-        avatar{asset->{url}},
+        avatar {
+          _type,
+          asset-> { 'id': _id }
+        },
       },
     },
   `,
@@ -52,7 +55,10 @@ const moduleTypes = {
       testimonial {
         name,
         text,
-        avatar{asset->{url}},
+        avatar {
+          _type,
+          asset-> { 'id': _id }
+        },
       },
     },
   `,
@@ -83,8 +89,10 @@ const moduleTypes = {
   `,
   hero1Module: `
     mainImage {
+      _type,
       alt,
-      asset { _ref },
+      caption,
+      asset { 'id': _ref },
     },
   `,
 }
@@ -116,7 +124,7 @@ const modules = `
     ${featuresModule}
     ${ctaModule}
     ${quoteModule}
-    ${hero1Module} // use mainImage _ref
+    ${hero1Module}
   }
 `
 
@@ -129,7 +137,10 @@ async function getPages() {
     subtitle,
     excerpt,
     template,
-    image {asset->{url}},
+    image {
+      _type,
+      asset-> { 'id': _id }
+    },
 
     pageBuilder { ${modules} },
     blog { categories[]-> { title, slug } }

@@ -15,9 +15,14 @@ import BodyPortableText from '../components/BodyPortableText'
 import PostSocialBar from '../components/blog/PostSocialBar'
 import Comments from '../components/blog/Comments'
 import PostNavigation from '../components/blog/PostNavigation'
+import useSanityImages from '../hooks/useSanityImages'
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {},
+  mainImage: {
+    maxWidth: 960,
+    margin: 'auto',
+  },
   divider: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(8),
@@ -44,9 +49,12 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
     excerpt,
     mainImage,
     body,
-    images,
     categories,
   } = pageContext.current
+
+  // Get image sharp
+  const [getImageById] = useSanityImages()
+  const image = getImageById(mainImage?.asset.id)
 
   return (
     <Layout isBlog>
@@ -59,9 +67,13 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
       </Hero>
       <div className={classes.body}>
         <Container maxWidth="lg">
-          {mainImage && (
+          {image && (
             <Box mb={8}>
-              <Image alt={mainImage.alt} fluid={mainImage.asset.md} />
+              <Image
+                alt={mainImage?.alt}
+                className={classes.mainImage}
+                fluid={image.md}
+              />
             </Box>
           )}
         </Container>
@@ -70,7 +82,7 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
           <Divider className={classes.divider} />
 
           <Box mb={4}>
-            <BodyPortableText blocks={body} images={images} />
+            <BodyPortableText blocks={body} />
           </Box>
 
           <PostSocialBar categories={categories} />

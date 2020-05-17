@@ -17,7 +17,6 @@ export interface ContactTemplateProps extends PageTemplate {
 }
 
 function ContactPage({ pageContext, path }: ContactTemplateProps) {
-  console.log({ pageContext })
   const { title, subtitle, excerpt } = pageContext.page
   return (
     <Layout>

@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import Image from 'gatsby-image'
 
 import Link from '@material-ui/core/Link'
 import Card from '@material-ui/core/Card'
@@ -9,6 +10,7 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 
 import { Testimonial, Formation, Customer } from '../../interfaces'
+import useSanityImages from '../../hooks/useSanityImages'
 
 export interface TestimonialCardProps {
   title: string
@@ -22,6 +24,8 @@ const TestimonialCard: FC<Formation | Customer> = ({
 }) => {
   const TEXT_LENGTH = 150
   const [expended, setExpended] = useState(false)
+  const [getImageById] = useSanityImages()
+  const image = getImageById(testimonial?.avatar?.asset.id)
 
   // Return if hasn't testimonial
   if (!(testimonial?.name && testimonial?.text)) {
@@ -43,10 +47,10 @@ const TestimonialCard: FC<Formation | Customer> = ({
       <CardHeader
         avatar={
           <Avatar>
-            {testimonial?.avatar ? (
-              <img
+            {testimonial?.avatar && image ? (
+              <Image
                 style={{ width: `100%` }}
-                src={testimonial.avatar.asset?.url}
+                fluid={image.xxs}
                 alt={testimonial.name}
               />
             ) : (

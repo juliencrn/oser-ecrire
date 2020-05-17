@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 
 import { Category } from '../../interfaces'
-import { routes } from '../../config'
+import useSiteSettings from '../../hooks/useSiteSettings'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -37,6 +37,7 @@ export interface CategoryFilterProps {
 
 const CategoryFilter: FC<CategoryFilterProps> = ({ categories, basePath }) => {
   const classes = useStyles()
+  const { blog } = useSiteSettings()
   const allCategory: Category = {
     title: 'Tous',
     slug: {
@@ -48,7 +49,7 @@ const CategoryFilter: FC<CategoryFilterProps> = ({ categories, basePath }) => {
     <Typography variant="body2" className={classes.root}>
       {[allCategory, ...categories].map(({ title, slug }, i) => {
         // Find active item
-        const isMainPage = basePath === routes.blog
+        const isMainPage = basePath === `/${blog.path}`
         const matchCategory =
           basePath.includes(slug.current) && slug.current !== ''
         const active =
@@ -60,7 +61,7 @@ const CategoryFilter: FC<CategoryFilterProps> = ({ categories, basePath }) => {
             key={i}
             className={classes.category}
             component={GatsbyLink}
-            to={`${routes.blog}/${slug.current}`}
+            to={`${blog.path}/${slug.current}`}
             style={{
               opacity: active ? 1 : 0.6,
             }}

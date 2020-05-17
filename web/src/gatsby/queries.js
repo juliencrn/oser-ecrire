@@ -1,38 +1,10 @@
-const gatsbyFluid = `
-    srcWebp
-    src
-    srcSetWebp
-    srcSet
-    sizes
-    base64
-    aspectRatio
-`
-
-const gatsbyFixed = `
-    srcWebp
-    src
-    srcSetWebp
-    srcSet
-    base64
-    aspectRatio
-    height
-    width
-`
-
 const mainImage = `
   mainImage {
     alt
     caption
+    _type
     asset {
-      extension
-      size
-      url
-      sm: fluid(maxWidth: 600) {
-        ${gatsbyFluid}
-      }
-      md: fluid(maxWidth: 960) {
-        ${gatsbyFluid}
-      }
+      id
     }
   }
 `
@@ -83,22 +55,6 @@ const posts = `
 //     }
 //   }
 // `
-
-const images = `
-  allSanityImageAsset(limit: 1000) {
-    edges {
-      node {
-        _id
-        sm: fluid(maxWidth: 600) {
-          ${gatsbyFluid}
-        }
-        md: fluid(maxWidth: 960) {
-          ${gatsbyFluid}
-        }
-      }
-    }
-  }
-`
 
 // const customer = `
 //   id
@@ -182,11 +138,4 @@ const images = `
 //   }
 // `
 
-module.exports = {
-  gatsbyFluid,
-  gatsbyFixed,
-  mainImage,
-  post,
-  posts,
-  images,
-}
+module.exports = { posts }

@@ -27,17 +27,11 @@ export default function useAuthorData(): AuthorData {
         }
         excerpt
         mainImage {
+          _type
+          caption
           alt
           asset {
-            sm: fluid(maxWidth: 100) {
-              srcWebp
-              src
-              srcSetWebp
-              srcSet
-              sizes
-              base64
-              aspectRatio
-            }
+            id
           }
         }
       }

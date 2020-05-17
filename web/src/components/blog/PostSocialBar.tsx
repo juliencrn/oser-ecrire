@@ -7,11 +7,13 @@ import FolderOpenIcon from '@material-ui/icons/FolderOpen'
 
 import { Category } from '../../interfaces'
 import SharingButtons from '../SharingButtons'
-import { routes } from '../../config'
+import useSiteSettings from '../../hooks/useSiteSettings'
 
 const PostSocialBar: FC<{ categories?: Category[] }> = ({ categories }) => {
+  const { blog } = useSiteSettings()
+
   const handleCategoryClick = (slug: string) => {
-    navigate(`${routes.blog}/${slug}`)
+    navigate(`/${blog.path}/${slug}`)
   }
   return (
     <Box my={0} display="flex" justifyContent="space-between" flexWrap="wrap">

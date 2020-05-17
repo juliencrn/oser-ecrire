@@ -1,5 +1,3 @@
-import { FluidObject } from 'gatsby-image'
-
 export type NodeArrayOf<T> = Array<{ node: T }>
 
 export interface GraphQueryOf<T> {
@@ -16,13 +14,6 @@ export interface MenuItem {
   to: string
 }
 
-// Used with pageBuilder.module from mainImage refs
-export interface PageImage {
-  _id: string
-  sm: FluidObject
-  md: FluidObject
-}
-
 export type AlertType = 'success' | 'error' | 'warning' | 'info'
 export interface AlertProps {
   type: AlertType
@@ -30,14 +21,19 @@ export interface AlertProps {
   isValid: boolean
 }
 
-export interface MainImage {
+// Field "Image" from sanity collection
+export interface Image {
+  _type: 'image' | 'mainImage'
+  asset: {
+    id: string
+  }
+}
+
+// Field "mainImage" from sanity collection
+export interface MainImage extends Image {
+  _type: 'mainImage'
   alt: string
   caption?: string
-  asset: {
-    extension: string
-    size: number
-    url: string
-  } & { [key: string]: FluidObject }
 }
 
 export interface InternalLink {
@@ -47,17 +43,6 @@ export interface InternalLink {
     id: string
     title: string
     slug: Slug
-  }
-}
-
-export interface Testimonial {
-  name: string
-  text: string
-  avatar?: {
-    asset: {
-      avatar?: FluidObject // From GraphQL
-      url?: string // From @sanity/client
-    }
   }
 }
 

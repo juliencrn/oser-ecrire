@@ -59,25 +59,6 @@ const algoliaQueries = [
   },
 ]
 
-const getImagesFunc = images => id => {
-  const results = images.filter(({ node }) => node.id === id)
-  return results && results.length > 0 ? results[0] : null
-}
-
-const addImagesInPosts = (posts, images) => {
-  const getImageById = getImagesFunc(images)
-  return posts.map(({ node }) => ({
-    node: {
-      ...node,
-      images: node.body
-        ? node.body
-            .filter(({ _type }) => _type === 'mainImage')
-            .map(({ asset }) => getImageById(asset._ref))
-        : [],
-    },
-  }))
-}
-
 // Remove empty categories
 // Add "postsIn" posts array in each category
 const normalizeCategories = (categories, posts) => {
@@ -117,26 +98,24 @@ const normalizeCategories = (categories, posts) => {
  *
  * @return image[]
  */
-function extractsMainImageRefs(pageBuilder) {
-  if (!pageBuilder || !pageBuilder.modules.length) {
-    return []
-  }
+// function extractsMainImageRefs(pageBuilder) {
+//   if (!pageBuilder || !pageBuilder.modules.length) {
+//     return []
+//   }
 
-  const references = pageBuilder.modules.reduce((prev, curr) => {
-    if (curr._type === 'hero1Module' && curr.mainImage) {
-      return [...prev, curr.mainImage.asset._ref]
-    }
-    return prev
-  }, [])
+//   const references = pageBuilder.modules.reduce((prev, curr) => {
+//     if (curr._type === 'hero1Module' && curr.mainImage) {
+//       return [...prev, curr.mainImage.asset._ref]
+//     }
+//     return prev
+//   }, [])
 
-  return references
-}
+//   return references
+// }
 
 module.exports = {
-  addImagesInPosts,
   normalizeCategories,
-  // getMediaType,
-  extractsMainImageRefs,
+  // extractsMainImageRefs,
   feedSerializer,
   algoliaQueries,
 }
