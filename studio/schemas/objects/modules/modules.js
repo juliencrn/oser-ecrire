@@ -13,5 +13,6 @@ export default {
     { type: 'featuresModule' },
     { type: 'quote' },
     { type: 'hero1Module' },
+    { type: 'lastsPostsModule' },
   ],
 }

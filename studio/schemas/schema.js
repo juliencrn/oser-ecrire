@@ -41,6 +41,7 @@ import footerColumn from './objects/footerColumn'
 import feature from './objects/feature'
 import featuresModule from './objects/modules/featuresModule'
 import hero1Module from './objects/modules/hero1Module'
+import lastsPostsModule from './objects/modules/lastsPostsModule'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -87,5 +88,6 @@ export default createSchema({
     ctaModule,
     featuresModule,
     hero1Module,
+    lastsPostsModule,
   ]),
 })
