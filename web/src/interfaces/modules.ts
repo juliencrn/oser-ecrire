@@ -11,6 +11,7 @@ export type ModuleType =
   | 'featuresModule'
   | 'quote'
   | 'hero1Module'
+  | 'lastsPostsModule'
 
 export type LinkModule = InternalLink
 

@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 
 import { Module } from '../../interfaces'
 import Section from '../Section'
-import ServiceCard from './ServiceCard'
+import ServiceCard from '../cards/ServiceCard'
 
 function ServicesModule({ title, introduction, services }: Module) {
   if (!services) {

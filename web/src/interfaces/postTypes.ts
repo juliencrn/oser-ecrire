@@ -18,10 +18,10 @@ export interface Post {
   _updatedAt: string
   title: string
   slug: Slug
-  excerpt: string
+  excerpt?: string
   categories?: Category[]
   mainImage?: MainImage
-  body: any[]
+  body?: any[]
 }
 
 export interface Comment {

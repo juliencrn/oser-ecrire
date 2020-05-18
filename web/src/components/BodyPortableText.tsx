@@ -39,8 +39,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const BodyPortableText: FC<{ blocks: any[] }> = ({ blocks }) => {
+const BodyPortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
   const classes = useStyles()
+
+  if (!blocks || !blocks.length) {
+    return null
+  }
+
   const { siteUrl } = useSiteMetadata()
   const [getImageById] = useSanityImages()
 

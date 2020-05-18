@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 
 import { Module } from '../../interfaces'
 import Section from '../Section'
-import FormationCard from './FormationCard'
+import FormationCard from '../cards/FormationCard'
 
 function FormationsModule({ title, introduction, formations }: Module) {
   if (!formations) {

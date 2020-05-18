@@ -7,9 +7,9 @@ import Button from '@material-ui/core/Button'
 import Link from '@material-ui/core/Link'
 import Typography from '@material-ui/core/Typography'
 
-import useAuthorData from '../hooks/useAuthorData'
+import useAuthorData from '../../hooks/useAuthorData'
 import { Hidden } from '@material-ui/core'
-import useSanityImages from '../hooks/useSanityImages'
+import useSanityImages from '../../hooks/useSanityImages'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

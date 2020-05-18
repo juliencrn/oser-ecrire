@@ -37,9 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-export type PostCardProps = Post
-
-const PostCard: FC<PostCardProps> = ({ title, excerpt, mainImage, slug }) => {
+const PostCard: FC<Post> = ({ title, excerpt, mainImage, slug }) => {
   const classes = useStyles()
   const [getImageById] = useSanityImages()
   const image = getImageById(mainImage?.asset.id)

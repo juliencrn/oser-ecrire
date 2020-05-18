@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 
 import { Module } from '../../interfaces'
 import Section from '../Section'
-import TestimonialCard from './TestimonialCard'
+import TestimonialCard from '../cards/TestimonialCard'
 
 function CustomersModule({ title, introduction, customers }: Module) {
   if (!customers) {

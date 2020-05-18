@@ -10,17 +10,17 @@ import Fade from '@material-ui/core/Fade'
 import { Module } from '../interfaces'
 import Section from './Section'
 import Quote from './Quote'
-import Hero1Module from './modules/hero1'
-
-const BodyPortableText = loadable(() => import('./BodyPortableText'))
 
 // Modules
+const BodyPortableText = loadable(() => import('./BodyPortableText'))
 const CtaModule = loadable(() => import('./modules/cta'))
 const ProjectsModule = loadable(() => import('./modules/projects'))
 const CustomersModule = loadable(() => import('./modules/customers'))
 const FormationsModule = loadable(() => import('./modules/formations'))
 const ServicesModule = loadable(() => import('./modules/services'))
 const FeaturesModule = loadable(() => import('./modules/features'))
+const Hero1Module = loadable(() => import('./modules/hero1'))
+const LastsPostsModule = loadable(() => import('./modules/lastsPosts'))
 
 const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
   if (!modules || modules.length <= 0) {
@@ -43,69 +43,55 @@ const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
               isVisible,
             }
 
+            let component = null
+
             // New way
             switch (props._type) {
               case 'ctaModule':
-                return (
-                  <div>
-                    <CtaModule {...props} />
-                  </div>
-                )
+                component = <CtaModule {...props} />
+                break
 
               case 'projectsModule':
-                return (
-                  <div>
-                    <ProjectsModule {...props} />
-                  </div>
-                )
+                component = <ProjectsModule {...props} />
+                break
 
               case 'customersModule':
-                return (
-                  <div>
-                    <CustomersModule {...props} />
-                  </div>
-                )
+                component = <CustomersModule {...props} />
+                break
 
               case 'formationsModule':
-                return (
-                  <div>
-                    <FormationsModule {...props} />
-                  </div>
-                )
+                component = <FormationsModule {...props} />
+                break
 
               case 'servicesModule':
-                return (
-                  <div>
-                    <ServicesModule {...props} />
-                  </div>
-                )
+                component = <ServicesModule {...props} />
+                break
 
               case 'quote':
                 if (!props?.text) {
                   console.warn(`Error with Quote module, missing "text"`)
-                  return null
+                  component = null
+                } else {
+                  component = (
+                    <Container maxWidth="lg">
+                      <Box py={8} my={8}>
+                        <Fade timeout={1000} in={props?.isVisible}>
+                          <div>
+                            <Quote author={props?.author}>{props.text}</Quote>
+                          </div>
+                        </Fade>
+                      </Box>
+                    </Container>
+                  )
                 }
-                return (
-                  <Container maxWidth="lg">
-                    <Box py={8} my={8}>
-                      <Fade timeout={1000} in={props?.isVisible}>
-                        <div>
-                          <Quote author={props?.author}>{props.text}</Quote>
-                        </div>
-                      </Fade>
-                    </Box>
-                  </Container>
-                )
+                break
 
               case 'featuresModule':
-                return (
-                  <div>
-                    <FeaturesModule {...props} />
-                  </div>
-                )
+                component = <FeaturesModule {...props} />
+                break
 
               case 'simplePortableTextModule':
-                return (
+                component = (
                   <Section
                     title={props?.title}
                     description={props?.introduction}
@@ -116,18 +102,27 @@ const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
                     <BodyPortableText blocks={props.body} />
                   </Section>
                 )
+                break
 
               case 'hero1Module':
-                return (
-                  <div>
-                    <Hero1Module {...props} />
-                  </div>
-                )
+                component = <Hero1Module {...props} />
+                break
+
+              case 'lastsPostsModule':
+                component = <LastsPostsModule {...props} />
+                break
 
               default:
                 console.warn(`This module hasn't module template`, { module })
                 return null
             }
+
+            // Then return component
+            if (component) {
+              // empty div are used to make "isVisible" working
+              return <div>{component}</div>
+            }
+            return null
           }}
         </VisibilitySensor>
       ))}
