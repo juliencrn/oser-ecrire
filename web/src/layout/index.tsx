@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { makeStyles, ThemeProvider, Theme } from '@material-ui/core/styles'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -27,6 +27,20 @@ export interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children, isBlog = false }) => {
   const classes = useStyles()
   const { title } = useSiteSettings()
+
+  // Disallow right click on blog for protecting content
+  useEffect(() => {
+    const disable = (event: MouseEvent) => event.preventDefault()
+    const isBrowser = typeof document !== 'undefined'
+    if (isBrowser && isBlog) {
+      document.addEventListener('contextmenu', disable)
+    }
+    return () => {
+      if (isBrowser && isBlog) {
+        document.removeEventListener('contextmenu', disable)
+      }
+    }
+  })
 
   return (
     <ThemeProvider theme={theme}>
