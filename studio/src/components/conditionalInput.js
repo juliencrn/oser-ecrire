@@ -2,14 +2,15 @@
 /* eslint-disable react/static-property-placement */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-filename-extension */
+/* eslint-disable import/no-unresolved */
 import PropTypes from 'prop-types'
 import React from 'react'
 import Fieldset from 'part:@sanity/components/fieldsets/default'
 import { setIfMissing } from 'part:@sanity/form-builder/patch-event'
+
 // FormBuilderInput automatically generates fields from a schema
-import { FormBuilderInput } from 'part:@sanity/form-builder'
 // a Higher Order Component that passes document values as props
-import { withDocument } from 'part:@sanity/form-builder'
+import { FormBuilderInput, withDocument } from 'part:@sanity/form-builder'
 
 class ConditionalInput extends React.PureComponent {
   static propTypes = {
@@ -21,6 +22,7 @@ class ConditionalInput extends React.PureComponent {
     value: PropTypes.shape({
       _type: PropTypes.string,
     }),
+    // eslint-disable-next-line react/forbid-prop-types
     focusPath: PropTypes.array.isRequired,
     onFocus: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
