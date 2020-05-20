@@ -16,11 +16,11 @@ export interface PageTemplateProps extends IPageTemplate {
 const PageTemplate: FC<PageTemplateProps> = ({ pageContext, path }) => {
   const classes = useStyles()
 
-  const { title, subtitle, excerpt, pageBuilder } = pageContext.page
+  const { title, subtitle, excerpt, pageBuilder, image } = pageContext.page
 
   return (
     <Layout>
-      <SEO title={title} description={excerpt} path={path} />
+      <SEO title={title} description={excerpt} path={path} image={image} />
 
       <Hero title={title} subtitle={subtitle}></Hero>
 

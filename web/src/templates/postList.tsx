@@ -41,7 +41,7 @@ export interface PostListTemplateProps extends PageTemplate {
 const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
   const classes = useStyles()
   const { numPages, currentPage, posts, basePath, categories } = pageContext
-  const { title, excerpt, subtitle } = pageContext.page
+  const { title, excerpt, subtitle, image } = pageContext.page
 
   const handleNavigate = (event: React.ChangeEvent<unknown>, value: number) => {
     navigate(value >= 2 ? `${basePath}/${value}` : basePath)
@@ -49,7 +49,7 @@ const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
 
   return (
     <Layout isBlog>
-      <SEO title={title} description={excerpt} path={path} />
+      <SEO title={title} description={excerpt} path={path} image={image} />
 
       <Hero title={title} subtitle={subtitle}>
         <CategoryFilter categories={categories} basePath={basePath} />

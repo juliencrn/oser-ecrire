@@ -17,10 +17,10 @@ export interface ContactTemplateProps extends PageTemplate {
 }
 
 function ContactPage({ pageContext, path }: ContactTemplateProps) {
-  const { title, subtitle, excerpt } = pageContext.page
+  const { title, subtitle, excerpt, image } = pageContext.page
   return (
     <Layout>
-      <SEO title={title} path={path} description={excerpt} />
+      <SEO title={title} path={path} description={excerpt} image={image} />
       <Hero title={title} subtitle={subtitle}>
         <Grid container spacing={2} justify="center">
           <Grid item>

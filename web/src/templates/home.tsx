@@ -18,7 +18,7 @@ function IndexPage({ pageContext, path }: HomeTemplateProps) {
 
   return (
     <Layout>
-      <SEO title={title} path={path} description={excerpt} />
+      <SEO title={title} path={path} description={excerpt} image={image} />
       <Hero fullScreen {...heroProps}></Hero>
 
       <SwitchModules modules={pageBuilder?.modules} />

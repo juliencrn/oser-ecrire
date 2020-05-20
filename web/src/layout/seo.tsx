@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet'
 import useSiteSettings from '../hooks/useSiteSettings'
 import useAuthorData from '../hooks/useAuthorData'
 import useSiteMetadata from '../hooks/useSiteMetadata'
+import { Image } from '../interfaces'
+import useSanityImages from '../hooks/useSanityImages'
 
 interface MetaProperty {
   property: string
@@ -23,12 +25,12 @@ export interface SEOProps {
   description?: string
   lang?: string
   meta?: Meta[]
-  imageUrl?: string
+  image?: Image
   isPost?: boolean
 }
 
 export default function SEO(props: SEOProps) {
-  const { path, title, description, lang, meta, imageUrl, isPost } = props
+  const { path, title, description, lang, meta, isPost } = props
   const siteSettings = useSiteSettings() // From CMS
   const authorData = useAuthorData() // From CMS
   const siteMetadata = useSiteMetadata() // From gatsby-config.js
@@ -38,8 +40,15 @@ export default function SEO(props: SEOProps) {
   const metaDescription =
     description || siteSettings.slogan || siteMetadata.description
   const url = `${siteMetadata.siteUrl}${path}`
-  const image = imageUrl || siteMetadata.image
   const author = authorData.name || siteMetadata.author
+
+  // Image
+  const [getImageById] = useSanityImages()
+  function getImageUrl(): string | undefined {
+    const img = getImageById(props?.image?.asset.id)
+    return img?.xl.src || undefined
+  }
+  const image = getImageUrl() || siteMetadata.image
 
   return (
     <Helmet
