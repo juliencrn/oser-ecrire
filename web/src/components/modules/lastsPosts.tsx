@@ -45,6 +45,7 @@ function LastsPostsModule({ title, introduction = ' ' }: Module) {
           <Button
             variant="contained"
             color="primary"
+            size="large"
             component={GatsbyLink}
             to={`/${blog.path}`}
           >

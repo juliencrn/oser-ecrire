@@ -6,8 +6,8 @@ import {
 } from '@material-ui/core/styles'
 import deepmerge from 'deepmerge'
 
-const serif = `Vidaloka, Domine, Georgia, Cambria, "Times New Roman", Times, serif`
-const sansS = `"Source Sans Pro", "Roboto", "Helvetica", "Arial", sans-serif`
+export const serif = `Vidaloka, Domine, Georgia, Cambria, "Times New Roman", Times, serif`
+export const sansS = `"Source Sans Pro", "Roboto", "Helvetica", "Arial", sans-serif`
 
 const heading = {
   fontFamily: serif,
@@ -34,7 +34,7 @@ const baseTheme: ThemeOptions = {
   breakpoints: {
     values: {
       xs: 0,
-      sm: 550,
+      sm: 600,
       md: 720,
       lg: 960,
       xl: 1280,

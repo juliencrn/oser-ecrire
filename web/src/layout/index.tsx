@@ -32,11 +32,14 @@ const Layout: FC<LayoutProps> = ({ children, isBlog = false }) => {
   useEffect(() => {
     const disable = (event: MouseEvent) => event.preventDefault()
     const isBrowser = typeof document !== 'undefined'
-    if (isBrowser && isBlog) {
+    const isProd = process.env.NODE_ENV === 'production'
+    const condition = isProd && isBrowser && isBlog
+
+    if (condition) {
       document.addEventListener('contextmenu', disable)
     }
     return () => {
-      if (isBrowser && isBlog) {
+      if (condition) {
         document.removeEventListener('contextmenu', disable)
       }
     }

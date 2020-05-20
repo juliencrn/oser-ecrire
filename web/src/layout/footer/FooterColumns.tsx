@@ -63,11 +63,13 @@ function FooterColumns() {
             minHeight="100%"
             display="flex"
           >
-            <Image
-              className={classes.logo}
-              fluid={logo.asset.fluid}
-              alt={logo.alt}
-            />
+            <GatsbyLink to="/">
+              <Image
+                className={classes.logo}
+                fluid={logo.asset.fluid}
+                alt={logo.alt}
+              />
+            </GatsbyLink>
           </Box>
         </Grid>
 

@@ -19,7 +19,7 @@ const PageTemplate: FC<PageTemplateProps> = ({ pageContext, path }) => {
   const { title, subtitle, excerpt, pageBuilder } = pageContext.page
 
   return (
-    <Layout isBlog>
+    <Layout>
       <SEO title={title} description={excerpt} path={path} />
 
       <Hero title={title} subtitle={subtitle}></Hero>

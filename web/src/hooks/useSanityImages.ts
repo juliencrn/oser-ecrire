@@ -8,6 +8,7 @@ export interface SanityImage {
   sm: FluidObject
   md: FluidObject
   lg: FluidObject
+  xl: FluidObject
 }
 
 /**
@@ -44,6 +45,9 @@ export default function useSanityImages(): HookReturn {
             ...GatsbySanityImageFluid
           }
           lg: fluid(maxWidth: 1440) {
+            ...GatsbySanityImageFluid
+          }
+          xl: fluid(maxWidth: 1920) {
             ...GatsbySanityImageFluid
           }
         }

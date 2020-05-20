@@ -13,12 +13,13 @@ export interface HomeTemplateProps extends PageTemplate {
 }
 
 function IndexPage({ pageContext, path }: HomeTemplateProps) {
-  const { title, subtitle, excerpt, pageBuilder } = pageContext.page
+  const { title, subtitle, excerpt, pageBuilder, image } = pageContext.page
+  const heroProps = { title, subtitle, image }
 
   return (
     <Layout>
       <SEO title={title} path={path} description={excerpt} />
-      <Hero title={title} subtitle={subtitle}></Hero>
+      <Hero fullScreen {...heroProps}></Hero>
 
       <SwitchModules modules={pageBuilder?.modules} />
     </Layout>
