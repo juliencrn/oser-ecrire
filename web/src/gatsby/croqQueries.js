@@ -87,13 +87,16 @@ const moduleTypes = {
     author,
     text,
   `,
-  hero1Module: `
+  heroModule: `
     mainImage {
       _type,
       alt,
       caption,
       asset { 'id': _ref },
     },
+    textSide,
+    overlay,
+    width,
   `,
 }
 
@@ -106,7 +109,7 @@ const {
   bodyModule,
   featuresModule,
   quoteModule,
-  hero1Module,
+  heroModule,
 } = moduleTypes
 
 const modules = `
@@ -124,7 +127,7 @@ const modules = `
     ${featuresModule}
     ${ctaModule}
     ${quoteModule}
-    ${hero1Module}
+    ${heroModule}
   }
 `
 

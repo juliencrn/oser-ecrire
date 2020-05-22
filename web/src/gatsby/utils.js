@@ -104,7 +104,7 @@ const normalizeCategories = (categories, posts) => {
 //   }
 
 //   const references = pageBuilder.modules.reduce((prev, curr) => {
-//     if (curr._type === 'hero1Module' && curr.mainImage) {
+//     if (curr._type === 'heroModule' && curr.mainImage) {
 //       return [...prev, curr.mainImage.asset._ref]
 //     }
 //     return prev

@@ -10,8 +10,12 @@ export type ModuleType =
   | 'formationsModule'
   | 'featuresModule'
   | 'quote'
-  | 'hero1Module'
+  | 'heroModule'
   | 'lastsPostsModule'
+
+export type TextSide = 'left' | 'right'
+export type Width = 'lg' | 'xl'
+export type Overlay = 'none' | 'text' | 'image'
 
 export type LinkModule = InternalLink
 
@@ -36,8 +40,11 @@ export interface Module {
   text?: string // quote
   author?: string // quote
 
-  // Used in Hero1
+  // Used in Hero
   mainImage?: MainImage
+  textSide?: TextSide
+  overlay?: Overlay
+  width?: Width
 }
 
 export interface Feature {

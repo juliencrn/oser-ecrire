@@ -19,7 +19,7 @@ const CustomersModule = loadable(() => import('./modules/customers'))
 const FormationsModule = loadable(() => import('./modules/formations'))
 const ServicesModule = loadable(() => import('./modules/services'))
 const FeaturesModule = loadable(() => import('./modules/features'))
-const Hero1Module = loadable(() => import('./modules/hero1'))
+const HeroModule = loadable(() => import('./modules/hero'))
 const LastsPostsModule = loadable(() => import('./modules/lastsPosts'))
 
 const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
@@ -104,8 +104,8 @@ const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
                 )
                 break
 
-              case 'hero1Module':
-                component = <Hero1Module {...props} />
+              case 'heroModule':
+                component = <HeroModule {...props} />
                 break
 
               case 'lastsPostsModule':
