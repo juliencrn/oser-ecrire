@@ -1,7 +1,10 @@
+import { FaNewspaper } from 'react-icons/fa'
+
 export default {
   name: 'lastsPostsModule',
   type: 'object',
   title: 'Derniers articles',
+  icon: FaNewspaper,
   fields: [
     {
       name: 'title',

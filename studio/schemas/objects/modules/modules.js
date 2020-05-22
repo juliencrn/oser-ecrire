@@ -12,7 +12,7 @@ export default {
     { type: 'ctaModule' },
     { type: 'featuresModule' },
     { type: 'quote' },
-    { type: 'hero1Module' },
+    { type: 'heroModule' },
     { type: 'lastsPostsModule' },
   ],
 }

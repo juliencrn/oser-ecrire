@@ -1,7 +1,10 @@
+import { MdFeaturedPlayList } from 'react-icons/md'
+
 export default {
   name: 'featuresModule',
   type: 'object',
   title: 'Fonctionnalités',
+  icon: MdFeaturedPlayList,
   fields: [
     {
       name: 'title',
