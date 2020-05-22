@@ -1,10 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, useRef, useState } from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import Image from 'gatsby-image'
 
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import Divider from '@material-ui/core/Divider'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 import Layout from '../layout'
 import SEO from '../layout/seo'
@@ -27,8 +29,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(8),
   },
-  body: {
-    paddingBottom: theme.spacing(6),
+  progress: {
+    backgroundColor: 'transparent',
+    height: theme.spacing(1),
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: `100%`,
+    zIndex: 1,
   },
 }))
 
@@ -40,41 +48,61 @@ export interface PostTemplateProps extends PageTemplate {
   }
 }
 
-const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
+const PostTemplate: FC<PostTemplateProps> = props => {
+  const { current, prev, next } = props.pageContext
+  const { title, excerpt, mainImage, categories, slug, body } = current
   const classes = useStyles()
-
-  const {
-    title,
-    slug,
-    excerpt,
-    mainImage,
-    body,
-    categories,
-  } = pageContext.current
-
-  // Get image sharp
+  const readRef = useRef<HTMLDivElement>(null)
+  const isBrowser = typeof window !== 'undefined'
+  const [readPercent, setReadPercent] = useState(0)
+  const displayProgress = readPercent >= 0 && readPercent <= 100
   const [getImageById] = useSanityImages()
   const image = getImageById(mainImage?.asset.id)
+
+  useScrollPosition(
+    ({ _, currPos }) => {
+      const element = readRef?.current
+      if (element && isBrowser) {
+        const readArea = element.clientHeight
+        const percent = (100 * currPos.y) / readArea
+        setReadPercent(percent)
+      }
+    },
+    [],
+    readRef,
+    true,
+    100,
+  )
 
   return (
     <Layout isBlog>
       <SEO
         title={title}
         description={excerpt}
-        path={path}
+        path={props.path}
         image={mainImage}
         isPost
       />
-      <PostNavigation direction="left" post={pageContext.prev} />
-      <PostNavigation direction="right" post={pageContext.next} />
+      <PostNavigation direction="left" post={prev} />
+      <PostNavigation direction="right" post={next} />
 
-      <Hero title={title} subtitle={excerpt}>
-        <PostSocialBar categories={categories} />
-      </Hero>
-      <div className={classes.body}>
+      {displayProgress && (
+        <LinearProgress
+          className={classes.progress}
+          variant="determinate"
+          value={readPercent}
+          color="primary"
+        />
+      )}
+
+      <div ref={readRef}>
+        <Hero title={title} subtitle={excerpt}>
+          <PostSocialBar categories={categories} />
+        </Hero>
+
         <Container maxWidth="lg">
           {image && (
-            <Box mb={8}>
+            <Box mb={8} mt={4}>
               <Image
                 alt={mainImage?.alt}
                 className={classes.mainImage}
@@ -90,7 +118,11 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
           <Box mb={4}>
             <BodyPortableText blocks={body} />
           </Box>
+        </Container>
+      </div>
 
+      <Box mb={6}>
+        <Container maxWidth="md">
           <PostSocialBar categories={categories} />
 
           <Divider className={classes.divider} />
@@ -101,7 +133,7 @@ const PostTemplate: FC<PostTemplateProps> = ({ pageContext, path }) => {
 
           <Comments postSlug={slug.current} postTitle={title} />
         </Container>
-      </div>
+      </Box>
     </Layout>
   )
 }
