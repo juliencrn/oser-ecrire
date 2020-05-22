@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import Image from 'gatsby-image'
 import { makeStyles, Theme } from '@material-ui/core/styles'
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const BodyPortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
+const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
   const classes = useStyles()
 
   if (!blocks || !blocks.length) {
@@ -161,5 +161,7 @@ const BodyPortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
     </div>
   )
 }
+
+const BodyPortableText = memo(PortableText)
 
 export default BodyPortableText

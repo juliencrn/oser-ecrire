@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import uuid from 'uuid/v1'
 import loadable from '@loadable/component'
 import VisibilitySensor from 'react-visibility-sensor'
@@ -22,7 +22,7 @@ const FeaturesModule = loadable(() => import('./modules/features'))
 const HeroModule = loadable(() => import('./modules/hero'))
 const LastsPostsModule = loadable(() => import('./modules/lastsPosts'))
 
-const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
+const Switcher: FC<{ modules?: Module[] }> = ({ modules }) => {
   if (!modules || modules.length <= 0) {
     return null
   }
@@ -129,5 +129,7 @@ const SwitchModules: FC<{ modules?: Module[] }> = ({ modules }) => {
     </>
   )
 }
+
+const SwitchModules = memo(Switcher)
 
 export default SwitchModules
