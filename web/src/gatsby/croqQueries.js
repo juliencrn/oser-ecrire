@@ -98,6 +98,11 @@ const moduleTypes = {
     overlay,
     width,
   `,
+  formModule: `
+    form {
+      'type': _ref,
+    },
+  `,
 }
 
 const {
@@ -110,6 +115,7 @@ const {
   featuresModule,
   quoteModule,
   heroModule,
+  formModule,
 } = moduleTypes
 
 const modules = `
@@ -128,6 +134,7 @@ const modules = `
     ${ctaModule}
     ${quoteModule}
     ${heroModule}
+    ${formModule}
   }
 `
 

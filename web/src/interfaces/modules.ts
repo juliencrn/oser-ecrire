@@ -12,10 +12,12 @@ export type ModuleType =
   | 'quote'
   | 'heroModule'
   | 'lastsPostsModule'
+  | 'formModule'
 
 export type TextSide = 'left' | 'right'
 export type Width = 'lg' | 'xl'
 export type Overlay = 'none' | 'text' | 'image'
+export type FormName = 'contactForm' | 'newsletterForm'
 
 export type LinkModule = InternalLink
 
@@ -39,6 +41,7 @@ export interface Module {
   link?: LinkModule
   text?: string // quote
   author?: string // quote
+  form?: { type: FormName }
 
   // Used in Hero
   mainImage?: MainImage

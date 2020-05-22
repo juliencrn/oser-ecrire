@@ -21,6 +21,7 @@ const ServicesModule = loadable(() => import('./modules/services'))
 const FeaturesModule = loadable(() => import('./modules/features'))
 const HeroModule = loadable(() => import('./modules/hero'))
 const LastsPostsModule = loadable(() => import('./modules/lastsPosts'))
+const FormModule = loadable(() => import('./modules/formModule'))
 
 const Switcher: FC<{ modules?: Module[] }> = ({ modules }) => {
   if (!modules || modules.length <= 0) {
@@ -47,6 +48,10 @@ const Switcher: FC<{ modules?: Module[] }> = ({ modules }) => {
 
             // New way
             switch (props._type) {
+              case 'formModule':
+                component = <FormModule {...props} />
+                break
+
               case 'ctaModule':
                 component = <CtaModule {...props} />
                 break

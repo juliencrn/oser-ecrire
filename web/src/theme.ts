@@ -1,4 +1,4 @@
-import { red, cyan, amber } from '@material-ui/core/colors'
+import { red, cyan, amber, teal } from '@material-ui/core/colors'
 import {
   createMuiTheme,
   responsiveFontSizes,
@@ -21,11 +21,14 @@ const baseTheme: ThemeOptions = {
        * fade(dark || cyan.A700, 0.3) == #ccf0f6
        */
       dark: cyan.A700,
-      main: cyan[700],
+      // main: cyan[700],
+      main: teal.A700,
       light: `#ccf0f6`,
+      contrastText: 'white',
     },
     secondary: {
       main: amber.A700,
+      light: '#ffd57f',
     },
     error: {
       main: red.A400,

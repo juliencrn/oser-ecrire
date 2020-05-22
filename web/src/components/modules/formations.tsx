@@ -1,13 +1,18 @@
 import React from 'react'
-import uuid from 'uuid/v1'
 
 import Grid from '@material-ui/core/Grid'
+import Grow from '@material-ui/core/Grow'
 
 import { Module } from '../../interfaces'
 import Section from '../Section'
 import FormationCard from '../cards/FormationCard'
 
-function FormationsModule({ title, introduction, formations }: Module) {
+function FormationsModule({
+  title,
+  introduction,
+  formations,
+  isVisible,
+}: Module) {
   if (!formations) {
     return null
   }
@@ -22,9 +27,16 @@ function FormationsModule({ title, introduction, formations }: Module) {
     >
       <Grid container justify="center" spacing={2}>
         {formations.map((formation, i, arr) => (
-          <Grid key={uuid()} item xs={12} sm={6} md={arr.length >= 3 ? 4 : 6}>
-            <FormationCard {...formation} />
-          </Grid>
+          <Grow
+            in={isVisible}
+            key={i}
+            timeout={(i + 1) * 1000}
+            style={{ transformOrigin: '0 -40px 0' }}
+          >
+            <Grid item xs={12} sm={6} md={arr.length >= 3 ? 4 : 6}>
+              <FormationCard {...formation} />
+            </Grid>
+          </Grow>
         ))}
       </Grid>
     </Section>

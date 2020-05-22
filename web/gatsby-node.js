@@ -121,16 +121,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     })
   }
 
-  // Contact
-  const contactTemplate = pages.filter(isTemplate('contact'))[0]
-  if (contactTemplate) {
-    createPage({
-      path: contactTemplate.slug.current,
-      component: path.resolve(`./src/templates/contact.tsx`),
-      context: { page: contactTemplate },
-    })
-  }
-
   // Other Pages
   const otherPages = pages.filter(({ template }) => !template)
   if (otherPages) {

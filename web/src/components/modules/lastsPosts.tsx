@@ -13,7 +13,7 @@ import PostCard from '../blog/PostCard'
 import useLastsPosts from '../../hooks/useLastsPosts'
 import useSiteSettings from '../../hooks/useSiteSettings'
 
-function LastsPostsModule({ title, introduction = ' ' }: Module) {
+function LastsPostsModule({ title, introduction = ' ', isVisible }: Module) {
   const posts = useLastsPosts()
   const { blog } = useSiteSettings()
 
@@ -28,7 +28,7 @@ function LastsPostsModule({ title, introduction = ' ' }: Module) {
       <Grid container spacing={4}>
         {posts.map(({ node }, i) => (
           <Grow
-            in
+            in={isVisible}
             key={i}
             timeout={(i + 1) * 1000}
             style={{ transformOrigin: '0 -40px 0' }}

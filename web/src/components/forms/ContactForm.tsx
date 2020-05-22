@@ -6,6 +6,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 
 import Yup from '../../libs/Yup'
 import FormLayout from './FormLayout'
+import useSanityForms from '../../hooks/useSanityForms'
 
 const useStyles = makeStyles((theme: Theme) => ({
   field: {
@@ -38,6 +39,10 @@ const initialValues: Values = {
 }
 
 function ContactForm() {
+  const forms = useSanityForms()
+  const { title, subtitle } = forms.filter(
+    ({ type }) => type === 'contactForm',
+  )[0]
   const classes = useStyles()
   return (
     <Formik
@@ -52,8 +57,8 @@ function ContactForm() {
     >
       {({ submitForm, isSubmitting }) => (
         <FormLayout
-          title="Contactez-moi"
-          subtitle="Je vous réponds avec plaisir et rapidement. À très vite !"
+          title={title}
+          subtitle={subtitle}
           isSubmitting={isSubmitting}
           submitForm={submitForm}
         >

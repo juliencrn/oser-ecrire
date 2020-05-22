@@ -51,7 +51,7 @@ const Layout: FC<LayoutProps> = ({ children, isBlog = false }) => {
       <div className={classes.root}>
         <Header siteTitle={title} isBlog={isBlog} />
         <main className={classes.main}>{children}</main>
-        <Footer />
+        <Footer isBlog={isBlog} />
       </div>
       <BackToTop />
     </ThemeProvider>

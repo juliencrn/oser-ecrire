@@ -60,22 +60,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-function Footer() {
+function Footer({ isBlog }: { isBlog?: boolean }) {
   const classes = useStyles()
   const theme = useTheme()
   const fluidBird = useBirdImage()
 
   return (
     <footer className={classes.root}>
-      <Container maxWidth="xl" className={classes.preFooter}>
-        <Grid container>
-          <Grid item xs={12} md={8}>
-            <Box className={classes.preFooterContent}>
-              <NewsletterForm />
-            </Box>
+      {isBlog && (
+        <Container maxWidth="xl" className={classes.preFooter}>
+          <Grid container>
+            <Grid item xs={12} md={8}>
+              <Box className={classes.preFooterContent}>
+                <NewsletterForm />
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      )}
 
       <Box mb={-2} zIndex={-1}>
         <Image className={classes.bird} fluid={fluidBird} alt="oiseau" />

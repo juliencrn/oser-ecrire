@@ -43,57 +43,55 @@ const FormLayout: FC<FormLayoutProps> = ({
 }) => {
   const classes = useStyles()
   return (
-    <Fade in>
-      <Paper className={classes.paper}>
-        <Form className={classes.form}>
-          {title && (
-            <Typography variant="h5" align="center" gutterBottom>
-              {title}
-            </Typography>
-          )}
+    <Paper className={classes.paper}>
+      <Form className={classes.form}>
+        {title && (
+          <Typography variant="h5" align="center" gutterBottom>
+            {title}
+          </Typography>
+        )}
 
-          {subtitle && (
-            <Typography
-              variant="body1"
-              color="textSecondary"
-              align="center"
-              gutterBottom
-            >
-              {subtitle}
-            </Typography>
-          )}
-          <br />
-          {alert && (
-            <Fade in={!!alert}>
-              <Alert severity={alert.type}>{alert.message}</Alert>
-            </Fade>
-          )}
-          <br />
-
-          {children}
-
-          <Box
-            display="flex"
-            justifyContent="flex-end"
-            alignItems="center"
-            flexWrap="wrap"
-            mt={3}
+        {subtitle && (
+          <Typography
+            variant="body1"
+            color="textSecondary"
+            align="center"
+            gutterBottom
           >
-            <Button
-              variant="contained"
-              color="primary"
-              disabled={isSubmitting}
-              onClick={submitForm}
-              className={classes.submit}
-            >
-              Envoyer
-            </Button>
-          </Box>
-        </Form>
+            {subtitle}
+          </Typography>
+        )}
+        <br />
+        {alert && (
+          <Fade in={!!alert}>
+            <Alert severity={alert.type}>{alert.message}</Alert>
+          </Fade>
+        )}
+        <br />
 
-        {isSubmitting && <LinearProgress />}
-      </Paper>
-    </Fade>
+        {children}
+
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          alignItems="center"
+          flexWrap="wrap"
+          mt={3}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={isSubmitting}
+            onClick={submitForm}
+            className={classes.submit}
+          >
+            Envoyer
+          </Button>
+        </Box>
+      </Form>
+
+      {isSubmitting && <LinearProgress />}
+    </Paper>
   )
 }
 

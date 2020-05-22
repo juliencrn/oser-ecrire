@@ -12,6 +12,12 @@ export interface Testimonial {
   avatar?: Image
 }
 
+export interface Modal {
+  active: string
+  delay: number
+  modules: Module[]
+}
+
 export interface Post {
   id: string
   _createdAt: string

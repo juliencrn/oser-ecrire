@@ -9,6 +9,7 @@ import Yup from '../../libs/Yup'
 import FormLayout from './FormLayout'
 import { registerContact } from '../../libs/sendInBlueApi'
 import { AlertProps } from '../../interfaces'
+import useSanityForms from '../../hooks/useSanityForms'
 
 const useStyles = makeStyles((theme: Theme) => ({
   field: {
@@ -33,6 +34,10 @@ const initialValues = {
 }
 
 function NewsletterForm() {
+  const forms = useSanityForms()
+  const { title, subtitle } = forms.filter(
+    ({ type }) => type === 'newsletterForm',
+  )[0]
   const classes = useStyles()
   const [alert, setAlert] = React.useState<AlertProps | undefined>(undefined)
   return (
@@ -59,9 +64,8 @@ function NewsletterForm() {
     >
       {({ submitForm, isSubmitting }) => (
         <FormLayout
-          title="Inscrivez-vous à la newsletter"
-          subtitle="Recevez les derniers articles d'Oser Ecrire directement dans votre
-boite de réception."
+          title={title}
+          subtitle={subtitle}
           isSubmitting={isSubmitting}
           submitForm={submitForm}
           alert={alert}
