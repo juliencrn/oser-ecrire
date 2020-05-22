@@ -14,5 +14,6 @@ export default {
     { type: 'quote' },
     { type: 'heroModule' },
     { type: 'lastsPostsModule' },
+    { type: 'formModule' },
   ],
 }

@@ -15,6 +15,11 @@ import service from './documents/service'
 import formation from './documents/formation'
 import project from './documents/project'
 import siteSettings from './documents/siteSettings'
+import comment from './documents/comment'
+import page from './documents/page'
+import newsletterForm from './documents/newsletterForm'
+import contactForm from './documents/contactForm'
+import modal from './documents/modal'
 
 // Object types
 import bodyPortableText from './objects/bodyPortableText'
@@ -24,24 +29,25 @@ import excerpt from './objects/excerpt'
 import testimonial from './objects/testimonial'
 import siteLinks from './objects/siteLinks'
 import authorLinks from './objects/authorLinks'
-import comment from './documents/comment'
-import projectsModule from './objects/modules/projectsModule'
-import servicesModule from './objects/modules/servicesModule'
-import customersModule from './objects/modules/customersModule'
-import ctaModule from './objects/modules/ctaModule'
-import simplePortableText from './objects/simplePortableText'
-import simplePortableTextModule from './objects/modules/simplePortableTextModule'
-import modules from './objects/modules/modules'
-import formationsModule from './objects/modules/formationsModule'
-import page from './documents/page'
 import internalLink from './objects/internalLink'
+import simplePortableText from './objects/simplePortableText'
 import pageBlog from './objects/conditionals/pageBlog'
 import pageBuilder from './objects/conditionals/pageBuilder'
 import footerColumn from './objects/footerColumn'
 import feature from './objects/feature'
+
+// Modules
+import modules from './objects/modules/modules'
+import projectsModule from './objects/modules/projectsModule'
+import servicesModule from './objects/modules/servicesModule'
+import customersModule from './objects/modules/customersModule'
+import ctaModule from './objects/modules/ctaModule'
+import simplePortableTextModule from './objects/modules/simplePortableTextModule'
+import formationsModule from './objects/modules/formationsModule'
 import featuresModule from './objects/modules/featuresModule'
 import heroModule from './objects/modules/heroModule'
 import lastsPostsModule from './objects/modules/lastsPostsModule'
+import formModule from './objects/modules/formModule'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -62,6 +68,9 @@ export default createSchema({
     project,
     formation,
     comment,
+    newsletterForm,
+    contactForm,
+    modal,
 
     // Object types
     mainImage,
@@ -89,5 +98,6 @@ export default createSchema({
     featuresModule,
     heroModule,
     lastsPostsModule,
+    formModule,
   ]),
 })

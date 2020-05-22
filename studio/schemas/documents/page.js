@@ -2,7 +2,6 @@ import { FaNewspaper } from 'react-icons/fa'
 
 const templateList = [
   { title: 'Accueil', value: 'home' },
-  { title: 'Contact', value: 'contact' },
   { title: 'Blog', value: 'blog' },
 ]
 

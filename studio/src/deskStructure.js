@@ -12,7 +12,9 @@ import {
   FaHeart,
   FaRegLightbulb,
   FaNewspaper,
+  FaWindowRestore,
 } from 'react-icons/fa'
+import { GrDocumentPerformance } from 'react-icons/gr'
 
 export default () =>
   S.list()
@@ -108,6 +110,45 @@ export default () =>
                   S.documentTypeList('formation').title('Formations suivies'),
                 ),
             ]),
+        ),
+
+      S.listItem()
+        .title('Formulaires')
+        .icon(GrDocumentPerformance)
+        .child(
+          S.list()
+            .title('Newsletter')
+            .items([
+              // Singleton
+              S.listItem()
+                .title('Newsletter')
+                .icon(GrDocumentPerformance)
+                .child(
+                  S.editor()
+                    .schemaType('newsletterForm')
+                    .title('Newsletter')
+                    .documentId('newsletterForm'),
+                ),
+
+              // Singleton
+              S.listItem()
+                .title('Contact')
+                .icon(GrDocumentPerformance)
+                .child(
+                  S.editor()
+                    .schemaType('contactForm')
+                    .title('Contact')
+                    .documentId('contactForm'),
+                ),
+            ]),
+        ),
+
+      // Singleton
+      S.listItem()
+        .title('Popup')
+        .icon(FaWindowRestore)
+        .child(
+          S.editor().schemaType('modal').title('Popup').documentId('modal'),
         ),
       //   ...S.documentTypeListItems().filter(listItem => !['siteSettings', 'author'].includes(listItem.getId()))
     ])

@@ -32,11 +32,6 @@ export default {
       title: 'Courte présentation',
     },
     {
-      name: 'body',
-      type: 'bodyPortableText',
-      title: 'Présentation complète',
-    },
-    {
       name: 'social',
       type: 'authorLinks',
       title: 'Social',
