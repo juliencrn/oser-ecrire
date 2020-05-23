@@ -13,6 +13,7 @@ export type ModuleType =
   | 'heroModule'
   | 'lastsPostsModule'
   | 'formModule'
+  | 'aboutMeModule'
 
 export type TextSide = 'left' | 'right'
 export type Width = 'lg' | 'xl'
@@ -20,6 +21,13 @@ export type Overlay = 'none' | 'text' | 'image'
 export type FormName = 'contactForm' | 'newsletterForm'
 
 export type LinkModule = InternalLink
+
+export interface Quality {
+  _key: string
+  _type: 'quality'
+  answer: string
+  response: string
+}
 
 export interface Module {
   // Common
@@ -42,12 +50,12 @@ export interface Module {
   text?: string // quote
   author?: string // quote
   form?: { type: FormName }
-
-  // Used in Hero
+  qualities?: Quality[]
   mainImage?: MainImage
   textSide?: TextSide
   overlay?: Overlay
   width?: Width
+  subtitle?: string
 }
 
 export interface Feature {

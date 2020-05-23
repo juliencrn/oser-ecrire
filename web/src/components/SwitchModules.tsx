@@ -22,6 +22,7 @@ const FeaturesModule = loadable(() => import('./modules/features'))
 const HeroModule = loadable(() => import('./modules/hero'))
 const LastsPostsModule = loadable(() => import('./modules/lastsPosts'))
 const FormModule = loadable(() => import('./modules/formModule'))
+const AboutMeModule = loadable(() => import('./modules/AboutMe'))
 
 const Switcher: FC<{ modules?: Module[] }> = ({ modules }) => {
   if (!modules || modules.length <= 0) {
@@ -48,6 +49,10 @@ const Switcher: FC<{ modules?: Module[] }> = ({ modules }) => {
 
             // New way
             switch (props._type) {
+              case 'aboutMeModule':
+                component = <AboutMeModule {...props} />
+                break
+
               case 'formModule':
                 component = <FormModule {...props} />
                 break
@@ -124,7 +129,7 @@ const Switcher: FC<{ modules?: Module[] }> = ({ modules }) => {
 
             // Then return component
             if (component) {
-              // empty div are used to make "isVisible" working
+              // wrap into simple div to make "isVisible" working
               return <div>{component}</div>
             }
             return null

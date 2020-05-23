@@ -103,6 +103,11 @@ const moduleTypes = {
       'type': _ref,
     },
   `,
+  // Use "mainImage" & "link" too
+  aboutMeModule: `
+    qualities,
+    subtitle,
+  `,
 }
 
 const {
@@ -116,6 +121,7 @@ const {
   quoteModule,
   heroModule,
   formModule,
+  aboutMeModule,
 } = moduleTypes
 
 const modules = `
@@ -135,6 +141,7 @@ const modules = `
     ${quoteModule}
     ${heroModule}
     ${formModule}
+    ${aboutMeModule}
   }
 `
 
