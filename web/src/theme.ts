@@ -24,7 +24,7 @@ const baseTheme: ThemeOptions = {
       // main: cyan[700],
       main: teal.A700,
       light: `#ccf0f6`,
-      contrastText: 'white',
+      contrastText: '#ffffff',
     },
     secondary: {
       main: amber.A700,

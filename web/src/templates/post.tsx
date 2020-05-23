@@ -60,7 +60,7 @@ const PostTemplate: FC<PostTemplateProps> = props => {
   const image = getImageById(mainImage?.asset.id)
 
   useScrollPosition(
-    ({ _, currPos }) => {
+    ({ currPos }) => {
       const element = readRef?.current
       if (element && isBrowser) {
         const readArea = element.clientHeight
