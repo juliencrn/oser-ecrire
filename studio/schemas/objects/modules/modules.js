@@ -15,5 +15,6 @@ export default {
     { type: 'heroModule' },
     { type: 'lastsPostsModule' },
     { type: 'formModule' },
+    { type: 'aboutMeModule' },
   ],
 }

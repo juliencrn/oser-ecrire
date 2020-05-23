@@ -35,6 +35,7 @@ import pageBlog from './objects/conditionals/pageBlog'
 import pageBuilder from './objects/conditionals/pageBuilder'
 import footerColumn from './objects/footerColumn'
 import feature from './objects/feature'
+import quality from './objects/quality'
 
 // Modules
 import modules from './objects/modules/modules'
@@ -48,6 +49,7 @@ import featuresModule from './objects/modules/featuresModule'
 import heroModule from './objects/modules/heroModule'
 import lastsPostsModule from './objects/modules/lastsPostsModule'
 import formModule from './objects/modules/formModule'
+import aboutMeModule from './objects/modules/aboutMeModule'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -86,6 +88,7 @@ export default createSchema({
     pageBuilder,
     footerColumn,
     feature,
+    quality,
 
     // Modules builder
     modules,
@@ -99,5 +102,6 @@ export default createSchema({
     heroModule,
     lastsPostsModule,
     formModule,
+    aboutMeModule,
   ]),
 })
