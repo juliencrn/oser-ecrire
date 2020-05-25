@@ -14,32 +14,30 @@ const client = sanityClient({
   useCdn: false, // `false` if you want to ensure fresh data
 })
 
-exports.handler = function (event, context, callback) {
+exports.handler = async event => {
   const { postSlug } = event.queryStringParameters
 
   if (!postSlug) {
-    return callback(null, {
+    return {
       statusCode: 500,
       body: 'postSlug missing',
-    })
+    }
   }
 
   const query = `*[_type == "comment" && post._ref == $slug] | order(_createdAt asc)`
   const params = { slug: postSlug }
 
-  client
-    .fetch(query, params)
-    .then(res =>
-      callback(null, {
-        statusCode: 200,
-        body: JSON.stringify(res),
-      }),
-    )
-    .catch(error => {
-      console.log(error)
-      return callback(null, {
-        statusCode: 500,
-        body: 'Err',
-      })
-    })
+  try {
+    const res = await client.fetch(query, params)
+    return {
+      statusCode: 200,
+      body: JSON.stringify(res),
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Cannot getting comments' }),
+    }
+  }
 }

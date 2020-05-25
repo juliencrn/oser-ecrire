@@ -14,37 +14,45 @@ const client = sanityClient({
   useCdn: false, // `false` if you want to ensure fresh data
 })
 
-exports.handler = function (event, context, callback) {
-  const { email, username, message, post } = JSON.parse(event.body)
+exports.handler = async event => {
+  const { postSlug } = event.queryStringParameters
+  const { email, username, message } = JSON.parse(event.body)
 
-  if (!(email && username && message && post && post._ref)) {
-    return callback(null, {
+  if (!postSlug) {
+    return {
+      statusCode: 500,
+      body: 'Missing post slug',
+    }
+  }
+
+  if (!(email && username && message)) {
+    return {
       statusCode: 500,
       body: 'Field missing',
-    })
+    }
   }
 
   const comment = {
     email,
     username,
     message,
-    post,
+    post: {
+      _ref: postSlug,
+    },
     _type: 'comment',
   }
 
-  client
-    .create(comment)
-    .then(() =>
-      callback(null, {
-        statusCode: 200,
-        body: 'OK',
-      }),
-    )
-    .catch(error => {
-      console.log(error)
-      return callback(null, {
-        statusCode: 500,
-        body: 'Err',
-      })
-    })
+  try {
+    await client.create(comment)
+    return {
+      statusCode: 200,
+      body: 'OK',
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Cannot post comment' }),
+    }
+  }
 }

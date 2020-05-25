@@ -22,8 +22,8 @@ export type CreateCommentFields = Omit<
 
 export const createComment = async (comment: CreateCommentFields) => {
   try {
-    const url = `/.netlify/functions/postComment`
-    const res = await Axios.post(url, { ...comment, _type: 'comment' })
+    const url = `/.netlify/functions/postComment?postSlug=${comment.post._ref}`
+    const res = await Axios.post(url, { ...comment })
     return res.status < 400
   } catch (error) {
     console.log({ error })
