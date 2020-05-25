@@ -1,5 +1,4 @@
 import React, { FC, memo } from 'react'
-import uuid from 'uuid/v1'
 import loadable from '@loadable/component'
 import VisibilitySensor from 'react-visibility-sensor'
 
@@ -12,7 +11,7 @@ const Switcher: FC<{ modules?: Module[] }> = ({ modules }) => {
 
   return (
     <>
-      {modules.map(item => {
+      {modules.map((item, i) => {
         const fileName = item._type.replace('Module', '')
 
         const AsyncComponent = loadable<Module>(() =>
@@ -24,7 +23,7 @@ const Switcher: FC<{ modules?: Module[] }> = ({ modules }) => {
         }
 
         return (
-          <VisibilitySensor partialVisibility key={uuid()}>
+          <VisibilitySensor partialVisibility key={i}>
             {({ isVisible }) => (
               <div>
                 <AsyncComponent isVisible={isVisible} {...item} />

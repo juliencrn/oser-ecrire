@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
-import uuid from 'uuid/v1'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
 
@@ -32,9 +31,9 @@ export interface MenuProps {
 
 const MenuLinks: FC<MenuProps> = ({ links, isLarge }) => (
   <>
-    {links.map(({ label, to }) => (
+    {links.map(({ label, to }, i) => (
       <Button
-        key={uuid()}
+        key={i}
         component={GatsbyLink}
         to={to}
         size={isLarge ? `medium` : `large`}

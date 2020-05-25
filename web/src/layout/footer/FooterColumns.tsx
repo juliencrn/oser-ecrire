@@ -2,7 +2,6 @@ import React from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Link as GatsbyLink } from 'gatsby'
 import Image from 'gatsby-image'
-import uuid from 'uuid/v1'
 
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
@@ -73,15 +72,15 @@ function FooterColumns() {
           </Box>
         </Grid>
 
-        {footerMenus.map(({ title, menu }) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={uuid()}>
+        {footerMenus.map(({ title, menu }, i) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={i}>
             <Box className={classes.column}>
               <div>
                 <Typography gutterBottom variant="h6" color="textPrimary">
                   {title}
                 </Typography>
                 {menu.map(({ label, to }) => (
-                  <Typography key={uuid()}>
+                  <Typography key={i}>
                     <Link
                       to={to}
                       component={GatsbyLink}
