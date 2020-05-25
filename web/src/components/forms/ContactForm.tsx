@@ -37,11 +37,11 @@ interface Values {
 }
 
 const initialValues: Values = {
-  email: 'test@test.fr',
-  firstName: 'Julien',
-  lastName: 'Caron',
-  subject: 'Message test',
-  message: 'Bonjour Nathalie, Super site !',
+  email: '',
+  firstName: '',
+  lastName: '',
+  subject: '',
+  message: '',
   newsletter: true,
 }
 
