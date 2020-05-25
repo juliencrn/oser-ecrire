@@ -43,10 +43,10 @@ exports.handler = async event => {
   }
 
   try {
-    await client.create(comment)
+    const res = await client.create(comment)
     return {
       statusCode: 200,
-      body: 'OK',
+      body: JSON.stringify({ res }),
     }
   } catch (error) {
     console.log(error)

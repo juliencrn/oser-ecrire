@@ -18,7 +18,7 @@ export type Mail = TextMail | HtmlMail
 async function sendMail(mailInfo: Mail): Promise<boolean> {
   const url = `/.netlify/functions/sendMail`
   const res = await axios.post(url, mailInfo)
-  return res?.statusText === 'OK'
+  return res?.status < 400
 }
 
 export default sendMail

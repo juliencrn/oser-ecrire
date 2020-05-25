@@ -46,10 +46,10 @@ exports.handler = async event => {
   }
 
   try {
-    await main(to, subject, text, html)
+    const res = await main(to, subject, text, html)
     return {
       statusCode: 200,
-      body: 'OK',
+      body: JSON.stringify(res),
     }
   } catch (error) {
     console.log(error)

@@ -80,7 +80,7 @@ function FooterColumns() {
                   {title}
                 </Typography>
                 {menu.map(({ label, to }) => (
-                  <Typography key={i}>
+                  <Typography key={JSON.stringify({ i, label, to })}>
                     <Link
                       to={to}
                       component={GatsbyLink}

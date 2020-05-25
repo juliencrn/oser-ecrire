@@ -75,7 +75,7 @@ function ContactForm() {
 
         if (newsletter) {
           // Save mail
-          await registerContact({
+          registerContact({
             email,
             attributes: {
               PRENOM: firstName,
@@ -102,6 +102,8 @@ function ContactForm() {
         }
 
         const res = await sendMail(mail)
+
+        console.log({ res })
 
         if (res) {
           setAlert({

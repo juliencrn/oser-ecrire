@@ -94,7 +94,7 @@ function CommentsForm({ postSlug, postTitle, onSubmit }: CommentsFormProps) {
             <p>${message}</p>
             `,
           }
-          await sendMail(mail)
+          sendMail(mail)
         }
 
         return !!res
