@@ -17,9 +17,9 @@ const errorAlert: AlertProps = {
 
 export interface ContactProps {
   email: string
-  attributes: {
-    NOM: string
-    PRENOM: string
+  attributes?: {
+    NOM?: string
+    PRENOM?: string
   }
   listIds?: number[]
 }

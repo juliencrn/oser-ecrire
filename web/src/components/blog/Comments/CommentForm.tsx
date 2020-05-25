@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Formik, Field, Form } from 'formik'
 
-import { TextField } from 'formik-material-ui'
+import { TextField, CheckboxWithLabel } from 'formik-material-ui'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
@@ -10,6 +10,7 @@ import Yup from '../../../libs/Yup'
 import { createComment } from './commentsAPI'
 import sendMail, { Mail } from '../../../libs/sendMailApi'
 import useSiteSettings from '../../../hooks/useSiteSettings'
+import { registerContact } from '../../../libs/sendInBlueApi'
 
 const useStyles = makeStyles((theme: Theme) => ({
   field: {
@@ -29,12 +30,14 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email().required(),
   username: Yup.string().required(),
   message: Yup.string().required(),
+  newsletter: Yup.boolean(),
 })
 
 const initialValues = {
   email: '',
   username: '',
   message: '',
+  newsletter: true,
 }
 
 export interface CommentsFormProps {
@@ -52,7 +55,7 @@ function CommentsForm({ postSlug, postTitle, onSubmit }: CommentsFormProps) {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={async (values, { resetForm }) => {
-        const { username, email, message } = values
+        const { username, email, message, newsletter } = values
 
         const res = await createComment({
           username,
@@ -62,6 +65,16 @@ function CommentsForm({ postSlug, postTitle, onSubmit }: CommentsFormProps) {
             _ref: postSlug,
           },
         })
+
+        if (newsletter) {
+          // Save mail
+          await registerContact({
+            email,
+            attributes: {
+              PRENOM: username,
+            },
+          })
+        }
 
         if (res) {
           resetForm()
@@ -74,7 +87,7 @@ function CommentsForm({ postSlug, postTitle, onSubmit }: CommentsFormProps) {
             <p>Nouveau commentaire sur oser-ecrire.fr > "${postTitle}" !</p>
             <p>De la part de :</p>
             <ul>
-              <li>Nom : ${username} </li>
+              <li>Prénom : ${username} </li>
               <li>Email : ${email} </li>
             </ul>
             <p>Message :</p>
@@ -94,7 +107,7 @@ function CommentsForm({ postSlug, postTitle, onSubmit }: CommentsFormProps) {
               <Field
                 component={TextField}
                 type="text"
-                label="Nom complet"
+                label="Prénom"
                 variant="outlined"
                 required
                 name="username"
@@ -123,6 +136,14 @@ function CommentsForm({ postSlug, postTitle, onSubmit }: CommentsFormProps) {
                 type="text"
                 label="Commentaire"
                 className={classes.field}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Field
+                component={CheckboxWithLabel}
+                name="newsletter"
+                type="checkbox"
+                Label={{ label: "M'inscrire à la newsletter" }}
               />
             </Grid>
             <Grid item xs={12}>
