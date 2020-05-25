@@ -35,29 +35,27 @@ async function main(to, subject, text = '', html = '') {
   return true
 }
 
-exports.handler = function (event, context, callback) {
+exports.handler = async event => {
   const { to, subject, text, html } = JSON.parse(event.body)
 
   if (!(to && subject && (text || html))) {
-    callback(null, {
+    return {
       statusCode: 500,
       body: 'Field missing',
-    })
+    }
   }
 
-  main(to, subject, text, html)
-    .then(() =>
-      callback(null, {
-        statusCode: 200,
-        body: 'OK',
-      }),
-    )
-
-    .catch(err => {
-      console.error(err.message)
-      callback(null, {
-        statusCode: 500,
-        body: 'Err',
-      })
-    })
+  try {
+    await main(to, subject, text, html)
+    return {
+      statusCode: 200,
+      body: 'OK',
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Cannot send mail' }),
+    }
+  }
 }
