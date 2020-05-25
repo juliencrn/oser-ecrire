@@ -28,19 +28,23 @@ const Layout: FC<LayoutProps> = ({ children, isBlog = false }) => {
   const classes = useStyles()
   const { title } = useSiteSettings()
 
-  // Disallow right click on blog for protecting content
+  // Disallow right click, cut & copy on blog for protecting content
   useEffect(() => {
-    const disable = (event: MouseEvent) => event.preventDefault()
+    const disable = (event: any) => event.preventDefault()
     const isBrowser = typeof document !== 'undefined'
     const isProd = process.env.NODE_ENV === 'production'
     const condition = isProd && isBrowser && isBlog
 
     if (condition) {
       document.addEventListener('contextmenu', disable)
+      document.addEventListener('copy', disable)
+      document.addEventListener('cut', disable)
     }
     return () => {
       if (condition) {
         document.removeEventListener('contextmenu', disable)
+        document.removeEventListener('copy', disable)
+        document.removeEventListener('cut', disable)
       }
     }
   })
