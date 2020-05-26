@@ -1,3 +1,5 @@
+import { Module } from './modules'
+
 export type NodeArrayOf<T> = Array<{ node: T }>
 
 export interface GraphQueryOf<T> {
@@ -44,6 +46,12 @@ export interface InternalLink {
     title: string
     slug: Slug
   }
+}
+
+export interface Modal {
+  active: boolean
+  delay: number
+  modules?: Module[]
 }
 
 export interface PageTemplate {

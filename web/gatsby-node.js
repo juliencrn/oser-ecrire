@@ -11,7 +11,7 @@ const path = require('path')
 // Deep node console.log util
 // require('util').inspect.defaultOptions.depth = null
 
-const { getPages } = require('./src/gatsby/croqQueries')
+const { getPages, getModal } = require('./src/gatsby/croqQueries')
 const queries = require('./src/gatsby/queries')
 const { normalizeCategories } = require('./src/gatsby/utils')
 
@@ -31,6 +31,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   const pages = await getPages()
+  const modal = await getModal()
   const posts = results.data.posts.edges
 
   /**
@@ -44,7 +45,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     createPage({
       path: node.slug.current,
       component: path.resolve(`./src/templates/post.tsx`),
-      context: { current: node, next, prev },
+      context: { current: node, next, prev, modal },
     })
   })
 
@@ -71,6 +72,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         path: i === 0 ? blogPath : `${blogPath}/${i + 1}`,
         component: path.resolve(`./src/templates/postList.tsx`),
         context: {
+          modal,
           categories,
           numPages,
           basePath: blogPath,
@@ -94,6 +96,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           path: i === 0 ? basePath : `${basePath}/${i + 1}`,
           component: path.resolve(`./src/templates/postList.tsx`),
           context: {
+            modal,
             categories,
             basePath,
             numPages: numArchivePages,
@@ -116,6 +119,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: '/',
       component: path.resolve(`./src/templates/home.tsx`),
       context: {
+        modal,
         page: homeTemplate,
       },
     })
@@ -128,7 +132,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       createPage({
         path: page.slug.current,
         component: path.resolve(`./src/templates/page.tsx`),
-        context: { page },
+        context: { page, modal },
       })
     })
   }

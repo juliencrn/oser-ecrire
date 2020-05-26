@@ -10,7 +10,14 @@ import Grow from '@material-ui/core/Grow'
 
 import Layout from '../layout'
 import SEO from '../layout/seo'
-import { PageTemplate, Post, NodeArrayOf, Category, Page } from '../interfaces'
+import {
+  PageTemplate,
+  Post,
+  NodeArrayOf,
+  Category,
+  Page,
+  Modal,
+} from '../interfaces'
 import Hero from '../components/Hero'
 import CategoryFilter from '../components/blog/CategoryFilter'
 import PostCard from '../components/blog/PostCard'
@@ -35,12 +42,20 @@ export interface PostListTemplateProps extends PageTemplate {
     posts: NodeArrayOf<Post>
     categories: Category[]
     page: Page
+    modal: Modal
   }
 }
 
 const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
   const classes = useStyles()
-  const { numPages, currentPage, posts, basePath, categories } = pageContext
+  const {
+    numPages,
+    currentPage,
+    posts,
+    basePath,
+    categories,
+    modal,
+  } = pageContext
   const { title, excerpt, subtitle, image } = pageContext.page
 
   const handleNavigate = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -48,7 +63,7 @@ const PostListTemplate: FC<PostListTemplateProps> = ({ pageContext, path }) => {
   }
 
   return (
-    <Layout isBlog>
+    <Layout isBlog modal={modal}>
       <SEO title={title} description={excerpt} path={path} image={image} />
 
       <Hero title={title} subtitle={subtitle}>

@@ -8,6 +8,8 @@ import Footer from './footer'
 import theme from '../theme'
 import useSiteSettings from '../hooks/useSiteSettings'
 import BackToTop from './BackToTop'
+import Modal from '../components/Modal'
+import { Modal as IModal } from '../interfaces'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -22,9 +24,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface LayoutProps {
   isBlog?: boolean
+  modal: IModal
 }
 
-const Layout: FC<LayoutProps> = ({ children, isBlog = false }) => {
+const Layout: FC<LayoutProps> = ({ children, modal, isBlog = false }) => {
   const classes = useStyles()
   const { title } = useSiteSettings()
 
@@ -52,12 +55,16 @@ const Layout: FC<LayoutProps> = ({ children, isBlog = false }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
       <div className={classes.root}>
         <Header siteTitle={title} isBlog={isBlog} />
         <main className={classes.main}>{children}</main>
         <Footer isBlog={isBlog} />
       </div>
+
       <BackToTop />
+
+      {modal.active && <Modal {...modal} />}
     </ThemeProvider>
   )
 }

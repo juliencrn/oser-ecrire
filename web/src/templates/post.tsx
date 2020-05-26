@@ -10,7 +10,7 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 
 import Layout from '../layout'
 import SEO from '../layout/seo'
-import { PageTemplate, Post } from '../interfaces'
+import { PageTemplate, Post, Modal } from '../interfaces'
 import Hero from '../components/Hero'
 import AuthorCard from '../components/cards/AuthorCard'
 import BodyPortableText from '../components/BodyPortableText'
@@ -45,11 +45,12 @@ export interface PostTemplateProps extends PageTemplate {
     current: Post
     next: Post
     prev: Post
+    modal: Modal
   }
 }
 
 const PostTemplate: FC<PostTemplateProps> = props => {
-  const { current, prev, next } = props.pageContext
+  const { current, prev, next, modal } = props.pageContext
   const { title, excerpt, mainImage, categories, slug, body } = current
   const classes = useStyles()
   const readRef = useRef<HTMLDivElement>(null)
@@ -75,7 +76,7 @@ const PostTemplate: FC<PostTemplateProps> = props => {
   )
 
   return (
-    <Layout isBlog>
+    <Layout isBlog modal={modal}>
       <SEO
         title={title}
         description={excerpt}

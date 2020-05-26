@@ -166,4 +166,17 @@ async function getPages() {
   return await client.fetch(query)
 }
 
-module.exports = { getPages }
+async function getModal() {
+  const query = `
+    *[_type == "modal" && _id == "modal"] {
+      active,
+      delay,
+      ${modules}
+    }
+  `
+
+  const modals = await client.fetch(query)
+  return modals[0]
+}
+
+module.exports = { getPages, getModal }
