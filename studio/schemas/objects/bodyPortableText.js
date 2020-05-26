@@ -1,9 +1,22 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-filename-extension */
+import React from 'react'
 import { FaExternalLinkAlt, FaLink } from 'react-icons/fa'
+import { MdTextFields } from 'react-icons/md'
+
+const highlightIcon = () => <span style={{ fontWeight: 'bold' }}>H</span>
+const highlightRender = (props) => (
+  <span style={{ backgroundColor: 'rgba(0, 184, 212, 0.3)' }}>
+    {props.children}
+  </span>
+)
 
 export default {
   name: 'bodyPortableText',
   type: 'array',
   title: "Contenu de l'article",
+  icon: MdTextFields,
   of: [
     {
       type: 'block',
@@ -23,6 +36,16 @@ export default {
         decorators: [
           { title: 'Gras', value: 'strong' },
           { title: 'Italique', value: 'em' },
+          { title: 'Souligner', value: 'underline' },
+          { title: 'Barrer', value: 'strike-through' },
+          {
+            title: 'Surligner',
+            value: 'highlight',
+            blockEditor: {
+              icon: highlightIcon,
+              render: highlightRender,
+            },
+          },
         ],
         annotations: [
           {

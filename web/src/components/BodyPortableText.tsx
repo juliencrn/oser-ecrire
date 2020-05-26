@@ -2,7 +2,7 @@
 import React, { FC, memo } from 'react'
 import { Link as GatsbyLink } from 'gatsby'
 import Image from 'gatsby-image'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import { makeStyles, Theme, fade } from '@material-ui/core/styles'
 import BlockContent from '@sanity/block-content-to-react'
 
 import Typography from '@material-ui/core/Typography'
@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   imageCaption: {
     marginTop: theme.spacing(1),
+  },
+  highlight: {
+    backgroundColor: fade(theme.palette.primary.dark, 0.3),
   },
 }))
 
@@ -124,6 +127,9 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
       </Typography>
     ),
     marks: {
+      highlight: (props: any) => (
+        <span className={classes.highlight}>{props.children}</span>
+      ),
       link: (props: any) => {
         // Hack: replace old site link by internalLink if url matches
         const link = new URL(props.mark.href)
