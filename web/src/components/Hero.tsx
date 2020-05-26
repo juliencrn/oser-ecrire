@@ -47,11 +47,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     paddingTop: (props: BaseProps) =>
       props?.fullScreen ? 0 : theme.spacing(16),
-    textShadow: `0px 1px 4px rgba(255, 255, 255, .8)`,
+    textShadow: (props: BaseProps) =>
+      props?.fullScreen ? `0px 1px 14px rgba(0, 0, 0, 1)` : 'none',
+    color: (props: BaseProps) =>
+      props?.fullScreen
+        ? theme.palette.common.white
+        : theme.palette.text.primary,
     marginBottom: theme.spacing(2),
   },
   subtitle: {
-    textShadow: `0px 1px 8px rgba(255, 255, 255, .8)`,
+    color: (props: BaseProps) =>
+      props?.fullScreen
+        ? theme.palette.background.default
+        : theme.palette.text.secondary,
+    textShadow: (props: BaseProps) =>
+      props?.fullScreen ? `0px 1px 14px rgba(0, 0, 0, 1)` : 'none',
     fontFamily: sansS,
     fontWeight: 400,
   },

@@ -61,7 +61,7 @@ const CategoryFilter: FC<CategoryFilterProps> = ({ categories, basePath }) => {
             key={i}
             className={classes.category}
             component={GatsbyLink}
-            to={`${blog.path}/${slug.current}`}
+            to={`/${blog.path}/${slug.current}`}
             style={{
               opacity: active ? 1 : 0.6,
             }}

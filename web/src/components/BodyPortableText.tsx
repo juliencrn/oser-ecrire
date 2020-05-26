@@ -12,6 +12,7 @@ import Box from '@material-ui/core/Box'
 import Quote from './Quote'
 import useSiteMetadata from '../hooks/useSiteMetadata'
 import useSanityImages from '../hooks/useSanityImages'
+import useAllPosts from '../hooks/useAllPosts'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -48,6 +49,7 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
 
   const { siteUrl } = useSiteMetadata()
   const [getImageById] = useSanityImages()
+  const allPosts = useAllPosts()
 
   const serializers = {
     types: {
@@ -142,11 +144,29 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
           </Link>
         )
       },
-      internalLink: (props: any) => (
-        <Link component={GatsbyLink} to={`/${props.mark.reference._ref}`}>
-          {props.children}
-        </Link>
-      ),
+      internalLink: (props: any) => {
+        // IF empty => prop.mark?
+        // IF post => props.mark.reference._ref == 'slug'
+        // IF page => props.mark.reference._ref == '_id'
+        const ref = props.mark?.reference?._ref
+        if (typeof ref === 'undefined') {
+          return null
+        }
+
+        const isPost = !!allPosts.posts.filter(
+          ({ slug }) => slug.current === ref,
+        )[0]
+
+        const url = isPost
+          ? ref
+          : allPosts.pages.filter(({ _id }) => _id === ref)[0]?.slug.current
+
+        return (
+          <Link component={GatsbyLink} to={`/${url}`}>
+            {props.children}
+          </Link>
+        )
+      },
     },
   }
 

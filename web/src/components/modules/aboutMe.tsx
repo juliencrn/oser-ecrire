@@ -77,9 +77,13 @@ function Quality({
       </Typography>
       <Divider className={classes.dividerX} />
       <Hidden xsDown>
-        {!dividerClasses.length || (
-          <Box className={`${classes.dividerY} ${dividerClasses.join(' ')}`} />
-        )}
+        <>
+          {!dividerClasses.length || (
+            <Box
+              className={`${classes.dividerY} ${dividerClasses.join(' ')}`}
+            />
+          )}
+        </>
       </Hidden>
       <Typography variant="subtitle2" className={classes.itemText}>
         {response}
