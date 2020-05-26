@@ -48,12 +48,6 @@ export interface InternalLink {
   }
 }
 
-export interface Modal {
-  active: boolean
-  delay: number
-  modules?: Module[]
-}
-
 export interface PageTemplate {
   location: Location
   pageContext: any

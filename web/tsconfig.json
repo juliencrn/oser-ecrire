@@ -16,10 +16,10 @@
   },
   "include": ["src/**/*"],
   "exclude": [
-    "node_modules", 
-    "public", 
-    ".cache", 
-    "functions-src", 
+    "node_modules",
+    "public",
+    ".cache",
+    "functions-src",
     "functions-build"
   ]
 }
