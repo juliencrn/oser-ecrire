@@ -96,6 +96,7 @@ const moduleTypes = {
     },
     textSide,
     overlay,
+    disableOverlap,
     width,
   `,
   formModule: `

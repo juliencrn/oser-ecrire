@@ -54,6 +54,7 @@ export interface Module {
   mainImage?: MainImage
   textSide?: TextSide
   overlay?: Overlay
+  disableOverlap?: boolean
   width?: Width
   subtitle?: string
 }

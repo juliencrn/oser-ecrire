@@ -34,6 +34,11 @@ export default {
       },
     },
     {
+      name: 'disableOverlap',
+      type: 'boolean',
+      title: 'Désactiver le chevauchement',
+    },
+    {
       name: 'width',
       type: 'string',
       title: 'Largeur',

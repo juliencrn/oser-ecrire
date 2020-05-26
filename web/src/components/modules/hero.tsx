@@ -73,6 +73,7 @@ function HeroModule(props: Module) {
     overlay = 'none',
     textSide,
     link,
+    disableOverlap,
   } = props
   const classes = useStyles({ overlay })
   const { breakpoints } = useTheme()
@@ -95,7 +96,7 @@ function HeroModule(props: Module) {
           className={`${classes.content} ${isLeft ? 'left' : 'right'}`}
           item
           xs={12}
-          md={width === 'lg' ? 8 : 6}
+          md={!disableOverlap ? (width === 'lg' ? 8 : 6) : 6}
         >
           <Box className={classes.contentBox}>
             {title && (
@@ -128,7 +129,11 @@ function HeroModule(props: Module) {
             )}
           </Box>
         </Grid>
-        <Grid item sm={width === 'lg' ? 7 : 9} style={{ zIndex: -1 }}>
+        <Grid
+          item
+          sm={!disableOverlap ? (width === 'lg' ? 7 : 9) : 6}
+          style={{ zIndex: -1 }}
+        >
           {isLarge && (
             <Box my={8}>
               {image && mainImage?.asset ? (
