@@ -31,6 +31,7 @@ export interface FormLayoutProps {
   isSubmitting: boolean
   submitForm: () => void
   alert?: AlertProps
+  buttonSecondary?: boolean
 }
 
 const FormLayout: FC<FormLayoutProps> = ({
@@ -40,6 +41,7 @@ const FormLayout: FC<FormLayoutProps> = ({
   isSubmitting,
   submitForm,
   alert,
+  buttonSecondary,
 }) => {
   const classes = useStyles()
   return (
@@ -80,7 +82,7 @@ const FormLayout: FC<FormLayoutProps> = ({
         >
           <Button
             variant="contained"
-            color="primary"
+            color={buttonSecondary ? 'secondary' : 'primary'}
             disabled={isSubmitting}
             onClick={submitForm}
             className={classes.submit}

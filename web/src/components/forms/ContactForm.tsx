@@ -103,8 +103,6 @@ function ContactForm() {
 
         const res = await sendMail(mail)
 
-        console.log({ res })
-
         if (res) {
           setAlert({
             type: 'success',
@@ -130,6 +128,7 @@ function ContactForm() {
           isSubmitting={isSubmitting}
           submitForm={submitForm}
           alert={alert}
+          buttonSecondary
         >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>

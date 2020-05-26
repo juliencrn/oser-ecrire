@@ -12,6 +12,18 @@ export function FooterWave({ color }: { color?: CSSProperties['color'] }) {
   )
 }
 
+export function Blob1({ color }: { color?: CSSProperties['color'] }) {
+  return (
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fill={color || 'rgba(0, 184, 212, 0.3)'}
+        d="M51.2,-63.8C62.1,-51.8,63.8,-31.7,63.5,-14.1C63.1,3.5,60.6,18.5,54.1,32.6C47.6,46.6,37,59.6,21.6,69.5C6.3,79.5,-13.8,86.4,-29.8,81C-45.8,75.6,-57.7,57.9,-67.4,39.6C-77,21.4,-84.4,2.6,-82.2,-15.3C-80,-33.2,-68.1,-50.1,-52.8,-61.4C-37.5,-72.6,-18.8,-78.2,0.7,-79C20.1,-79.8,40.2,-75.9,51.2,-63.8Z"
+        transform="translate(100 100)"
+      />
+    </svg>
+  )
+}
+
 // export function LightSectionTopWave({
 //   color,
 // }: {

@@ -6,27 +6,39 @@ import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import Link from '@material-ui/core/Link'
 import Typography from '@material-ui/core/Typography'
+import Hidden from '@material-ui/core/Hidden'
 
 import useAuthorData from '../../hooks/useAuthorData'
-import { Hidden } from '@material-ui/core'
 import useSanityImages from '../../hooks/useSanityImages'
+import SocialButtons from '../SocialButtons'
+
+export interface AuthorCardProps {
+  direction?: 'vertical' | 'horizontal'
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
+    width: `100%`,
+    flexDirection: (p: AuthorCardProps) =>
+      p?.direction === 'vertical' ? 'column' : 'row',
   },
   avatar: {
     width: 56,
     height: 56,
     [theme.breakpoints.up('sm')]: {
-      width: 80,
-      height: 80,
+      width: (p: AuthorCardProps) => (p?.direction === 'vertical' ? 200 : 80),
+      height: (p: AuthorCardProps) => (p?.direction === 'vertical' ? 200 : 80),
     },
   },
   content: {
     flex: 1,
     padding: theme.spacing(0, 3),
+    margin: (p: AuthorCardProps) =>
+      p?.direction === 'vertical' ? theme.spacing(3, 0) : 0,
+    textAlign: (p: AuthorCardProps) =>
+      p?.direction === 'vertical' ? 'center' : 'left',
     '& p': {
       maxWidth: 400,
     },
@@ -34,23 +46,36 @@ const useStyles = makeStyles((theme: Theme) => ({
   name: {
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0),
-    textDecoration: 'underline',
+    textDecoration: (p: AuthorCardProps) =>
+      p?.direction === 'vertical' ? 'normal' : 'underline',
+  },
+  button: {
+    margin: theme.spacing(2, 0),
   },
 }))
 
-const AuthorCard: FC = () => {
-  const classes = useStyles()
+export interface AuthorCardProps {
+  direction?: 'vertical' | 'horizontal'
+  isContact?: boolean
+}
+
+const AuthorCard: FC<AuthorCardProps> = ({
+  direction = 'horizontal',
+  isContact = false,
+}) => {
+  const classes = useStyles({ direction })
   const { name, excerpt, mainImage } = useAuthorData()
   const [getImageById] = useSanityImages()
   const image = getImageById(mainImage?.asset.id)
+  const isVertical = direction === 'vertical'
 
   return (
     <Box className={classes.root}>
       <Link to="/a-propos" component={GatsbyLink}>
         <Avatar
           className={classes.avatar}
-          src={image?.xxs.src}
-          srcSet={image?.xxs.srcSet}
+          src={isVertical ? image?.xs.src : image?.xxs.src}
+          srcSet={isVertical ? image?.xs.srcSet : image?.xxs.srcSet}
         ></Avatar>
       </Link>
       <Box className={classes.content}>
@@ -67,15 +92,20 @@ const AuthorCard: FC = () => {
         </Typography>
       </Box>
       <Hidden xsDown>
-        <Button
-          to="/contact"
-          component={GatsbyLink}
-          variant="contained"
-          color="primary"
-          size="small"
-        >
-          Contact
-        </Button>
+        {isContact ? (
+          <SocialButtons />
+        ) : (
+          <Button
+            to="/contact"
+            component={GatsbyLink}
+            variant="contained"
+            color="primary"
+            size="small"
+            className={classes.button}
+          >
+            Contact
+          </Button>
+        )}
       </Hidden>
     </Box>
   )

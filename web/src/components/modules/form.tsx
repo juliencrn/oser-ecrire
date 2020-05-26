@@ -1,48 +1,97 @@
 import React from 'react'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
 
-import Container, { ContainerProps } from '@material-ui/core/Container'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Zoom from '@material-ui/core/Zoom'
 import Box from '@material-ui/core/Box'
 
 import { Module } from '../../interfaces'
 import ContactForm from '../forms/ContactForm'
 import NewsletterForm from '../forms/NewsletterForm'
+import AuthorCard from '../cards/AuthorCard'
+import { Blob1 } from '../svg'
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
+  container: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(8),
+  },
+  blob: {
+    display: 'none',
+    maxWidth: 850,
+    position: 'absolute',
+    transform: `translate(-50%, -50%)`,
+    zIndex: -1,
+
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+      width: `90%`,
+      top: `50%`,
+      left: `30%`,
+    },
+
+    [theme.breakpoints.up('lg')]: {
+      width: `70%`,
+      top: `50%`,
+      left: `30%`,
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: `45%`,
+      top: `45%`,
+      left: `30%`,
+    },
   },
 }))
 
 function FormModule({ form, isVisible }: Module) {
   const classes = useStyles()
-  const props: ContainerProps = {
-    className: classes.root,
-    maxWidth: 'lg',
-    children: null,
-  }
+  const { palette } = useTheme()
+  const { breakpoints } = useTheme()
+  const isMobile = useMediaQuery(breakpoints.down('sm'))
+
   switch (form?.type) {
     case 'contactForm':
-      props.children = <ContactForm />
-      break
+      return (
+        <Box my={20} position="relative">
+          <Zoom timeout={800} in={isVisible}>
+            <Container maxWidth="xl">
+              <Grid container spacing={4} justify="space-between">
+                <Grid item xs={12} md={5}>
+                  <Box py={4} height="100%" display="flex" alignItems="center">
+                    <AuthorCard
+                      direction={isMobile ? 'horizontal' : 'vertical'}
+                      isContact
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={7}>
+                  <ContactForm />
+                </Grid>
+              </Grid>
+              <Box className={classes.blob}>
+                <Blob1 color={palette.secondary.light} />
+              </Box>
+            </Container>
+          </Zoom>
+        </Box>
+      )
+
     case 'newsletterForm':
-      props.maxWidth = 'md'
-      props.children = <NewsletterForm />
-      break
+      return (
+        <Box py={8} bgcolor="secondary.light">
+          <Zoom timeout={800} in={isVisible}>
+            <Container maxWidth="md">
+              <NewsletterForm />
+            </Container>
+          </Zoom>
+        </Box>
+      )
 
     default:
-      break
+      return null
   }
-
-  return (
-    <Box py={8} bgcolor="secondary.light">
-      <Zoom timeout={800} in={isVisible}>
-        <Container {...props} />
-      </Zoom>
-    </Box>
-  )
 }
 
 export default FormModule
