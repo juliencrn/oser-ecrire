@@ -1,23 +1,24 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import Image from 'gatsby-image'
+import { graphql } from 'gatsby'
 
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import Divider from '@material-ui/core/Divider'
 import LinearProgress from '@material-ui/core/LinearProgress'
 
+import { Post, PageTemplate, Modal } from '../interfaces'
 import Layout from '../layout'
 import SEO from '../layout/seo'
-import { PageTemplate, Post, Modal } from '../interfaces'
-import Hero from '../components/Hero'
-import AuthorCard from '../components/cards/AuthorCard'
-import BodyPortableText from '../components/BodyPortableText'
-import PostSocialBar from '../components/blog/PostSocialBar'
-import Comments from '../components/blog/Comments'
 import PostNavigation from '../components/blog/PostNavigation'
+import Hero from '../components/Hero'
+import PostSocialBar from '../components/blog/PostSocialBar'
 import useSanityImages from '../hooks/useSanityImages'
+import BodyPortableText from '../components/BodyPortableText'
+import AuthorCard from '../components/cards/AuthorCard'
+import Comments from '../components/blog/Comments'
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {},
@@ -40,23 +41,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-export interface PostTemplateProps extends PageTemplate {
-  pageContext: {
-    current: Post
-    next: Post
-    prev: Post
-    modal: Modal
-  }
-}
-
-const PostTemplate: FC<PostTemplateProps> = props => {
-  const { current, prev, next, modal } = props.pageContext
-  const { title, excerpt, mainImage, categories, slug, body } = current
+export function PostTemplate(props: Post) {
+  const { title, slug, excerpt, categories, mainImage, body } = props
   const classes = useStyles()
+
+  // Percent of reading
   const readRef = useRef<HTMLDivElement>(null)
   const isBrowser = typeof window !== 'undefined'
   const [readPercent, setReadPercent] = useState(0)
   const displayProgress = readPercent >= 0 && readPercent <= 100
+
+  // Get image Sharp
   const [getImageById] = useSanityImages()
   const image = getImageById(mainImage?.asset.id)
 
@@ -76,17 +71,7 @@ const PostTemplate: FC<PostTemplateProps> = props => {
   )
 
   return (
-    <Layout isBlog modal={modal}>
-      <SEO
-        title={title}
-        description={excerpt}
-        path={props.path}
-        image={mainImage}
-        isPost
-      />
-      <PostNavigation direction="left" post={prev} />
-      <PostNavigation direction="right" post={next} />
-
+    <>
       {displayProgress && (
         <LinearProgress
           className={classes.progress}
@@ -135,8 +120,54 @@ const PostTemplate: FC<PostTemplateProps> = props => {
           <Comments postSlug={slug.current} postTitle={title} />
         </Container>
       </Box>
+    </>
+  )
+}
+
+interface Props extends PageTemplate {
+  data: {
+    post: Post
+    next: Post
+    prev: Post
+  }
+  pageContext: {
+    modal: Modal
+  }
+}
+
+export default function Template(props: Props) {
+  const { modal } = props.pageContext
+  const { post, prev, next } = props.data
+  const { title, excerpt, mainImage } = post
+
+  return (
+    <Layout isBlog modal={modal}>
+      <SEO
+        title={title}
+        description={excerpt}
+        path={props.path}
+        image={mainImage}
+        isPost
+      />
+
+      {prev && <PostNavigation direction="left" post={prev} />}
+      {next && <PostNavigation direction="right" post={next} />}
+
+      <PostTemplate {...post} />
     </Layout>
   )
 }
 
-export default PostTemplate
+export const pageQuery = graphql`
+  query($postId: String!, $nextId: String!, $prevId: String!) {
+    post: sanityPost(_id: { eq: $postId }) {
+      ...Post
+    }
+    prev: sanityPost(_id: { eq: $prevId }) {
+      ...Post
+    }
+    next: sanityPost(_id: { eq: $nextId }) {
+      ...Post
+    }
+  }
+`

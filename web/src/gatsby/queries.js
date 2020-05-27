@@ -11,6 +11,7 @@ const mainImage = `
 
 const post = `
     id
+    _id
     _createdAt
     _updatedAt
     title

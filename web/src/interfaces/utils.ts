@@ -53,3 +53,8 @@ export interface PageTemplate {
   pageContext: any
   path: string
 }
+
+export interface PreviewTemplate {
+  documentId: string
+  location: Location
+}

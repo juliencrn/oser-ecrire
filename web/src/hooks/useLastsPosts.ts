@@ -1,34 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import { Post, NodeArrayOf } from '../interfaces'
 
-export const post = graphql`
-  fragment Post on SanityPost {
-    id
-    _createdAt
-    _updatedAt
-    title
-    slug {
-      current
-    }
-    excerpt
-    categories {
-      id
-      title
-      slug {
-        current
-      }
-    }
-    mainImage {
-      alt
-      caption
-      _type
-      asset {
-        id
-      }
-    }
-  }
-`
-
 type SmallPost = Omit<Post, 'body'>
 type LastsPosts = NodeArrayOf<SmallPost>
 

@@ -43,9 +43,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const prev = posts[i - 1] ? posts[i - 1].node : posts[posts.length - 1].node
 
     createPage({
-      path: node.slug.current,
+      path: `/${node.slug.current}`,
       component: path.resolve(`./src/templates/post.tsx`),
-      context: { current: node, next, prev, modal },
+      pageContext: {
+        modal,
+      },
+      context: {
+        postId: node._id,
+        nextId: next._id,
+        prevId: prev._id,
+      },
     })
   })
 

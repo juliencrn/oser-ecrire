@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface LayoutProps {
   isBlog?: boolean
-  modal: IModal
+  modal?: IModal
 }
 
 const Layout: FC<LayoutProps> = ({ children, modal, isBlog = false }) => {
@@ -64,7 +64,7 @@ const Layout: FC<LayoutProps> = ({ children, modal, isBlog = false }) => {
 
       <BackToTop />
 
-      {modal.active && <Modal {...modal} />}
+      {modal?.active && <Modal {...modal} />}
     </ThemeProvider>
   )
 }
