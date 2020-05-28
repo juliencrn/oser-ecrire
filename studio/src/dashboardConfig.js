@@ -5,6 +5,7 @@
  */
 
 // SIZE: auto | small | medium | large | full
+const { SANITY_STUDIO_SITE_URL } = process.env
 
 export default {
   widgets: [
@@ -50,7 +51,7 @@ export default {
           },
           {
             title: 'Site',
-            value: 'https://oser-ecrire.netlify.app',
+            value: SANITY_STUDIO_SITE_URL,
             category: 'apps',
           },
         ],

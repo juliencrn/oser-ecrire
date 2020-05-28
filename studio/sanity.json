@@ -3,10 +3,6 @@
   "project": {
     "name": "Oser Ecrire"
   },
-  "api": {
-    "projectId": "5pa3cetx",
-    "dataset": "production"
-  },
   "plugins": [
     "@sanity/base",
     "@sanity/components",

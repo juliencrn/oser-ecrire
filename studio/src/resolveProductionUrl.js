@@ -1,4 +1,8 @@
 /* eslint-disable no-underscore-dangle */
+const { SANITY_STUDIO_SITE_URL, SANITY_ACTIVE_ENV } = process.env
+
+const isDev = SANITY_ACTIVE_ENV !== 'production'
+const siteUrl = SANITY_STUDIO_SITE_URL
 
 export default function resolveProductionUrl(document) {
   let id = document._id
@@ -12,8 +16,7 @@ export default function resolveProductionUrl(document) {
   }
 
   const path = `preview?id=${id}`
-  // const base = `https://oser-ecrire.netlify.app`
-  const base = `http://localhost:8000`
+  const base = isDev ? `http://localhost:8000` : siteUrl
 
   // Active url per post type
   switch (document._type) {

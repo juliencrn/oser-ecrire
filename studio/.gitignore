@@ -2,3 +2,7 @@ node_modules
 dist
 
 yarn.lock
+
+# dotenv environment variable files
+.env.production
+.env.development
