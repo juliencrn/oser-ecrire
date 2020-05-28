@@ -117,7 +117,11 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
       },
       quote: (props: any) => (
         <Quote inPortableText author={props.node?.author}>
-          {props.node.text}
+          {props.node.text.split('\n').map((line: string, i: number) => (
+            <span style={{ display: 'block' }} key={i}>
+              {line}
+            </span>
+          ))}
         </Quote>
       ),
     },

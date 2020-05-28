@@ -17,7 +17,13 @@ function QuoteModule({ author, text, isVisible }: Module) {
       <Box py={8} my={8}>
         <Fade timeout={1000} in={isVisible}>
           <div>
-            <Quote author={author}>{text}</Quote>
+            <Quote author={author}>
+              {text.split('\n').map((line: string, i: number) => (
+                <span style={{ display: 'block' }} key={i}>
+                  {line}
+                </span>
+              ))}
+            </Quote>
           </div>
         </Fade>
       </Box>
