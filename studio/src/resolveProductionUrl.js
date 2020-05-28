@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const siteUrl = process.envSANITY_STUDIO_SITE_URL
+const siteUrl = process.env.SANITY_STUDIO_SITE_URL
 
 export default function resolveProductionUrl(document) {
   let id = document._id
