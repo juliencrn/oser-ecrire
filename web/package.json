@@ -22,7 +22,7 @@
     "start:lambda": "netlify-lambda serve functions-src",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "refresh": "npm run refresh-self && rm -fr node_modules && rm -fr package-lock.json && npm install",
+    "refresh": "rm -fr node_modules && npm install",
     "refresh-self": "rm -fr node_modules && rm -fr package-lock.json && npm install",
     "lint": "run-p lint:**",
     "lint:prettier": "prettier --write \"**/*.{js,jsx,json,md}\"",
