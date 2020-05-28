@@ -3,6 +3,7 @@ import { Module } from './modules'
 
 export interface Category {
   title: string
+  excerpt?: string
   slug: Slug
 }
 

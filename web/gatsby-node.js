@@ -12,18 +12,34 @@ const path = require('path')
 // require('util').inspect.defaultOptions.depth = null
 
 const { getPages, getModal } = require('./src/gatsby/croqQueries')
-const queries = require('./src/gatsby/queries')
-const { normalizeCategories } = require('./src/gatsby/utils')
+const { mergePostsInCategories } = require('./src/gatsby/utils')
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  /**
-   * Fetch data
-   */
-  const results = await graphql(`{
-    posts: ${queries.posts}
-  }`)
+  const results = await graphql(`
+    {
+      posts: allSanityPost(
+        limit: 1000
+        sort: { fields: _createdAt, order: DESC }
+      ) {
+        edges {
+          node {
+            _id
+            slug {
+              current
+            }
+            categories {
+              _id
+              slug {
+                current
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
 
   if (results.errors) {
     reporter.panicOnBuild(`Error while running GraphQL posts query.`)
@@ -69,7 +85,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
      * Create posts list (with pagination)
      */
     const { blog, ...page } = blogTemplate
-    const categories = normalizeCategories(blog.categories, posts)
+    const categories = mergePostsInCategories(blog.categories, posts)
     const postsPerPage = 6
     const blogPath = `/${page.slug.current}`
     const numPages = Math.ceil(posts.length / postsPerPage)
@@ -77,15 +93,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     Array.from({ length: numPages }).forEach((_, i) => {
       createPage({
         path: i === 0 ? blogPath : `${blogPath}/${i + 1}`,
-        component: path.resolve(`./src/templates/postList.tsx`),
+        component: path.resolve(`./src/templates/blog.tsx`),
         context: {
           modal,
           categories,
-          numPages,
-          basePath: blogPath,
-          currentPage: i + 1,
-          posts: posts.slice(i * postsPerPage, i * postsPerPage + postsPerPage),
           page,
+          basePath: blogPath,
+          numPages,
+          currentPage: i + 1,
+          skip: i * postsPerPage,
+          limit: postsPerPage,
         },
       })
     })
@@ -105,14 +122,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           context: {
             modal,
             categories,
+            page,
             basePath,
             numPages: numArchivePages,
             currentPage: i + 1,
-            posts: postsIn.slice(
-              i * postsPerPage,
-              i * postsPerPage + postsPerPage,
-            ),
-            page,
+            slug: slug.current,
+            skip: i * postsPerPage,
+            limit: postsPerPage,
           },
         })
       })

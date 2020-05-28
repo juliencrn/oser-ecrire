@@ -61,7 +61,7 @@ const algoliaQueries = [
 
 // Remove empty categories
 // Add "postsIn" posts array in each category
-const normalizeCategories = (categories, posts) => {
+const mergePostsInCategories = (categories, posts) => {
   if (!categories || categories.length < 1) {
     return []
   }
@@ -84,38 +84,8 @@ const normalizeCategories = (categories, posts) => {
   )
 }
 
-/**
- * Extracts mainImage ref from Modules
- *
- * @param $pageBuilder comes from Sanity CROQ and contains refs
- * The following function extracts there refs
- * and pass to the page for graphQL query.
- *
- * It's better for imageSharp optimization.
- *
- * Return arrays of string refs ranged in an object,
- * Object.keys === field name
- *
- * @return image[]
- */
-// function extractsMainImageRefs(pageBuilder) {
-//   if (!pageBuilder || !pageBuilder.modules.length) {
-//     return []
-//   }
-
-//   const references = pageBuilder.modules.reduce((prev, curr) => {
-//     if (curr._type === 'heroModule' && curr.mainImage) {
-//       return [...prev, curr.mainImage.asset._ref]
-//     }
-//     return prev
-//   }, [])
-
-//   return references
-// }
-
 module.exports = {
-  normalizeCategories,
-  // extractsMainImageRefs,
+  mergePostsInCategories,
   feedSerializer,
   algoliaQueries,
 }
