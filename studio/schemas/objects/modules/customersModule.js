@@ -10,7 +10,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Titre de la section',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'introduction',
@@ -21,7 +21,7 @@ export default {
       name: 'customers',
       type: 'array',
       title: 'Mes avis',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
       description: `Sélectionner les clients qui vous ont donné un avis. L'ordre compte.`,
       of: [
         {

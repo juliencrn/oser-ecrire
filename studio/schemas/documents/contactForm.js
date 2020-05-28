@@ -11,13 +11,13 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Titre',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'subtitle',
       type: 'string',
       title: 'Sous-titre',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
   ],
 }

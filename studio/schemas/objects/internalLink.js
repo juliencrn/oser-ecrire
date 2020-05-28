@@ -13,7 +13,7 @@ export default {
       name: 'reference',
       type: 'reference',
       title: 'Lien',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
       to: [
         { type: 'post' },
         { type: 'page' },

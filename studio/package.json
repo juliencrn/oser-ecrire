@@ -14,7 +14,7 @@
     "format": "prettier --write \"**/*.js\" \"!node_modules/**\" \"!dist/**\"",
     "refresh": "rm -fr node_modules && rm -fr package-lock.json && npm install",
     "lint": "eslint .",
-    "test": "sanity check"
+    "test": "npm run format && npm run lint && sanity check"
   },
   "keywords": [
     "sanity"

@@ -15,26 +15,26 @@ export default {
       to: {
         type: 'post',
       },
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'username',
       type: 'string',
       title: 'Nom',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'email',
       type: 'string',
       title: 'Email',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'message',
       type: 'text',
       title: 'Message',
       row: 4,
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
   ],
   preview: {

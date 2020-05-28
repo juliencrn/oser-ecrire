@@ -6,7 +6,7 @@ import { FaExternalLinkAlt, FaLink } from 'react-icons/fa'
 import { MdTextFields } from 'react-icons/md'
 
 const highlightIcon = () => <span style={{ fontWeight: 'bold' }}>H</span>
-const highlightRender = (props) => (
+const highlightRender = props => (
   <span style={{ backgroundColor: 'rgba(0, 184, 212, 0.3)' }}>
     {props.children}
   </span>

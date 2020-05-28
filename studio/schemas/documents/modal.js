@@ -11,20 +11,20 @@ export default {
       name: 'active',
       type: 'boolean',
       title: 'Activer le popup',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'delay',
       type: 'number',
       title: 'Délais en secondes',
       description: "Délais avant que le popup ne s'ouvre.",
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'modules',
       type: 'modules',
       title: 'Contenu',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
   ],
 }

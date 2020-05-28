@@ -10,13 +10,13 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Titre de la section',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'features',
       type: 'array',
       title: 'Fonctionnalités',
-      validation: (Rule) =>
+      validation: Rule =>
         Rule.required()
           .min(2)
           .max(3)

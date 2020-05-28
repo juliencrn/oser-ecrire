@@ -8,13 +8,13 @@ export default {
       name: 'answer',
       type: 'string',
       title: 'Question',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'response',
       type: 'string',
       title: 'Réponse',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
   ],
 }

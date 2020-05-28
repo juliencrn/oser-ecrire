@@ -17,7 +17,7 @@ export default {
       type: 'text',
       title: 'Citation',
       rows: 3,
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
   ],
   preview: {

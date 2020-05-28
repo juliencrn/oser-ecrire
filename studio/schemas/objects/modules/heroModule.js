@@ -10,7 +10,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Titre',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'introduction',

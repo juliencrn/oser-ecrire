@@ -8,14 +8,14 @@ export default {
       name: 'name',
       type: 'string',
       title: 'Nom',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'slug',
       type: 'slug',
       title: 'Slug',
       description: "Ceci est l'identifiant unique utilisé dans l'url",
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
       options: {
         source: 'name',
         maxLength: 96,

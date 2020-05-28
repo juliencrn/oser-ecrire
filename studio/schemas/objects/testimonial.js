@@ -7,7 +7,7 @@ export default {
       name: 'name',
       type: 'string',
       title: 'Nom du contact',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'avatar',
@@ -23,7 +23,7 @@ export default {
       type: 'text',
       title: 'Message',
       rows: 3,
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
   ],
   preview: {

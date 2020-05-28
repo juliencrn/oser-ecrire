@@ -7,14 +7,14 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Titre de la colonne',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'menu',
       type: 'array',
       title: 'Liens',
       of: [{ type: 'internalLink' }],
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
   ],
 }

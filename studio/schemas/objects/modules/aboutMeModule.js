@@ -7,7 +7,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Titre',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'subtitle',
@@ -31,7 +31,7 @@ export default {
       description:
         "Ordre: De haut en bas, d'abord la colonne de gauche, puis l'autre",
       of: [{ type: 'quality' }],
-      validation: (Rule) =>
+      validation: Rule =>
         Rule.required().min(5).max(5).error('Il doit y avoir 3 colonnes'),
     },
     {

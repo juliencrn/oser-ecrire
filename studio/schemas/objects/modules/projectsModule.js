@@ -10,7 +10,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Titre de la section',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'introduction',
@@ -21,7 +21,7 @@ export default {
       name: 'projects',
       type: 'array',
       title: 'Mes références',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
       description: `Sélectionner les références clients à mettre en avant sur le portfolio. L'ordre compte.`,
       of: [
         {

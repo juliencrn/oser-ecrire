@@ -10,7 +10,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Title de la formation',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'slug',
@@ -18,7 +18,7 @@ export default {
       title: 'Slug',
       description:
         "Ceci est l'identifiant unique de l'article utilisé dans l'url",
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
       options: {
         source: 'title',
         maxLength: 96,

@@ -8,14 +8,14 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Titre',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'email',
       type: 'string',
       title: 'Email',
       description: `Ceci est l'email administrateur, celui sur lequel vous recevrez les notifications de gestion du site.`,
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'slogan',
@@ -27,7 +27,7 @@ export default {
       name: 'logo',
       type: 'mainImage',
       title: 'Logo du site',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'social',
@@ -44,7 +44,7 @@ export default {
       name: 'footerMenus',
       type: 'array',
       title: 'Colonnes du pied de page.',
-      validation: (Rule) =>
+      validation: Rule =>
         Rule.required().min(3).max(3).error('Il doit y avoir 3 colonnes'),
       of: [
         {

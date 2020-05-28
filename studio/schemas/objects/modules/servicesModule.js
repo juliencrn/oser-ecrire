@@ -10,7 +10,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Titre de la section',
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
     {
       name: 'introduction',
@@ -22,7 +22,7 @@ export default {
       type: 'array',
       title: 'Mes services',
       description: `Sélectionner les services proposés. L'ordre compte.`,
-      validation: (Rule) => Rule.error('Champ obligatoire').required(),
+      validation: Rule => Rule.error('Champ obligatoire').required(),
       of: [
         {
           type: 'reference',

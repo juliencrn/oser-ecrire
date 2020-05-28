@@ -89,7 +89,7 @@ class ConditionalInput extends React.PureComponent {
               key={field.name}
               type={field.type}
               value={value && value[field.name]}
-              onChange={(patchEvent) => {
+              onChange={patchEvent => {
                 this.handleFieldChange(field, patchEvent)
               }}
               path={[field.name]}

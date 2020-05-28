@@ -29,7 +29,7 @@
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:typescript": "tsc",
     "format": "npm run lint:prettier",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "npm run lint"
   },
   "dependencies": {
     "@loadable/component": "^5.12.0",
