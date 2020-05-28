@@ -1,8 +1,8 @@
-/**
- * Fetch Sanity CMS using CROQ queries
- *
- * @link https://www.sanity.io/docs/query-cheat-sheet
- */
+import React, { useEffect, useState } from 'react'
+
+import { Page, PreviewTemplate } from '../interfaces'
+import { PageTemplate } from '../templates/page'
+import Loader from '../components/Loader'
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const sanityClient = require('@sanity/client')
@@ -11,12 +11,13 @@ const client = sanityClient({
   projectId: process.env.GATSBY_SANITY_PROJECTID,
   dataset: process.env.GATSBY_SANITY_DATASET,
   token: process.env.GATSBY_SANITY_TOKEN,
-  useCdn: true, // `false` if you want to ensure fresh data
+  useCdn: false,
+  withCredentials: true,
 })
 
 /* 
 ##################################
-This query is copied to previews/PagePreview.ts
+This query is copied from previews/PagePreview.ts
 ##################################
 */
 const moduleTypes = {
@@ -178,26 +179,37 @@ and here
 ##################################
 */
 
-async function getPages() {
-  const query = `
-  *[_type == "page"] {
-    ${page}
-  }`
-
-  return await client.fetch(query)
+async function fetchSanityPage(id: string): Promise<Page> {
+  const params = { id }
+  const results = await client.fetch(pageQuery, params)
+  return results[0]
 }
 
-async function getModal() {
-  const query = `
-    *[_type == "modal" && _id == "modal"] {
-      active,
-      delay,
-      ${modules}
+const PagePreview = ({ documentId: id }: PreviewTemplate) => {
+  const [pageData, setPageData] = useState<Page | undefined>(undefined)
+
+  // Fetch CMS data in Real-time
+  useEffect(() => {
+    const params = { id }
+    const options = {
+      includeResult: false,
+      includePreviousRevision: false,
+      visibility: 'query',
+      events: ['welcome', 'mutation', 'reconnect'],
     }
-  `
+    const subscription = client
+      .listen(pageQuery, params, options)
+      .subscribe(() => {
+        console.log('Receive update!')
+        fetchSanityPage(id).then(data => {
+          setPageData(data)
+        })
+      })
 
-  const modals = await client.fetch(query)
-  return modals[0]
+    return subscription.unsubscribe
+  }, [])
+
+  return pageData ? <PageTemplate {...pageData} /> : <Loader />
 }
 
-module.exports = { getPages, getModal }
+export default PagePreview

@@ -90,6 +90,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     const blogPath = `/${page.slug.current}`
     const numPages = Math.ceil(posts.length / postsPerPage)
 
+    // Reduce "page" data weight
+    const { pageBuilder, ...pageData } = page
+
     Array.from({ length: numPages }).forEach((_, i) => {
       createPage({
         path: i === 0 ? blogPath : `${blogPath}/${i + 1}`,
@@ -97,7 +100,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         context: {
           modal,
           categories,
-          page,
+          page: pageData,
           basePath: blogPath,
           numPages,
           currentPage: i + 1,
@@ -135,25 +138,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     })
   }
 
-  // Home
+  // Pages
   const homeTemplate = pages.filter(isTemplate('home'))[0]
-  if (homeTemplate) {
-    createPage({
-      path: '/',
-      component: path.resolve(`./src/templates/home.tsx`),
-      context: {
-        modal,
-        page: homeTemplate,
-      },
-    })
-  }
-
-  // Other Pages
   const otherPages = pages.filter(({ template }) => !template)
-  if (otherPages) {
-    otherPages.forEach(page => {
+  const allPages = !homeTemplate ? otherPages : [homeTemplate, ...otherPages]
+
+  if (allPages) {
+    allPages.forEach(page => {
       createPage({
-        path: page.slug.current,
+        path: page.template === 'home' ? '/' : page.slug.current,
         component: path.resolve(`./src/templates/page.tsx`),
         context: { page, modal },
       })

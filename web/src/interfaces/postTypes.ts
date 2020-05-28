@@ -51,6 +51,7 @@ export interface Page {
   subtitle?: string
   excerpt?: string
   image?: Image
+  template?: string
 
   pageBuilder?: { modules?: Module[] }
   // blog?: { categories?: Category[] }

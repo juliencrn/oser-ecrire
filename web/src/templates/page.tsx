@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { makeStyles, Theme } from '@material-ui/core/styles'
 
 import Layout from '../layout'
 import SEO from '../layout/seo'
@@ -7,30 +6,40 @@ import { PageTemplate as IPageTemplate, Page, Modal } from '../interfaces'
 import Hero from '../components/Hero'
 import SwitchModules from '../components/SwitchModules'
 
-const useStyles = makeStyles((theme: Theme) => ({}))
+export function PageTemplate(props: Page) {
+  const { title, subtitle, pageBuilder, image } = props
+  return (
+    <>
+      <Hero
+        fullScreen={props?.template === 'home'}
+        title={title}
+        subtitle={subtitle}
+        image={image}
+      ></Hero>
 
-export interface PageTemplateProps extends IPageTemplate {
+      <SwitchModules modules={pageBuilder?.modules} />
+    </>
+  )
+}
+
+export interface TemplateProps extends IPageTemplate {
   pageContext: {
     page: Page
     modal: Modal
   }
 }
 
-const PageTemplate: FC<PageTemplateProps> = ({ pageContext, path }) => {
-  const classes = useStyles()
-
+const Template: FC<TemplateProps> = ({ pageContext, path }) => {
   const { page, modal } = pageContext
-  const { title, subtitle, excerpt, pageBuilder, image } = page
+  const { title, excerpt, image } = page
 
   return (
     <Layout modal={modal}>
       <SEO title={title} description={excerpt} path={path} image={image} />
 
-      <Hero title={title} subtitle={subtitle}></Hero>
-
-      <SwitchModules modules={pageBuilder?.modules} />
+      <PageTemplate {...page} />
     </Layout>
   )
 }
 
-export default PageTemplate
+export default Template
