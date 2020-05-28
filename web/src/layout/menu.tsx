@@ -66,7 +66,7 @@ const Menu: FC = () => {
       ) : (
         <>
           <IconButton onClick={handleOpenMenu}>
-            <MenuIcon />
+            <MenuIcon style={{ color: 'white' }} />
           </IconButton>
           <Drawer anchor="top" open={isOpen} onClose={handleCloseMenu}>
             <Container maxWidth="lg" className={classes.drawerHeader}>

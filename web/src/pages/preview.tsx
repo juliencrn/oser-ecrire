@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
+import loadable from '@loadable/component'
 import * as queryString from 'query-string'
 import { Helmet } from 'react-helmet'
 import { navigate } from 'gatsby'
 
 import Layout from '../layout'
 import { PageTemplate } from '../interfaces'
-import PostPreview from '../previews/PostPreview'
-import PagePreview from '../previews/PagePreview'
+
+const PostPreview = loadable(() => import('../previews/PostPreview'))
+const PagePreview = loadable(() => import('../previews/PagePreview'))
 
 export default function PreviewPage(props: PageTemplate) {
   const parsed = queryString.parse(props.location.search)

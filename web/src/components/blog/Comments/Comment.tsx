@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import { formatDistanceToNow } from 'date-fns'
-import fr from 'date-fns/locale/fr'
 
 import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar'
@@ -39,9 +37,6 @@ const Comment: FC<CommentProps> = ({
   onDelete,
 }) => {
   const classes = useStyles()
-  const date = formatDistanceToNow(new Date(_createdAt), {
-    locale: fr,
-  })
 
   return (
     <Box mb={3} className={classes.root}>
@@ -53,7 +48,7 @@ const Comment: FC<CommentProps> = ({
         <Box pl={2} py={1} mr="auto">
           <Typography>{username}</Typography>
           <Typography color="textSecondary" variant="body2">
-            {date}
+            {_createdAt}
           </Typography>
         </Box>
 

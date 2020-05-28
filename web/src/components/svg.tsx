@@ -24,22 +24,6 @@ export function Blob1({ color }: { color?: CSSProperties['color'] }) {
   )
 }
 
-// export function LightSectionTopWave({
-//   color,
-// }: {
-//   color?: CSSProperties['color']
-// }) {
-//   return (
-//     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200">
-//       <path
-//         fill={color || 'rgba(0, 184, 212, 0.3)'}
-//         fillOpacity="1"
-//         d="M0,32L80,42.7C160,53,320,75,480,101.3C640,128,800,160,960,154.7C1120,149,1280,107,1360,85.3L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-//       ></path>
-//     </svg>
-//   )
-// }
-
 export function LightSectionTopWave({
   color,
 }: {

@@ -8,14 +8,14 @@ import SwitchModules from '../components/SwitchModules'
 
 export function PageTemplate(props: Page) {
   const { title, subtitle, pageBuilder, image } = props
+  const isHome = props?.template === 'home'
   return (
     <>
-      <Hero
-        fullScreen={props?.template === 'home'}
-        title={title}
-        subtitle={subtitle}
-        image={image}
-      ></Hero>
+      {isHome ? (
+        <Hero fullScreen title={title} subtitle={subtitle} image={image} />
+      ) : (
+        <Hero title={title} subtitle={subtitle} />
+      )}
 
       <SwitchModules modules={pageBuilder?.modules} />
     </>

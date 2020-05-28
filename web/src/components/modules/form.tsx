@@ -1,4 +1,5 @@
 import React from 'react'
+import loadable from '@loadable/component'
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
 
 import Container from '@material-ui/core/Container'
@@ -8,10 +9,11 @@ import Zoom from '@material-ui/core/Zoom'
 import Box from '@material-ui/core/Box'
 
 import { Module } from '../../interfaces'
-import ContactForm from '../forms/ContactForm'
-import NewsletterForm from '../forms/NewsletterForm'
-import AuthorCard from '../cards/AuthorCard'
 import { Blob1 } from '../svg'
+
+const NewsletterForm = loadable(() => import('../forms/NewsletterForm'))
+const ContactForm = loadable(() => import('../forms/ContactForm'))
+const AuthorCard = loadable(() => import('../cards/AuthorCard'))
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {

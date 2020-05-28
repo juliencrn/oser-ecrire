@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import fr from 'date-fns/locale/fr'
+
 const sanityClient = require('@sanity/client')
 
 const isDev = process.env.NODE_ENV !== 'production'
@@ -28,10 +31,18 @@ exports.handler = async event => {
   const params = { slug: postSlug }
 
   try {
-    const res = await client.fetch(query, params)
+    const comments = await client.fetch(query, params)
+
+    // Format the date
+    const options = { locale: fr }
+    const formatted = comments.map(comment => ({
+      ...comment,
+      _createdAt: formatDistanceToNow(new Date(comment._createdAt), options),
+    }))
+
     return {
       statusCode: 200,
-      body: JSON.stringify(res),
+      body: JSON.stringify(formatted),
     }
   } catch (error) {
     console.log(error)
