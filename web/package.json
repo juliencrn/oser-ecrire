@@ -29,7 +29,8 @@
     "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:typescript": "tsc",
     "format": "npm run lint:prettier",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "postinstall": "netlify-lambda install"
   },
   "dependencies": {
     "@loadable/component": "^5.12.0",
