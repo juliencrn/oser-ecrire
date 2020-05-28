@@ -1,8 +1,6 @@
-import * as React from 'react'
-import { Formik, Field } from 'formik'
+import React, { useState } from 'react'
+import { Formik } from 'formik'
 
-import { TextField } from 'formik-material-ui'
-import { makeStyles, Theme } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 
 import Yup from '../../libs/Yup'
@@ -10,12 +8,7 @@ import FormLayout from './FormLayout'
 import { registerContact } from '../../libs/sendInBlueApi'
 import { AlertProps } from '../../interfaces'
 import useSanityForms from '../../hooks/useSanityForms'
-
-const useStyles = makeStyles((theme: Theme) => ({
-  field: {
-    width: `100%`,
-  },
-}))
+import InputText from './InputText'
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required(),
@@ -38,8 +31,7 @@ function NewsletterForm() {
   const { title, subtitle } = forms.filter(
     ({ type }) => type === 'newsletterForm',
   )[0]
-  const classes = useStyles()
-  const [alert, setAlert] = React.useState<AlertProps | undefined>(undefined)
+  const [alert, setAlert] = useState<AlertProps | undefined>(undefined)
   return (
     <Formik
       initialValues={initialValues}
@@ -62,7 +54,7 @@ function NewsletterForm() {
         return newAlert.isValid
       }}
     >
-      {({ submitForm, isSubmitting }) => (
+      {({ submitForm, isSubmitting, getFieldProps, getFieldMeta }) => (
         <FormLayout
           title={title}
           subtitle={subtitle}
@@ -72,33 +64,28 @@ function NewsletterForm() {
         >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <Field
-                component={TextField}
-                type="text"
+              <InputText
                 label="Prénom"
                 required
-                name="attributes.PRENOM"
-                className={classes.field}
+                fieldProps={getFieldProps('attributes.PRENOM')}
+                fieldMeta={getFieldMeta('attributes.PRENOM')}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field
-                component={TextField}
-                required
-                type="text"
+              <InputText
                 label="Nom"
-                name="attributes.NOM"
-                className={classes.field}
+                required
+                fieldProps={getFieldProps('attributes.NOM')}
+                fieldMeta={getFieldMeta('attributes.NOM')}
               />
             </Grid>
             <Grid item xs={12}>
-              <Field
-                component={TextField}
-                required
-                name="email"
-                type="email"
+              <InputText
                 label="Email"
-                className={classes.field}
+                required
+                inputProps={{ type: 'email' }}
+                fieldProps={getFieldProps('email')}
+                fieldMeta={getFieldMeta('email')}
               />
             </Grid>
           </Grid>

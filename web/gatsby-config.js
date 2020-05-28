@@ -26,7 +26,6 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-material-ui`,
-    `gatsby-plugin-webpack-bundle-analyzer`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

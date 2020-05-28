@@ -2,6 +2,8 @@ import React from 'react'
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
 import { graphql, useStaticQuery } from 'gatsby'
 import Image, { FluidObject } from 'gatsby-image'
+import loadable from '@loadable/component'
+import VisibilitySensor from 'react-visibility-sensor'
 
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
@@ -10,7 +12,11 @@ import Container from '@material-ui/core/Container'
 import { FooterWave } from '../../components/svg'
 import Copyright from './Copyright'
 import FooterColumns from './FooterColumns'
-import NewsletterForm from '../../components/forms/NewsletterForm'
+import { Grow } from '@material-ui/core'
+
+const NewsletterForm = loadable(() =>
+  import('../../components/forms/NewsletterForm'),
+)
 
 function useBirdImage(): FluidObject {
   const data = useStaticQuery(graphql`
@@ -69,13 +75,19 @@ function Footer({ isBlog }: { isBlog?: boolean }) {
     <footer className={classes.root}>
       {isBlog && (
         <Container maxWidth="xl" className={classes.preFooter}>
-          <Grid container>
-            <Grid item xs={12} md={8}>
-              <Box className={classes.preFooterContent}>
-                <NewsletterForm />
-              </Box>
-            </Grid>
-          </Grid>
+          <VisibilitySensor partialVisibility>
+            {({ isVisible }) => (
+              <Grow in={isVisible}>
+                <Grid container>
+                  <Grid item xs={12} md={8}>
+                    <Box className={classes.preFooterContent}>
+                      <NewsletterForm />
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Grow>
+            )}
+          </VisibilitySensor>
         </Container>
       )}
 

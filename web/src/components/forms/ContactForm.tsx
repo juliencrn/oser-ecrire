@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { Formik, Field } from 'formik'
+import { Formik } from 'formik'
+
 import Grid from '@material-ui/core/Grid'
-import { TextField, CheckboxWithLabel } from 'formik-material-ui'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
 
 import Yup from '../../libs/Yup'
 import FormLayout from './FormLayout'
@@ -11,12 +12,7 @@ import { registerContact } from '../../libs/sendInBlueApi'
 import useSiteSettings from '../../hooks/useSiteSettings'
 import sendMail, { Mail } from '../../libs/sendMailApi'
 import { AlertProps } from '../../interfaces'
-
-const useStyles = makeStyles((theme: Theme) => ({
-  field: {
-    width: `100%`,
-  },
-}))
+import InputText from './InputText'
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required(),
@@ -53,7 +49,6 @@ function ContactForm() {
   const { title, subtitle } = forms.filter(
     ({ type }) => type === 'contactForm',
   )[0]
-  const classes = useStyles()
   return (
     <Formik
       initialValues={initialValues}
@@ -121,7 +116,7 @@ function ContactForm() {
         return !!res
       }}
     >
-      {({ submitForm, isSubmitting }) => (
+      {({ submitForm, isSubmitting, getFieldProps, getFieldMeta }) => (
         <FormLayout
           title={title}
           subtitle={subtitle}
@@ -132,63 +127,60 @@ function ContactForm() {
         >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <Field
-                component={TextField}
-                type="text"
+              <InputText
                 label="Prénom"
                 required
-                name="firstName"
-                className={classes.field}
+                fieldProps={getFieldProps('firstName')}
+                fieldMeta={getFieldMeta('firstName')}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field
-                component={TextField}
-                required
-                type="text"
+              <InputText
                 label="Nom"
-                name="lastName"
-                className={classes.field}
+                required
+                fieldProps={getFieldProps('lastName')}
+                fieldMeta={getFieldMeta('lastName')}
               />
             </Grid>
             <Grid item xs={12}>
-              <Field
-                component={TextField}
-                required
-                name="email"
-                type="email"
+              <InputText
                 label="Email"
-                className={classes.field}
+                required
+                inputProps={{ type: 'email' }}
+                fieldProps={getFieldProps('email')}
+                fieldMeta={getFieldMeta('email')}
               />
             </Grid>
             <Grid item xs={12}>
-              <Field
-                component={TextField}
-                required
-                type="text"
+              <InputText
                 label="Sujet"
-                name="subject"
-                className={classes.field}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                component={TextField}
                 required
-                type="text"
-                label="Message"
-                name="message"
-                className={classes.field}
-                multiline
-                rows={6}
+                fieldProps={getFieldProps('subject')}
+                fieldMeta={getFieldMeta('subject')}
               />
             </Grid>
             <Grid item xs={12}>
-              <Field
-                component={CheckboxWithLabel}
-                name="newsletter"
-                type="checkbox"
-                Label={{ label: "M'inscrire à la newsletter" }}
+              <InputText
+                label="Message"
+                required
+                inputProps={{
+                  multiline: true,
+                  rows: 6,
+                }}
+                fieldProps={getFieldProps('message')}
+                fieldMeta={getFieldMeta('message')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={!!getFieldProps('newsletter').value}
+                    onChange={getFieldProps('newsletter').onChange}
+                    name="newsletter"
+                  />
+                }
+                label="M'inscrire à la newsletter"
               />
             </Grid>
           </Grid>

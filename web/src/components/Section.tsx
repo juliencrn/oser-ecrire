@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react'
+import React, { FC } from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 
 import Box from '@material-ui/core/Box'
@@ -21,7 +21,7 @@ export interface SectionProps {
   childContainerProps?: ContainerProps
 }
 
-const SectionComponent: FC<SectionProps> = ({
+const Section: FC<SectionProps> = ({
   title,
   description,
   childContainerProps = {},
@@ -53,7 +53,5 @@ const SectionComponent: FC<SectionProps> = ({
     </Box>
   )
 }
-
-const Section = memo(SectionComponent)
 
 export default Section

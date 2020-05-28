@@ -1,16 +1,18 @@
 import * as React from 'react'
-import { Formik, Field, Form } from 'formik'
+import { Formik, Form } from 'formik'
 
-import { TextField, CheckboxWithLabel } from 'formik-material-ui'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
 
 import Yup from '../../../libs/Yup'
 import { createComment } from './commentsAPI'
 import sendMail, { Mail } from '../../../libs/sendMailApi'
 import useSiteSettings from '../../../hooks/useSiteSettings'
 import { registerContact } from '../../../libs/sendInBlueApi'
+import InputText from '../../forms/InputText'
 
 const useStyles = makeStyles((theme: Theme) => ({
   field: {
@@ -49,6 +51,11 @@ export interface CommentsFormProps {
 function CommentsForm({ postSlug, postTitle, onSubmit }: CommentsFormProps) {
   const classes = useStyles()
   const siteSettings = useSiteSettings()
+
+  const textFieldProps = {
+    variant: 'outlined',
+    classes: classes.field,
+  }
 
   return (
     <Formik
@@ -100,50 +107,64 @@ function CommentsForm({ postSlug, postTitle, onSubmit }: CommentsFormProps) {
         return !!res
       }}
     >
-      {({ submitForm, isSubmitting }) => (
+      {({ submitForm, isSubmitting, getFieldProps, getFieldMeta }) => (
         <Form className={classes.form}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <Field
-                component={TextField}
-                type="text"
+              <InputText
                 label="Prénom"
-                variant="outlined"
                 required
-                name="username"
-                className={classes.field}
+                textFieldProps={{
+                  variant: 'outlined',
+                }}
+                inputProps={{
+                  className: classes.field,
+                }}
+                fieldProps={getFieldProps('username')}
+                fieldMeta={getFieldMeta('username')}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field
-                component={TextField}
-                type="email"
+              <InputText
                 label="Email"
-                variant="outlined"
                 required
-                name="email"
-                className={classes.field}
+                inputProps={{
+                  type: 'email',
+                  className: classes.field,
+                }}
+                textFieldProps={{
+                  variant: 'outlined',
+                }}
+                fieldProps={getFieldProps('email')}
+                fieldMeta={getFieldMeta('email')}
               />
             </Grid>
             <Grid item xs={12}>
-              <Field
-                component={TextField}
-                required
-                name="message"
-                variant="outlined"
-                multiline
-                rows={4}
-                type="text"
+              <InputText
                 label="Commentaire"
-                className={classes.field}
+                required
+                inputProps={{
+                  multiline: true,
+                  rows: 4,
+                  className: classes.field,
+                }}
+                textFieldProps={{
+                  variant: 'outlined',
+                }}
+                fieldProps={getFieldProps('message')}
+                fieldMeta={getFieldMeta('message')}
               />
             </Grid>
             <Grid item xs={12}>
-              <Field
-                component={CheckboxWithLabel}
-                name="newsletter"
-                type="checkbox"
-                Label={{ label: "M'inscrire à la newsletter" }}
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={!!getFieldProps('newsletter').value}
+                    onChange={getFieldProps('newsletter').onChange}
+                    name="newsletter"
+                  />
+                }
+                label="M'inscrire à la newsletter"
               />
             </Grid>
             <Grid item xs={12}>
