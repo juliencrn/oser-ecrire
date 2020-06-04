@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
 
 import { Post, PreviewTemplate } from '../interfaces'
 import { PostTemplate } from '../templates/post'
 import Loader from '../components/Loader'
+import { countWordInBlocks } from '../libs/countWords'
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const sanityClient = require('@sanity/client')
@@ -32,6 +35,24 @@ async function fetchSanityPost(id: string): Promise<Post> {
   return results[0]
 }
 
+function WordCount({ count = 0 }: { count?: number }) {
+  return (
+    <Box
+      position="fixed"
+      left={2}
+      top="50%"
+      p={2}
+      zIndex="10"
+      style={{
+        transform: 'translateY(-50%)',
+      }}
+    >
+      <Typography variant="subtitle2">Nombre de mots</Typography>
+      <Typography variant="h4">{count}</Typography>
+    </Box>
+  )
+}
+
 const PostPreview = ({ documentId: id }: PreviewTemplate) => {
   const [postData, setPostData] = useState<Post | undefined>(undefined)
 
@@ -56,7 +77,19 @@ const PostPreview = ({ documentId: id }: PreviewTemplate) => {
     return subscription.unsubscribe
   }, [])
 
-  return postData ? <PostTemplate {...postData} /> : <Loader />
+  let count = 0
+  if (postData?.body) {
+    count = countWordInBlocks(postData.body)
+  }
+
+  return postData ? (
+    <>
+      <WordCount count={count} />
+      <PostTemplate {...postData} />
+    </>
+  ) : (
+    <Loader />
+  )
 }
 
 export default PostPreview
