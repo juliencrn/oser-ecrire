@@ -80,6 +80,9 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
           case 'blockquote':
             return <Quote inPortableText>{props.children}</Quote>
           default:
+            if (props.children[0] === '') {
+              return <Box py={1.75} />
+            }
             return (
               <Typography className={classes.blogText} variant="body1">
                 {props.children}

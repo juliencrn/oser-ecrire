@@ -28,11 +28,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   quote: {
     marginBottom: theme.spacing(2),
     fontStyle: 'italic',
-    textAlign: 'center',
+    textAlign: 'left',
   },
   author: {
     fontWeight: 600,
-    textAlign: 'center',
+    textAlign: 'right',
   },
 }))
 

@@ -13,7 +13,7 @@ function QuoteModule({ author, text, isVisible }: Module) {
   }
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <Box py={8} my={8}>
         <Fade timeout={1000} in={isVisible}>
           <div>
