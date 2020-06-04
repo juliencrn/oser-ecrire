@@ -41,6 +41,7 @@ export default {
       name: 'categories',
       type: 'array',
       title: 'Catégories',
+      validation: Rule => Rule.error('Champ obligatoire').required(),
       of: [
         {
           type: 'reference',
@@ -54,6 +55,7 @@ export default {
       name: 'body',
       type: 'bodyPortableText',
       title: 'Contenu Texte',
+      validation: Rule => Rule.error('Champ obligatoire').required(),
     },
   ],
   preview: {
