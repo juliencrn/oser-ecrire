@@ -24,11 +24,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     marginTop: theme.spacing(12),
     marginBottom: theme.spacing(12),
-
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(24),
-      marginBottom: theme.spacing(24),
-    },
   },
   container: {
     position: 'relative',

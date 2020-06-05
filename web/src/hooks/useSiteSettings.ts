@@ -29,6 +29,7 @@ export const mainMenu = graphql`
   fragment MainMenu on SanitySiteSettings {
     mainMenu {
       label
+      anchor
       reference {
         ... on SanityPage {
           id
@@ -65,6 +66,7 @@ export const FooterMenu = graphql`
       title
       menu {
         label
+        anchor
         reference {
           ... on SanityPage {
             id

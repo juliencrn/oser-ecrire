@@ -7,8 +7,8 @@ import Container, { ContainerProps } from '@material-ui/core/Container'
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(12),
+    paddingTop: theme.spacing(10),
+    paddingBottom: theme.spacing(6),
   },
   title: {
     marginBottom: theme.spacing(4),

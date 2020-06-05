@@ -53,7 +53,9 @@ export default function CtaModule({ title, link }: Module) {
               size="large"
               color="secondary"
               component={GatsbyLink}
-              to={`/${link.reference.slug}`}
+              to={`/${link.reference.slug.current}${
+                link?.anchor ? `#${link.anchor}` : ``
+              }`}
             >
               {link?.label || link.reference.title}
             </Button>

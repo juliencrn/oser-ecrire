@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'normal',
   },
   cardMedia: {
     paddingBottom: '56.25%',

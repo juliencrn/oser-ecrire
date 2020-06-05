@@ -3,6 +3,8 @@ import loadable from '@loadable/component'
 import VisibilitySensor from 'react-visibility-sensor'
 
 import { Module } from '../interfaces'
+import { AnchorItem } from './Anchor'
+import { Container } from '@material-ui/core'
 
 const Switcher: FC<{ modules?: Module[] }> = ({ modules }) => {
   if (!modules || modules.length <= 0) {
@@ -25,7 +27,10 @@ const Switcher: FC<{ modules?: Module[] }> = ({ modules }) => {
         return (
           <VisibilitySensor partialVisibility key={i}>
             {({ isVisible }) => (
-              <div>
+              <div id={item?.slug?.current || ``}>
+                <Container maxWidth="lg">
+                  <AnchorItem anchor={item?.slug?.current || ``} />
+                </Container>
                 <AsyncComponent isVisible={isVisible} {...item} />
               </div>
             )}

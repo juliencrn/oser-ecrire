@@ -1,5 +1,5 @@
 import { InternalLink, Service, Project, Customer, Formation } from '.'
-import { MainImage } from './utils'
+import { MainImage, Slug } from './utils'
 
 export type ModuleType =
   | 'servicesModule'
@@ -35,6 +35,7 @@ export interface Module {
   _type: ModuleType
   title?: string
   introduction?: string
+  slug?: Slug
 
   // Settings
   isVisible?: boolean

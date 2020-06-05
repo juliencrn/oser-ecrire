@@ -4,6 +4,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import Image from 'gatsby-image'
 import { makeStyles, Theme, fade } from '@material-ui/core/styles'
 import BlockContent from '@sanity/block-content-to-react'
+import { Link as ScrollLink } from 'react-scroll'
 
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
@@ -13,6 +14,7 @@ import Quote from './Quote'
 import useSiteMetadata from '../hooks/useSiteMetadata'
 import useSanityImages from '../hooks/useSanityImages'
 import useAllPosts from '../hooks/useAllPosts'
+import Anchor from './Anchor'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -61,15 +63,27 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
         switch (style) {
           case 'h2':
             return (
-              <Typography className={classes.title} variant="h3" component="h2">
-                {props.children}
-              </Typography>
+              <Anchor title={props.node.children[0].text}>
+                <Typography
+                  className={classes.title}
+                  variant="h3"
+                  component="h2"
+                >
+                  {props.children}
+                </Typography>
+              </Anchor>
             )
           case 'h3':
             return (
-              <Typography className={classes.title} variant="h4" component="h3">
-                {props.children}
-              </Typography>
+              <Anchor title={props.node.children[0].text}>
+                <Typography
+                  className={classes.title}
+                  variant="h4"
+                  component="h3"
+                >
+                  {props.children}
+                </Typography>
+              </Anchor>
             )
           case 'h4':
             return (
@@ -138,6 +152,7 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
         <span className={classes.highlight}>{props.children}</span>
       ),
       link: (props: any) => {
+        console.log({ link: props })
         // Hack: replace old site link by internalLink if url matches
         const link = new URL(props.mark.href)
         const isMatch = link?.origin === siteUrl
@@ -157,7 +172,16 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
           </Link>
         )
       },
+      anchor: (props: any) => {
+        console.log({ linkProps: props })
+        return (
+          <ScrollLink smooth isDynamic to={props.mark.anchor}>
+            <Link style={{ cursor: 'pointer' }}>{props.children}</Link>
+          </ScrollLink>
+        )
+      },
       internalLink: (props: any) => {
+        console.log({ linkEx: props })
         // IF empty => prop.mark?
         // IF post => props.mark.reference._ref == 'slug'
         // IF page => props.mark.reference._ref == '_id'

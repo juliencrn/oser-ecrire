@@ -24,6 +24,7 @@ const moduleTypes = {
   ctaModule: `
     link {
       label,
+      anchor,
       reference-> { title, slug, },
     },
   `,
@@ -81,6 +82,7 @@ const moduleTypes = {
       content,
       link {
         label,
+        anchor,
         reference-> {
           _type,
           title, 
@@ -137,6 +139,7 @@ const modules = `
     _type,
     title,
     introduction,
+    slug { current },
 
     ${projectsModule}
     ${servicesModule}
