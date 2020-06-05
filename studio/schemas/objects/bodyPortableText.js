@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react'
-import { FaExternalLinkAlt, FaLink } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaLink, FaHashtag } from 'react-icons/fa'
 import { MdTextFields } from 'react-icons/md'
 
 const highlightIcon = () => <span style={{ fontWeight: 'bold' }}>H</span>
@@ -60,6 +60,21 @@ export default {
                 title: 'URL',
                 name: 'href',
                 type: 'url',
+              },
+            ],
+          },
+          {
+            name: 'anchor',
+            type: 'object',
+            title: 'Lien ancre',
+            blockEditor: {
+              icon: FaHashtag,
+            },
+            fields: [
+              {
+                title: 'Ancre',
+                name: 'anchor',
+                type: 'string',
               },
             ],
           },

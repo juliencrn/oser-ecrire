@@ -1,3 +1,5 @@
+import { getModuleSlugSrc } from '../../../src/schemaUtils'
+
 export default {
   name: 'aboutMeModule',
   type: 'object',
@@ -8,6 +10,17 @@ export default {
       type: 'string',
       title: 'Titre',
       validation: Rule => Rule.error('Champ obligatoire').required(),
+    },
+    {
+      name: 'slug',
+      type: 'slug',
+      title: 'Slug',
+      description: 'Utilisé pour les ancres',
+      validation: Rule => Rule.error('Champ obligatoire').required(),
+      options: {
+        source: getModuleSlugSrc,
+        maxLength: 96,
+      },
     },
     {
       name: 'subtitle',

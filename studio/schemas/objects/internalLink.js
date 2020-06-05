@@ -22,6 +22,12 @@ export default {
       ],
     },
     {
+      name: 'anchor',
+      type: 'string',
+      title: 'Ancre',
+      description: `Optionnel`,
+    },
+    {
       name: 'label',
       type: 'string',
       title: 'Texte du bouton',
