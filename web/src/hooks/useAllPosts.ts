@@ -8,6 +8,7 @@ export interface Page {
 }
 
 export interface Post {
+  _id: string
   slug: Slug
 }
 
@@ -30,6 +31,7 @@ export default function useAllPosts(): Return {
 
       posts: allSanityPost {
         nodes {
+          _id
           slug {
             current
           }

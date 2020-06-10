@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box'
 import Quote from './Quote'
 import useSiteMetadata from '../hooks/useSiteMetadata'
 import useSanityImages from '../hooks/useSanityImages'
-import useAllPosts from '../hooks/useAllPosts'
+import useAllPosts, { Page, Post } from '../hooks/useAllPosts'
 import Anchor from './Anchor'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -173,7 +173,7 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
         )
       },
       anchor: (props: any) => {
-        console.log({ linkProps: props })
+        console.log({ anchor: props })
         return (
           <ScrollLink smooth isDynamic to={props.mark.anchor}>
             <Link style={{ cursor: 'pointer' }}>{props.children}</Link>
@@ -181,22 +181,39 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
         )
       },
       internalLink: (props: any) => {
-        console.log({ linkEx: props })
+        console.log({ internalLink: props })
         // IF empty => prop.mark?
-        // IF post => props.mark.reference._ref == 'slug'
-        // IF page => props.mark.reference._ref == '_id'
         const ref = props.mark?.reference?._ref
         if (typeof ref === 'undefined') {
           return null
         }
 
-        const isPost = !!allPosts.posts.filter(
-          ({ slug }) => slug.current === ref,
-        )[0]
+        let url = '/'
+        let post: Post | Page | undefined = undefined
 
-        const url = isPost
-          ? ref
-          : allPosts.pages.filter(({ _id }) => _id === ref)[0]?.slug.current
+        // Test if is page by slug
+        post = allPosts.pages.filter(({ slug }) => slug === ref)[0]
+        if (typeof post !== 'undefined') {
+          url = post.slug.current
+        }
+
+        // Test if is page by _id
+        post = allPosts.pages.filter(({ _id }) => _id === ref)[0]
+        if (typeof post !== 'undefined') {
+          url = post.slug.current
+        }
+
+        // Test if is post by slug
+        post = allPosts.posts.filter(({ slug }) => slug === ref)[0]
+        if (typeof post !== 'undefined') {
+          url = post.slug.current
+        }
+
+        // Test if is post by _id
+        post = allPosts.posts.filter(({ _id }) => _id === ref)[0]
+        if (typeof post !== 'undefined') {
+          url = post.slug.current
+        }
 
         return (
           <Link component={GatsbyLink} to={`/${url}`}>
