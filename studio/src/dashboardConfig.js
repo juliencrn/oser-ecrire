@@ -29,15 +29,15 @@ export default {
               sites: [
                 {
                   title: 'Studio',
-                  apiId: '12ecf4cf-ddba-43bc-80c0-0d17ce95ab5e',
-                  buildHookId: '5eaca6696d3a2d23bfe121c0',
-                  name: 'oser-ecrire-dashboard',
+                  apiId: '724cd5fe-a72f-41bd-9725-d88f06275015',
+                  buildHookId: '5ee1316c3a13d7307523fea3',
+                  name: 'admin-oser-ecrire',
                 },
                 {
                   title: 'Site',
-                  apiId: 'c1937fa3-d070-4469-9e1a-94425df86bca',
-                  buildHookId: '5eacd62ae83a6538a488bdc5',
-                  name: 'oser-ecrire',
+                  apiId: 'c8044772-066b-42e1-a67a-f4c50760a009',
+                  buildHookId: '5ee131bc8db0aa5f5941670c',
+                  name: 'oser-ecrire-frontend',
                 },
               ],
             },

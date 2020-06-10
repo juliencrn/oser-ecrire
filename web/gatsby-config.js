@@ -14,7 +14,7 @@ require('dotenv').config({
 const siteMetadata = {
   title: `Oser Ecrire`,
   description: `Écrire et Partager`,
-  siteUrl: `https://www.oser-ecrire.fr`,
+  siteUrl: `https://oser-ecrire.fr`,
   author: `Nathalie CARON`,
   image: `${__dirname}/src/images/Baniere-oser-ecrire.png`,
 }
