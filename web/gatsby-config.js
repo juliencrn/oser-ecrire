@@ -95,6 +95,10 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
+        head: false,
+        anonymize: true,
+        respectDNT: true,
+        exclude: ['/preview/**'],
         trackingId: process.env.GATSBY_GOOGLE_ANALYTICS_TRACKING_ID || '',
       },
     },
