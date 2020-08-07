@@ -7,7 +7,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Helmet } = require('react-helmet')
 
-exports.onRenderBody = ({
+const onRenderBody = ({
   setHeadComponents,
   setHtmlAttributes,
   setBodyAttributes,
@@ -25,7 +25,7 @@ exports.onRenderBody = ({
   ])
 }
 
-exports.onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
+const onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
   const headComponents = getHeadComponents()
 
   headComponents.sort((x, y) => {
@@ -39,5 +39,7 @@ exports.onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
 
   replaceHeadComponents(headComponents)
 }
+
+export { onPreRenderHTML, onRenderBody }
 
 export { default as wrapRootElement } from './src/libs/wrapRootElement'
