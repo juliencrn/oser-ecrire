@@ -145,7 +145,7 @@ export default function Template(props: Props) {
       <SEO
         title={title}
         description={excerpt}
-        path={props.path}
+        path={`${props.location.pathname}`}
         image={mainImage}
         isPost
       />

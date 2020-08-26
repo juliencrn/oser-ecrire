@@ -34,7 +34,7 @@ export interface PostListTemplateProps extends PageTemplate {
 const PostListTemplate: FC<PostListTemplateProps> = ({
   data,
   pageContext,
-  path,
+  location,
 }) => {
   const {
     numPages,
@@ -57,7 +57,12 @@ const PostListTemplate: FC<PostListTemplateProps> = ({
 
   return (
     <Layout isBlog modal={modal}>
-      <SEO title={title} description={excerpt} path={path} image={image} />
+      <SEO
+        title={title}
+        description={excerpt}
+        path={location.pathname}
+        image={image}
+      />
 
       <BlogTemplate
         basePath={basePath}

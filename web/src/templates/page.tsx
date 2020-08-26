@@ -29,13 +29,18 @@ export interface TemplateProps extends IPageTemplate {
   }
 }
 
-const Template: FC<TemplateProps> = ({ pageContext, path }) => {
+const Template: FC<TemplateProps> = ({ pageContext, location }) => {
   const { page, modal } = pageContext
   const { title, excerpt, image } = page
 
   return (
     <Layout modal={modal}>
-      <SEO title={title} description={excerpt} path={path} image={image} />
+      <SEO
+        title={title}
+        description={excerpt}
+        path={location.pathname}
+        image={image}
+      />
 
       <PageTemplate {...page} />
     </Layout>
