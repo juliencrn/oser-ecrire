@@ -57,16 +57,11 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: 'gatsby-plugin-web-font-loader',
       options: {
-        fonts: [
-          {
-            family: `Source+Sans+Pro:ital`,
-            variants: [`200`, `300`, `400`, `600`, `700`],
-          },
-          { family: `Vidaloka` },
-          { family: `Domine` },
-        ],
+        google: {
+          families: ['Vidaloka', 'Domine', 'Source+Sans+Pro'],
+        },
       },
     },
     {
