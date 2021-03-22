@@ -16,7 +16,6 @@ const onRenderBody = ({
   setHtmlAttributes(helmet.htmlAttributes.toComponent())
   setBodyAttributes(helmet.bodyAttributes.toComponent())
   setHeadComponents([
-    helmet.title.toComponent(),
     helmet.link.toComponent(),
     helmet.meta.toComponent(),
     helmet.noscript.toComponent(),
