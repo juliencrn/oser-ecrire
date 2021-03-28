@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { navigate } from 'gatsby'
 import BackgroundImage from 'gatsby-background-image'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { grey } from '@material-ui/core/colors'
 
 import Card from '@material-ui/core/Card'
@@ -12,7 +12,7 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import { Post } from '../../interfaces'
 import useSanityImages from '../../hooks/useSanityImages'
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   card: {
     height: '100%',
     display: 'flex',

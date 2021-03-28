@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from 'react'
-import { makeStyles, ThemeProvider, Theme } from '@material-ui/core/styles'
+import React, { FC } from 'react'
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 
@@ -11,7 +11,7 @@ import BackToTop from './BackToTop'
 import Modal from '../components/Modal'
 import { Modal as IModal } from '../interfaces'
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',

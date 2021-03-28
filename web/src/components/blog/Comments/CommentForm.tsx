@@ -52,11 +52,6 @@ function CommentsForm({ postSlug, postTitle, onSubmit }: CommentsFormProps) {
   const classes = useStyles()
   const siteSettings = useSiteSettings()
 
-  const textFieldProps = {
-    variant: 'outlined',
-    classes: classes.field,
-  }
-
   return (
     <Formik
       initialValues={initialValues}
