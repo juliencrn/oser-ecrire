@@ -25,6 +25,7 @@ import modal from './documents/modal'
 import bodyPortableText from './objects/bodyPortableText'
 import mainImage from './objects/mainImage'
 import quote from './objects/quote'
+import video from './objects/video'
 import excerpt from './objects/excerpt'
 import testimonial from './objects/testimonial'
 import siteLinks from './objects/siteLinks'
@@ -79,6 +80,7 @@ export default createSchema({
     bodyPortableText,
     simplePortableText,
     quote,
+    video,
     excerpt,
     siteLinks,
     authorLinks,

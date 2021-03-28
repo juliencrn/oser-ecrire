@@ -110,5 +110,8 @@ export default {
     {
       type: 'quote',
     },
+    {
+      type: 'video',
+    },
   ],
 }
