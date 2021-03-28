@@ -15,6 +15,7 @@ import useSiteMetadata from '../hooks/useSiteMetadata'
 import useSanityImages from '../hooks/useSanityImages'
 import useAllPosts, { Page, Post } from '../hooks/useAllPosts'
 import Anchor from './Anchor'
+import YoutubeEmbed from './modules/youtube'
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
@@ -141,6 +142,12 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
           ))}
         </Quote>
       ),
+      video: (props: any) =>
+        props?.node?.url ? (
+          <Box className={classes.imageWrap}>
+            <YoutubeEmbed url={props.node.url} />
+          </Box>
+        ) : null,
     },
     listItem: (props: any) => (
       <Typography className={classes.blogText} variant="body1" component="li">
@@ -152,7 +159,6 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
         <span className={classes.highlight}>{props.children}</span>
       ),
       link: (props: any) => {
-        console.log({ link: props })
         // Hack: replace old site link by internalLink if url matches
         const link = new URL(props.mark.href)
         const isMatch = link?.origin === siteUrl
@@ -173,7 +179,6 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
         )
       },
       anchor: (props: any) => {
-        console.log({ anchor: props })
         return (
           <ScrollLink smooth isDynamic to={props.mark.anchor}>
             <Link style={{ cursor: 'pointer' }}>{props.children}</Link>
@@ -181,7 +186,6 @@ const PortableText: FC<{ blocks?: any[] }> = ({ blocks }) => {
         )
       },
       internalLink: (props: any) => {
-        console.log({ internalLink: props })
         // IF empty => prop.mark?
         const ref = props.mark?.reference?._ref
         if (typeof ref === 'undefined') {

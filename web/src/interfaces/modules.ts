@@ -10,6 +10,7 @@ export type ModuleType =
   | 'formationsModule'
   | 'featuresModule'
   | 'quote'
+  | 'video'
   | 'heroModule'
   | 'lastsPostsModule'
   | 'formModule'
