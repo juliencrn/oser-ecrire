@@ -5,6 +5,7 @@ import { AlertProps } from '../interfaces'
 const defaultListIds = [3] // Contact - Newsletter Form ID
 const apiUrl = 'https://api.brevo.com/v3'
 const headers = {
+  Accept: 'application/json',
   'Content-Type': 'application/json',
   'api-key': process.env.GATSBY_SENDINBLUE_API_KEY,
 }
@@ -25,36 +26,6 @@ export interface ContactProps {
 }
 
 /**
- * Update contact in SendInBlue Newsletter API
- *
- * @param props ContactProps
- * @return async Alert
- */
-export const updateContact = async (
-  props: ContactProps,
-): Promise<AlertProps> => {
-  const { email, attributes } = props
-
-  try {
-    const data = { attributes }
-    const res = await axios.put(`${apiUrl}/contacts/${email}`, data, {
-      headers,
-    })
-    if (res.status < 400) {
-      return {
-        type: 'success',
-        message: 'Le contact a été mis à jour.',
-        isValid: true,
-      }
-    }
-  } catch (error) {
-    console.error(`Unable to update ${email} in the SendInBlue list.`)
-    console.error({ error })
-  }
-  return errorAlert
-}
-
-/**
  * Register new contact in SendInBlue Newsletter API
  *
  * @param props ContactProps
@@ -64,10 +35,12 @@ export const registerContact = async (
   props: ContactProps,
 ): Promise<AlertProps> => {
   const { email, attributes, listIds = defaultListIds } = props
+  const data = { email, attributes, listIds, updateEnabled: true }
 
   try {
-    const data = { email, attributes, listIds }
     const res = await axios.post(`${apiUrl}/contacts`, data, { headers })
+    console.log({ res, data, headers })
+
     if (res.status < 400) {
       return {
         type: 'success',
@@ -76,18 +49,11 @@ export const registerContact = async (
       }
     }
   } catch (error) {
-    console.warn(`Unable to register ${email} in the SendInBlue list.`)
-    console.log({ error })
-    // If contact already exists
-    // Try to update this
-    if (error?.response?.data?.code === 'duplicate_parameter') {
-      console.log(`Try update contact...`)
-      const res = await updateContact({ email, attributes })
-      return res
-    } else {
-      console.error(`Unable to register ${email} in the SendInBlue list.`)
-      console.error({ error })
-    }
+    console.error(
+      `Unable to register ${email} in the SendInBlue/Brevo list.`,
+      error,
+    )
+    console.log('DEBUG: Here the given props', data)
   }
   return errorAlert
 }
