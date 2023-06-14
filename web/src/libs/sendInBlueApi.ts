@@ -3,7 +3,7 @@ import { AlertProps } from '../interfaces'
 
 // Common variables
 const defaultListIds = [3] // Contact - Newsletter Form ID
-const apiUrl = 'https://api.sendinblue.com/v3'
+const apiUrl = 'https://api.brevo.com/v3'
 const headers = {
   'Content-Type': 'application/json',
   'api-key': process.env.GATSBY_SENDINBLUE_API_KEY,
