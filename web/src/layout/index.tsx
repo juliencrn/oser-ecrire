@@ -30,6 +30,7 @@ export interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children, modal, isBlog = false }) => {
   const classes = useStyles()
   const { title } = useSiteSettings()
+  const MEASUREMENT_ID = process.env.GATSBY_GOOGLE_ANALYTICS_MEASUREMENT_ID
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,6 +45,19 @@ const Layout: FC<LayoutProps> = ({ children, modal, isBlog = false }) => {
       <BackToTop />
 
       {modal?.active && <Modal {...modal} />}
+
+      <script
+        src={`https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`}
+        data-nscript="afterInteractive"
+      ></script>
+      <script id="google-analytics" data-nscript="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${MEASUREMENT_ID}');
+        `}
+      </script>
     </ThemeProvider>
   )
 }

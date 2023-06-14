@@ -69,7 +69,7 @@ module.exports = {
       options: {
         host: siteMetadata.siteUrl,
         sitemap: `${siteMetadata.siteUrl}/sitemap.xml`,
-        policy: [{ userAgent: '*', allow: '/' }],
+        policy: [{ userAgent: '*', allow: '/', disallow: ['/preview'] }],
       },
     },
     {
@@ -85,16 +85,6 @@ module.exports = {
               utils.feedSerializer(query.posts.edges, siteMetadata),
           },
         ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        head: false,
-        anonymize: true,
-        respectDNT: true,
-        exclude: ['/preview/**'],
-        trackingId: process.env.GATSBY_GOOGLE_ANALYTICS_TRACKING_ID || '',
       },
     },
     {
