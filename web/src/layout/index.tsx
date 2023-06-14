@@ -50,14 +50,16 @@ const Layout: FC<LayoutProps> = ({ children, modal, isBlog = false }) => {
         src={`https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`}
         data-nscript="afterInteractive"
       ></script>
-      <script id="google-analytics" data-nscript="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
+      <script
+        id="google-analytics"
+        data-nscript="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${MEASUREMENT_ID}');
-        `}
-      </script>
+          gtag('config', '${MEASUREMENT_ID}');`,
+        }}
+      ></script>
     </ThemeProvider>
   )
 }
