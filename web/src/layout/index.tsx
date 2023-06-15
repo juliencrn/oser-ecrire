@@ -30,7 +30,6 @@ export interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children, modal, isBlog = false }) => {
   const classes = useStyles()
   const { title } = useSiteSettings()
-  const MEASUREMENT_ID = process.env.GATSBY_GOOGLE_ANALYTICS_MEASUREMENT_ID
 
   return (
     <ThemeProvider theme={theme}>

@@ -18,7 +18,7 @@ import PostSocialBar from '../components/blog/PostSocialBar'
 import useSanityImages from '../hooks/useSanityImages'
 import BodyPortableText from '../components/BodyPortableText'
 import AuthorCard from '../components/cards/AuthorCard'
-import Comments from '../components/blog/Comments'
+// import Comments from '../components/blog/Comments'
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {},
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 export function PostTemplate(props: Post) {
-  const { title, slug, excerpt, categories, mainImage, body } = props
+  const { title, excerpt, categories, mainImage, body } = props
   const classes = useStyles()
 
   // Percent of reading
@@ -117,7 +117,7 @@ export function PostTemplate(props: Post) {
 
           <Divider className={classes.divider} />
 
-          <Comments postSlug={slug.current} postTitle={title} />
+          {/* <Comments postSlug={slug.current} postTitle={title} /> */}
         </Container>
       </Box>
     </>
