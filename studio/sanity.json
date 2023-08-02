@@ -1,5 +1,9 @@
 {
   "root": true,
+  "api": {
+    "projectId": "5pa3cetx",
+    "dataset": "production"
+  },
   "project": {
     "name": "Oser Ecrire"
   },

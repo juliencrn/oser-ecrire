@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const nodemailer = require('nodemailer')
 
-const isDev = process.env.NODE_ENV !== 'production'
+const isProd = process.env.NODE_ENV === 'production'
+const isDev = !isProd
 
 require('dotenv').config({
   path: `.env.${isDev ? 'development' : 'production'}`,

@@ -86,7 +86,7 @@ function ContactForm() {
           <p>Nouveau message sur oser-ecrire.fr !</p>
           <p>De la part de :</p>
           <ul>
-            <li>Npm : ${lastName} </li>
+            <li>Nom : ${lastName} </li>
             <li>Prénom : ${firstName} </li>
             <li>Email : ${email} </li>
             <li>Sujet : ${subject} </li>
